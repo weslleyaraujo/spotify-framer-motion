@@ -1,92 +1,9 @@
 /** @jsx jsx */
 import React from "react";
-import { jsx, CSSObject } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import { ThemeProvider } from "emotion-theming";
-
-interface Colors {
-  black: string;
-  white: string;
-  primary: string;
-  secondary: string;
-  complementary: string;
-}
-
-interface Units {
-  smallest: number;
-  small: number;
-  medium: number;
-  large: number;
-  largest: number;
-}
-
-interface Typography
-  extends Partial<
-    Pick<
-      CSSObject,
-      | "font"
-      | "fontFamily"
-      | "fontFeatureSettings"
-      | "fontKerning"
-      | "fontLanguageOverride"
-      | "fontOpticalSizing"
-      | "fontSize"
-      | "fontSizeAdjust"
-      | "fontStretch"
-      | "fontStyle"
-      | "fontSynthesis"
-      | "fontVariant"
-      | "fontVariantCaps"
-      | "fontVariantEastAsian"
-      | "fontVariantLigatures"
-      | "fontVariantNumeric"
-      | "fontVariantPosition"
-      | "fontVariationSettings"
-      | "fontWeight"
-      | "letterSpacing"
-      | "lineBreak"
-      | "lineHeight"
-      | "lineHeightStep"
-      | "textAlign"
-      | "textAlignLast"
-      | "textCombineUpright"
-      | "textDecorationColor"
-      | "textDecorationLine"
-      | "textDecorationSkip"
-      | "textDecorationSkipInk"
-      | "textDecorationStyle"
-      | "textEmphasisColor"
-      | "textEmphasisPosition"
-      | "textEmphasisStyle"
-      | "textIndent"
-      | "textJustify"
-      | "textOrientation"
-      | "textOverflow"
-      | "textRendering"
-      | "textShadow"
-      | "textSizeAdjust"
-      | "textTransform"
-      | "textUnderlinePosition"
-      | "whiteSpace"
-      | "letterSpacing"
-      | "lineHeight"
-    >
-  > {}
-
-interface Fonts {
-  display: Typography;
-  heading: Typography;
-  title: Typography;
-  subtitle: Typography;
-  caption: Typography;
-  body: Typography;
-  strong: Typography;
-}
-
-interface Theme {
-  colors: Colors;
-  units: Units;
-  fonts: Fonts;
-}
+import { Theme } from "./foundations/Theme";
+import { Text } from "./components/atoms/Text/Text";
 
 const theme: Theme = {
   colors: {
@@ -94,7 +11,8 @@ const theme: Theme = {
     white: "#FFF",
     primary: "#E73438",
     secondary: "#F1AD27",
-    complementary: "#06BF73"
+    complementary: "#06BF73",
+    neutral: "#091E42"
   },
   units: {
     smallest: 2,
@@ -108,15 +26,28 @@ const theme: Theme = {
       fontSize: 30,
       fontWeight: 800,
       fontStyle: "normal",
+      lineHeight: 32,
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
-    body: {},
-    caption: {},
-    heading: {},
-    subtitle: {},
-    title: {},
-    strong: {}
+    body: {
+      lineHeight: 32
+    },
+    caption: {
+      lineHeight: 32
+    },
+    heading: {
+      lineHeight: 32
+    },
+    subtitle: {
+      lineHeight: 32
+    },
+    title: {
+      lineHeight: 32
+    },
+    strong: {
+      lineHeight: 32
+    }
   }
 };
 
@@ -125,11 +56,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <div
         css={(theme: Theme) => ({
-          ...theme.fonts.display,
           backgroundColor: theme.colors.complementary
         })}
       >
-        Hover to change color.
+        <Text
+          type="display"
+          as="p"
+          text="Flash Cards"
+          color="primary"
+          numberOfLines={0}
+        />
       </div>
     </ThemeProvider>
   );
