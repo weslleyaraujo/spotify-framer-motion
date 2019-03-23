@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import React from "react";
-import { jsx, CSSObject } from "@emotion/core";
+import { jsx, CSSObject, css } from "@emotion/core";
+import { cx } from "emotion";
 import { Colors, Theme, Fonts } from "../../../foundations/Theme";
+import { useStyles } from "../../../foundations/useStyles";
 
 interface Props {
   /* Text content to be rendered. */
@@ -40,8 +42,15 @@ function Text(
   const isTrucated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
   const isMultiline = isTrucated && numberOfLines > 1;
+  const styles = useStyles(theme => ({
+    foo: {
+      backgroundColor: theme.colors.black
+    }
+  }));
+
   return (
     <HTMLNode
+      className={cx(styles.foo)}
       css={(theme: Theme) => ({
         ...theme.fonts[type],
         color: color ? theme.colors[color] : "inherit",

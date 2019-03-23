@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from "react";
-import { jsx } from "@emotion/core";
+import { jsx, ThemeContext } from "@emotion/core";
 import { ThemeProvider } from "emotion-theming";
 import { Theme } from "./foundations/Theme";
 import { Text } from "./components/atoms/Text/Text";
@@ -53,12 +53,12 @@ const theme: Theme = {
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <div
-        css={(theme: Theme) => ({
-          backgroundColor: theme.colors.complementary
-        })}
-      >
+    <ThemeContext.Provider value={theme}>
+      <div>
+        hey
+        <ThemeContext.Consumer>
+          {args => JSON.stringify(args)}
+        </ThemeContext.Consumer>
         <Text
           type="display"
           as="p"
@@ -67,7 +67,7 @@ function App() {
           numberOfLines={0}
         />
       </div>
-    </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { CSSObject } from "@emotion/core";
 
 export interface Colors {
@@ -84,3 +85,5 @@ export interface Theme {
   units: Units;
   fonts: Fonts;
 }
+
+export const ThemeContext = React.createContext<Theme | null>(null);
