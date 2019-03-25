@@ -1,19 +1,20 @@
 import { useMemo } from "react";
 import { useTheme } from "./useTheme";
 import { Theme } from "./Theme";
-import css, { CSSObject, Interpolation } from "@emotion/css";
+import css, { CSSObject, SerializedStyles } from "@emotion/css";
 
 type Definition<T> = { [P in keyof T]: CSSObject };
-type NamedStyles<T> = { [P in keyof T]: string };
+type NamedStyles<T> = { [P in keyof T]: ReturnType<typeof css> };
 type Factory<T> = (theme: Theme) => Definition<T>;
 
 function createStylesheet<T extends NamedStyles<T>>(
   stylesheet: Definition<T>
 ): NamedStyles<T> {
   return Object.keys(stylesheet).reduce((acc, n) => {
+    const serialized = css(stylesheet[n as keyof typeof stylesheet]);
     return {
       ...acc,
-      [n]: css(stylesheet[n as keyof typeof stylesheet])
+      [n]: serialized
     };
   }, {}) as T;
 }

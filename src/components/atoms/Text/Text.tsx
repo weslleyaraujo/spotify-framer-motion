@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import React from "react";
-import { jsx, CSSObject, css } from "@emotion/core";
-import { cx } from "emotion";
-import { Colors, Theme, Fonts } from "../../../foundations/Theme";
-import { useStyles } from "../../../foundations/useStyles";
+import { jsx, css } from "@emotion/core";
+import { Colors, Fonts } from "../../../foundations/Theme";
+import { useTheme } from "../../../foundations/useTheme";
 
 interface Props {
   /* Text content to be rendered. */
@@ -22,7 +21,7 @@ interface Props {
   numberOfLines?: number;
 }
 
-interface DefaultProps {
+interface DefaultProps extends Props {
   as: keyof JSX.IntrinsicElements;
   color: keyof Colors;
   numberOfLines: number;
@@ -30,7 +29,7 @@ interface DefaultProps {
 }
 
 function Text(
-  { as, text, type, color, numberOfLines }: Props & DefaultProps = {
+  props: Props = {
     as: "p",
     text: "",
     numberOfLines: 0,
@@ -38,41 +37,32 @@ function Text(
     type: "body"
   }
 ) {
-  const HTMLNode = as;
+  const { as, text, type, color, numberOfLines } = props as DefaultProps;
+  const HTMLElement = as;
   const isTrucated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
   const isMultiline = isTrucated && numberOfLines > 1;
-  const styles = useStyles(theme => ({
-    foo: {
-      backgroundColor: theme.colors.black
-    }
-  }));
+  const theme = useTheme();
+  const styles = css({
+    ...theme.fonts[type],
+    color: color ? theme.colors[color] : "inherit",
+    lineHeight: `${theme.fonts[type].lineHeight}px`,
+    ...(isTrucated && {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      maxHeight: `calc(${theme.fonts[type].lineHeight}px * ${numberOfLines})` // TODO: px should be added by Theme
+    }),
+    ...(isSingleLine && {
+      whiteSpace: "nowrap"
+    }),
+    ...(isMultiline && {
+      WebkitLineClamp: numberOfLines,
+      display: "-webkit-box",
+      WebkitBoxOrient: "vertical"
+    })
+  });
 
-  return (
-    <HTMLNode
-      className={cx(styles.foo)}
-      css={(theme: Theme) => ({
-        ...theme.fonts[type],
-        color: color ? theme.colors[color] : "inherit",
-        lineHeight: `${theme.fonts[type].lineHeight}px`,
-        ...(isTrucated && {
-          maxHeight: `calc(${
-            theme.fonts[type].lineHeight
-          }px * ${numberOfLines})` // TODO: px should be added by Theme
-        }),
-        ...(isSingleLine && {
-          whiteSpace: "nowrap"
-        }),
-        ...(isMultiline && {
-          WebkitLineClamp: numberOfLines,
-          display: "-webkit-box",
-          WebkitBoxOrient: "vertical"
-        })
-      })}
-    >
-      {text}
-    </HTMLNode>
-  );
+  return <HTMLElement css={styles}>{text}</HTMLElement>;
 }
 
 export { Text };

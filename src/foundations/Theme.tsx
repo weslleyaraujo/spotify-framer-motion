@@ -86,4 +86,62 @@ export interface Theme {
   fonts: Fonts;
 }
 
-export const ThemeContext = React.createContext<Theme | null>(null);
+const theme: Theme = {
+  colors: {
+    black: "#000",
+    white: "#FFF",
+    primary: "#E73438",
+    secondary: "#F1AD27",
+    complementary: "#06BF73",
+    neutral: "#091E42"
+  },
+  units: {
+    smallest: 2,
+    small: 4,
+    medium: 8,
+    large: 16,
+    largest: 32
+  },
+  fonts: {
+    display: {
+      fontSize: 30,
+      fontWeight: 800,
+      fontStyle: "normal",
+      lineHeight: 32,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    },
+    body: {
+      lineHeight: 32,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    },
+    caption: {
+      lineHeight: 32,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    },
+    heading: {
+      lineHeight: 32,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    },
+    subtitle: {
+      lineHeight: 32,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    },
+    title: {
+      lineHeight: 32,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    },
+    strong: {
+      lineHeight: 32,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    }
+  }
+};
+
+export const ThemeContext = React.createContext<Theme>(theme);
