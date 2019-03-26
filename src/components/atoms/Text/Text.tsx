@@ -1,43 +1,33 @@
 /** @jsx jsx */
-import React from "react";
+import React, {
+  ReactElement,
+  FunctionComponent,
+  PropsWithChildren,
+  WeakValidationMap
+} from "react";
 import { jsx, css } from "@emotion/core";
 import { Colors, Fonts } from "../../../foundations/Theme";
 import { useTheme } from "../../../foundations/useTheme";
+import { ValidationMap } from "prop-types";
 
 interface Props {
   /* Text content to be rendered. */
   text: string;
 
   /* Typography type to be used based on runtime theme. */
-  type?: keyof Fonts;
+  type: keyof Fonts;
 
   /* HTML tag to be rendered */
-  as?: keyof JSX.IntrinsicElements;
+  as: keyof JSX.IntrinsicElements;
 
   /* Text color */
-  color?: keyof Colors;
+  color: keyof Colors;
 
   /* Number of lines that text will render. Truncation will be used to hide remaining lines. */
-  numberOfLines?: number;
-}
-
-interface DefaultProps extends Props {
-  as: keyof JSX.IntrinsicElements;
-  color: keyof Colors;
   numberOfLines: number;
-  type: keyof Fonts;
 }
 
-function Text(
-  props: Props = {
-    as: "p",
-    text: "",
-    numberOfLines: 0,
-    color: "neutral",
-    type: "body"
-  }
-) {
-  const { as, text, type, color, numberOfLines } = props as DefaultProps;
+function Text({ as = "a", type, text, numberOfLines, color }: Props) {
   const HTMLElement = as;
   const isTrucated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;

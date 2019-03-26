@@ -78,6 +78,7 @@ export interface Fonts {
   caption: Typography;
   body: Typography;
   strong: Typography;
+  featured: Typography;
 }
 
 export interface Theme {
@@ -112,32 +113,50 @@ const theme: Theme = {
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
     body: {
-      lineHeight: 32,
+      fontSize: 14,
+      fontWeight: 400,
+      lineHeight: 20,
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
     caption: {
-      lineHeight: 32,
+      fontWeight: 400,
+      fontSize: 12,
+      lineHeight: 16,
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
     heading: {
-      lineHeight: 32,
+      fontWeight: 700,
+      fontSize: 22,
+      lineHeight: 24,
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
     subtitle: {
-      lineHeight: 32,
+      fontWeight: 500,
+      fontSize: 14,
+      lineHeight: 20,
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
     title: {
-      lineHeight: 32,
+      lineHeight: 22,
+      fontWeight: 700,
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
     strong: {
-      lineHeight: 32,
+      fontWeight: 400,
+      fontSize: 14,
+      lineHeight: 20,
+      fontFamily:
+        "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
+    },
+    featured: {
+      fontWeight: 400,
+      fontSize: 16,
+      lineHeight: 20,
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     }
