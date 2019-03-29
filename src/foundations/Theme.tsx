@@ -81,10 +81,17 @@ export interface Fonts {
   featured: Typography;
 }
 
+export interface Constants {
+  borderRadiusLarge: number;
+  borderRadiusMedium: number;
+  borderRadiusSmall: number;
+}
+
 export interface Theme {
   colors: Colors;
   units: Units;
   fonts: Fonts;
+  constants: Constants;
 }
 
 const theme: Theme = {
@@ -160,6 +167,11 @@ const theme: Theme = {
       fontFamily:
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     }
+  },
+  constants: {
+    borderRadiusSmall: 6,
+    borderRadiusMedium: 12,
+    borderRadiusLarge: 18
   }
 };
 

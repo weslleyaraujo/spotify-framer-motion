@@ -1,8 +1,16 @@
+/** @jsx jsx */
 import React from "react";
+import { jsx } from "@emotion/core";
 import { Text } from "./components/atoms/Text/Text";
+import { View, useViewStyles } from "./components/atoms/View/View";
 import { Global, css } from "@emotion/core";
+import { useTheme } from "./foundations/useTheme";
 
 function App() {
+  const theme = useTheme();
+  const view = useViewStyles({
+    padding: "large"
+  });
   return (
     <React.Fragment>
       <Global
@@ -153,6 +161,22 @@ function App() {
         color="neutral"
         numberOfLines={2}
       />
+      <View
+        margin={["large", "none"]}
+        padding="large"
+        justify="center"
+        style={{ backgroundColor: theme.colors.complementary }}
+        radius="small"
+      >
+        <Text
+          as="p"
+          type="title"
+          text="This is View"
+          color="white"
+          numberOfLines={2}
+        />
+      </View>
+      <div css={view}>Something extra</div>
     </React.Fragment>
   );
 }

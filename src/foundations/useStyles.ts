@@ -4,7 +4,7 @@ import { Theme } from "./Theme";
 import css, { CSSObject, SerializedStyles } from "@emotion/css";
 
 type Definition<T> = { [P in keyof T]: CSSObject };
-type NamedStyles<T> = { [P in keyof T]: ReturnType<typeof css> };
+type NamedStyles<T> = { [P in keyof T]: string };
 type Factory<T> = (theme: Theme) => Definition<T>;
 
 function createStylesheet<T extends NamedStyles<T>>(
@@ -14,7 +14,7 @@ function createStylesheet<T extends NamedStyles<T>>(
     const serialized = css(stylesheet[n as keyof typeof stylesheet]);
     return {
       ...acc,
-      [n]: serialized
+      [n]: `css-${serialized.name}`
     };
   }, {}) as T;
 }
