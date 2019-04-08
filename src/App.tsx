@@ -155,10 +155,7 @@ function App() {
         numberOfLines={2}
       />
       <Text
-        as="p"
-        type="caption"
         text="Lorem ipsum dollor sit ammet stuff here blah example"
-        color="neutral"
         numberOfLines={2}
       />
       <View
@@ -176,7 +173,6 @@ function App() {
           numberOfLines={2}
         />
       </View>
-      <div css={view}>Something extra</div>
     </React.Fragment>
   );
 }

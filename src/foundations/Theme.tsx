@@ -18,6 +18,14 @@ export interface Units {
   largest: number;
 }
 
+export interface Scales {
+  smallest: number;
+  small: number;
+  medium: number;
+  large: number;
+  largest: number;
+}
+
 export interface Typography
   extends Partial<
       Pick<
@@ -92,6 +100,7 @@ export interface Theme {
   units: Units;
   fonts: Fonts;
   constants: Constants;
+  scales: Scales;
 }
 
 const theme: Theme = {
@@ -172,6 +181,13 @@ const theme: Theme = {
     borderRadiusSmall: 6,
     borderRadiusMedium: 12,
     borderRadiusLarge: 18
+  },
+  scales: {
+    smallest: 24,
+    small: 32,
+    medium: 48,
+    large: 64,
+    largest: 96
   }
 };
 
