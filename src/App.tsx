@@ -1,110 +1,23 @@
 /** @jsx jsx */
 import React from "react";
-import { jsx } from "@emotion/core";
+import { jsx, Global } from "@emotion/core";
 import { Text } from "./components/atoms/Text/Text";
-import { View, useViewStyles } from "./components/atoms/View/View";
-import { Global, css } from "@emotion/core";
+import { View } from "./components/atoms/View/View";
 import { useTheme } from "./foundations/useTheme";
+import { Icon } from "./components/atoms/Icon/Icon";
+import { globalStyles } from "./global-styles";
+import { IconTypes } from "./foundations/icons";
 
 function App() {
   const theme = useTheme();
-  const view = useViewStyles({
-    padding: "large"
-  });
   return (
     <React.Fragment>
-      <Global
-        styles={css`
-          html,
-          body,
-          div,
-          span,
-          applet,
-          object,
-          iframe,
-          h1,
-          h2,
-          h3,
-          h4,
-          h5,
-          h6,
-          p,
-          blockquote,
-          pre,
-          a,
-          abbr,
-          acronym,
-          address,
-          big,
-          cite,
-          code,
-          del,
-          dfn,
-          em,
-          img,
-          ins,
-          kbd,
-          q,
-          s,
-          samp,
-          small,
-          strike,
-          strong,
-          sub,
-          sup,
-          tt,
-          var,
-          b,
-          u,
-          i,
-          center,
-          dl,
-          dt,
-          dd,
-          ol,
-          ul,
-          li,
-          fieldset,
-          form,
-          label,
-          legend,
-          table,
-          caption,
-          tbody,
-          tfoot,
-          thead,
-          tr,
-          th,
-          td,
-          article,
-          aside,
-          canvas,
-          details,
-          embed,
-          figure,
-          figcaption,
-          footer,
-          header,
-          hgroup,
-          menu,
-          nav,
-          output,
-          ruby,
-          section,
-          summary,
-          time,
-          mark,
-          audio,
-          video {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font-size: 100%;
-            font: inherit;
-            vertical-align: baseline;
-          }
-        `}
-      />
+      <Global styles={globalStyles} />
+      <Icon<IconTypes> size="smallest" type="pencil" />
+      <Icon<IconTypes> size="small" type="pencil" />
+      <Icon<IconTypes> type="pencil" />
+      <Icon<IconTypes> size="large" type="pencil" />
+      <Icon<IconTypes> size="largest" type="pencil" color="secondary" />
       <Text
         as="h1"
         type="display"
@@ -168,7 +81,7 @@ function App() {
         <Text
           as="p"
           type="title"
-          text="This is View"
+          text="This is a View"
           color="white"
           numberOfLines={2}
         />

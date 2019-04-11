@@ -66,9 +66,11 @@ interface Props {
   style?: ViewStyles;
 }
 
+interface DefaultProps extends Required<Pick<Props, "margin" | "padding">> {}
+
 function useViewStyles(
   props: Pick<
-    Props,
+    Props & DefaultProps,
     | "margin"
     | "padding"
     | "radius"
@@ -112,26 +114,34 @@ function useViewStyles(
     [theme]
   );
 
-  function mapSpacing(value: Props["margin"] | Props["padding"]) {
-    if (!value) {
-      return 0;
-    }
+  const mapSpacing = useCallback(
+    function mapSpacing(value: Props["margin"] | Props["padding"]) {
+      if (!value) {
+        return 0;
+      }
 
-    return Array.isArray(value) ? value.map(convert).join(" ") : convert(value);
-  }
+      return Array.isArray(value)
+        ? value.map(convert).join(" ")
+        : convert(value);
+    },
+    [convert]
+  );
 
-  function mapRadius(radius: Props["radius"]) {
-    switch (radius) {
-      case "small":
-        return theme.constants.borderRadiusSmall;
-      case "medium":
-        return theme.constants.borderRadiusMedium;
-      case "large":
-        return theme.constants.borderRadiusLarge;
-      default:
-        0;
-    }
-  }
+  const mapRadius = useCallback(
+    function mapRadius(radius: Props["radius"]) {
+      switch (radius) {
+        case "small":
+          return theme.constants.borderRadiusSmall;
+        case "medium":
+          return theme.constants.borderRadiusMedium;
+        case "large":
+          return theme.constants.borderRadiusLarge;
+        default:
+          0;
+      }
+    },
+    [theme.constants]
+  );
 
   return css({
     ...style,
@@ -148,7 +158,7 @@ function useViewStyles(
   });
 }
 
-function View(props: Props) {
+function View(props: Props & DefaultProps) {
   const { children, style } = props;
   const view = useViewStyles(props);
 
@@ -163,9 +173,11 @@ function View(props: Props) {
   );
 }
 
-View.defaultProps = {
+const defaultProps: DefaultProps = {
   margin: "none",
   padding: "none"
-} as Partial<Props>;
+};
+
+View.defaultProps = defaultProps;
 
 export { View, useViewStyles };

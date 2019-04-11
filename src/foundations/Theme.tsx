@@ -1,5 +1,6 @@
 import React from "react";
 import { CSSObject } from "@emotion/core";
+import { IconTypes, icons } from "./icons";
 
 export interface Colors {
   black: string;
@@ -95,15 +96,24 @@ export interface Constants {
   borderRadiusSmall: number;
 }
 
-export interface Theme {
+export interface Theme<T extends string> {
   colors: Colors;
   units: Units;
   fonts: Fonts;
   constants: Constants;
   scales: Scales;
+  icons: Record<
+    T,
+    (args: {
+      color: string;
+      width: number;
+      height: number;
+    }) => React.ReactElement
+  >;
 }
 
-const theme: Theme = {
+const theme: Theme<IconTypes> = {
+  icons,
   colors: {
     black: "#000",
     white: "#FFF",
@@ -191,4 +201,4 @@ const theme: Theme = {
   }
 };
 
-export const ThemeContext = React.createContext<Theme>(theme);
+export const ThemeContext = React.createContext(theme);
