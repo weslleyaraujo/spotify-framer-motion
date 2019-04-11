@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Colors, Fonts } from "../../../foundations/Theme";
+import { Colors } from "../../../foundations/Theme";
 import { useTheme } from "../../../foundations/useTheme";
+import { Fonts } from "../../../foundations/Typography";
 
 interface Props {
   /* Text content to be rendered. */

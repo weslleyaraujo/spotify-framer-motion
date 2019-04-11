@@ -21,54 +21,50 @@ function App() {
       <Text
         as="h1"
         type="display"
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
+        text="display - Lorem ipsum dollor sit ammet stuff here blah example"
         color="neutral"
         numberOfLines={2}
       />
       <Text
         as="p"
         type="heading"
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
+        text="heading - Lorem ipsum dollor sit ammet stuff here blah example"
         color="neutral"
         numberOfLines={2}
       />
       <Text
         as="p"
         type="title"
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
+        text="title- Lorem ipsum dollor sit ammet stuff here blah example"
         color="neutral"
         numberOfLines={2}
       />
       <Text
         as="p"
         type="subtitle"
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
+        text="subtitle - Lorem ipsum dollor sit ammet stuff here blah example"
         color="neutral"
         numberOfLines={2}
       />
       <Text
         as="p"
         type="featured"
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
+        text="featured - Lorem ipsum dollor sit ammet stuff here blah example"
         color="neutral"
         numberOfLines={2}
       />
       <Text
         as="p"
         type="body"
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
+        text="body - Lorem ipsum dollor sit ammet stuff here blah example"
         color="neutral"
         numberOfLines={2}
       />
       <Text
         as="p"
         type="strong"
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
+        text="strong - Lorem ipsum dollor sit ammet stuff here blah example"
         color="neutral"
-        numberOfLines={2}
-      />
-      <Text
-        text="Lorem ipsum dollor sit ammet stuff here blah example"
         numberOfLines={2}
       />
       <View

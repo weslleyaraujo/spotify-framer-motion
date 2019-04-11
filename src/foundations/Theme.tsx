@@ -1,6 +1,6 @@
 import React from "react";
-import { CSSObject } from "@emotion/core";
 import { IconTypes, icons } from "./icons";
+import { Fonts } from "./Typography";
 
 export interface Colors {
   black: string;
@@ -25,69 +25,6 @@ export interface Scales {
   medium: number;
   large: number;
   largest: number;
-}
-
-export interface Typography
-  extends Partial<
-      Pick<
-        CSSObject,
-        | "font"
-        | "fontFamily"
-        | "fontFeatureSettings"
-        | "fontKerning"
-        | "fontLanguageOverride"
-        | "fontOpticalSizing"
-        | "fontSize"
-        | "fontSizeAdjust"
-        | "fontStretch"
-        | "fontStyle"
-        | "fontSynthesis"
-        | "fontVariant"
-        | "fontVariantCaps"
-        | "fontVariantEastAsian"
-        | "fontVariantLigatures"
-        | "fontVariantNumeric"
-        | "fontVariantPosition"
-        | "fontVariationSettings"
-        | "fontWeight"
-        | "letterSpacing"
-        | "lineBreak"
-        | "lineHeightStep"
-        | "textAlign"
-        | "textAlignLast"
-        | "textCombineUpright"
-        | "textDecorationColor"
-        | "textDecorationLine"
-        | "textDecorationSkip"
-        | "textDecorationSkipInk"
-        | "textDecorationStyle"
-        | "textEmphasisColor"
-        | "textEmphasisPosition"
-        | "textEmphasisStyle"
-        | "textIndent"
-        | "textJustify"
-        | "textOrientation"
-        | "textOverflow"
-        | "textRendering"
-        | "textShadow"
-        | "textSizeAdjust"
-        | "textTransform"
-        | "textUnderlinePosition"
-        | "whiteSpace"
-        | "letterSpacing"
-      >
-    >,
-    Required<Pick<CSSObject, "lineHeight">> {}
-
-export interface Fonts {
-  display: Typography;
-  heading: Typography;
-  title: Typography;
-  subtitle: Typography;
-  caption: Typography;
-  body: Typography;
-  strong: Typography;
-  featured: Typography;
 }
 
 export interface Constants {
@@ -173,7 +110,7 @@ const theme: Theme<IconTypes> = {
         "BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"
     },
     strong: {
-      fontWeight: 400,
+      fontWeight: 700,
       fontSize: 14,
       lineHeight: 20,
       fontFamily:
