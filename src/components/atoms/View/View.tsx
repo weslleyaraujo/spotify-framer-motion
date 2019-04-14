@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback } from "react";
 import { CSSPseudosForCSSObject, CSSObject } from "@emotion/serialize";
 import { jsx, css } from "@emotion/core";
 import { Units } from "../../../foundations/Theme";
@@ -52,7 +52,7 @@ type ViewStyles = Subtract<
   { [P in ClashingCSSProperties]?: CSSObject[P] }
 >;
 
-interface Props {
+export interface Props {
   children: React.ReactElement;
   margin?: Spacing;
   padding?: Spacing;
@@ -143,7 +143,7 @@ function useViewStyles(
     [theme.constants]
   );
 
-  return css({
+  return {
     ...style,
     display,
     justifyContent,
@@ -155,7 +155,7 @@ function useViewStyles(
     ...(margin && { margin: mapSpacing(margin) }),
     ...(padding && { padding: mapSpacing(padding) }),
     flexDirection: display ? flexDirection : "column"
-  });
+  };
 }
 
 function View(props: Props & DefaultProps) {

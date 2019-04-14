@@ -22,15 +22,9 @@ interface Props {
 }
 
 interface DefaultProps
-  extends Required<Pick<Props, "numberOfLines" | "type" | "as">> {}
+  extends Required<Pick<Props, "numberOfLines" | "type" | "as" | "color">> {}
 
-function Text({
-  as = "a",
-  type,
-  text,
-  numberOfLines,
-  color
-}: Props & DefaultProps) {
+function Text({ as, type, text, numberOfLines, color }: Props & DefaultProps) {
   const HTMLElement = as;
   const isTrucated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
@@ -43,7 +37,7 @@ function Text({
     ...(isTrucated && {
       overflow: "hidden",
       textOverflow: "ellipsis",
-      maxHeight: `calc(${theme.fonts[type].lineHeight}px * ${numberOfLines})` // TODO: px should be added by Theme
+      maxHeight: `calc(${theme.fonts[type].lineHeight}px * ${numberOfLines})`
     }),
     ...(isSingleLine && {
       whiteSpace: "nowrap"
@@ -58,10 +52,13 @@ function Text({
   return <HTMLElement css={styles}>{text}</HTMLElement>;
 }
 
-Text.defaultProps = {
+const defaultProps: DefaultProps = {
   as: "p",
   type: "body",
-  color: "grayLight"
+  numberOfLines: 1,
+  color: "neutral"
 };
+
+Text.defaultProps = defaultProps;
 
 export { Text };

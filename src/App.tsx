@@ -3,6 +3,7 @@ import React from "react";
 import { jsx, Global } from "@emotion/core";
 import { Text } from "./components/atoms/Text/Text";
 import { View } from "./components/atoms/View/View";
+import { Button } from "./components/molecules/Button/Button";
 import { useTheme } from "./foundations/useTheme";
 import { Icon } from "./components/atoms/Icon/Icon";
 import { globalStyles } from "./global-styles";
@@ -82,6 +83,8 @@ function App() {
           numberOfLines={2}
         />
       </View>
+
+      <Button label="Hello" />
     </React.Fragment>
   );
 }
