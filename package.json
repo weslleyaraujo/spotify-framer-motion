@@ -12,9 +12,7 @@
     "@types/react-dom": "^16.8.3",
     "apollo-boost": "^0.4.0",
     "apollo-cache-inmemory": "^1.6.0",
-    "concurrently": "^4.1.0",
     "emotion": "^10.0.9",
-    "emotion-theming": "^10.0.9",
     "graphql": "^14.3.1",
     "react": "^16.8.5",
     "react-apollo": "^2.5.6",
@@ -28,10 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "graphql": "yarn graphql:create-introspection-json && concurrently --kill-others 'yarn graphql:create-devserver' 'yarn graphql:generate-types'",
-    "graphql:create-devserver": "node ./scripts/create-graphql-dev-server.js",
-    "graphql:create-introspection-json": "node ./scripts/create-instrospection-schema-json.js",
-    "graphql:generate-types": "yarn apollo client:codegen --target typescript --outputFlat src/@graphql-types --localSchemaFile='./src/graphql/schema.json'"
+    "graphql-codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,9 +38,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "apollo": "^2.12.4",
-    "apollo-link-schema": "^1.2.2",
-    "apollo-server": "^2.5.1",
-    "graphql-tools": "^4.0.4"
+    "@graphql-codegen/cli": "^1.2.0",
+    "@graphql-codegen/typescript": "1.2.0",
+    "@graphql-codegen/typescript-operations": "1.2.0",
+    "@graphql-codegen/typescript-react-apollo": "1.2.0",
+    "apollo-server": "^2.5.1"
   }
 }

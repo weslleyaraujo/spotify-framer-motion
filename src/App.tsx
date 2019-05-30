@@ -3,38 +3,16 @@ import { Global } from "@emotion/core";
 import { Text } from "./components/atoms/Text/Text";
 import { View } from "./components/atoms/View/View";
 import { Button } from "./components/molecules/Button/Button";
-import { useTheme } from "./foundations/useTheme";
 import { Icon } from "./components/atoms/Icon/Icon";
 import { globalStyles } from "./global-styles";
 import { IconTypes } from "./foundations/icons";
-import { ApolloProvider } from "react-apollo";
-import ApolloClient, { gql } from "apollo-boost";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { useQuery } from "@apollo/react-hooks";
-
-const cache = new InMemoryCache();
-const client = new ApolloClient({
-  cache
-});
+import { Providers } from "./Providers";
 
 function App() {
-  const theme = useTheme();
-  const { data } = useQuery(gql`
-    query QueryGetUser {
-      user {
-        id
-      }
-    }
-  `);
-
-  console.log({ data });
   return (
-    <ApolloProvider client={client}>
+    <Providers>
       <Global styles={globalStyles} />
-      <View
-        padding="large"
-        style={{ backgroundColor: theme.colors.complementary }}
-      >
+      <View padding="large">
         <Text type="display" text="Example" color="white" />
       </View>
       <View padding="large" justify="center">
@@ -108,7 +86,7 @@ function App() {
       <View margin="large">
         <Button label="Large" size="large" />
       </View>
-    </ApolloProvider>
+    </Providers>
   );
 }
 
