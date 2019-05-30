@@ -4,7 +4,7 @@ import { Colors } from "../../../foundations/Theme";
 import { useTheme } from "../../../foundations/useTheme";
 import { Fonts } from "../../../foundations/Typography";
 
-interface Props {
+export interface Props {
   /* Text content to be rendered. */
   text: string;
 

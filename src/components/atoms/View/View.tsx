@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import React, { useCallback } from "react";
+import { jsx } from "@emotion/core";
+import { useCallback } from "react";
 import { CSSPseudosForCSSObject, CSSObject } from "@emotion/serialize";
-import { jsx, css } from "@emotion/core";
 import { Units } from "../../../foundations/Theme";
 import { Subtract } from "utility-types";
 import {
@@ -137,7 +137,7 @@ function useViewStyles(
         case "large":
           return theme.constants.borderRadiusLarge;
         default:
-          0;
+          return 0;
       }
     },
     [theme.constants]

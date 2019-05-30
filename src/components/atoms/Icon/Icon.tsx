@@ -29,7 +29,7 @@ function Icon<T = void>({
       height: dimensions,
       color: theme.colors[color]
     });
-  }, [dimensions, theme]);
+  }, [dimensions, theme, color, type]);
 
   return (
     <>
