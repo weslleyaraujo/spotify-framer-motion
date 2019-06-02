@@ -10,14 +10,19 @@ interface Props<T> {
   action: Action<T>;
   size?: SetIntersection<ViewProps["padding"], "medium" | "large" | "small">;
   label: string;
+  rounded?: boolean;
+  display?: "block" | "inline";
 }
 
-interface DefaultProps<T> extends Required<Pick<Props<T>, "action" | "size">> {}
+interface DefaultProps<T>
+  extends Required<Pick<Props<T>, "action" | "size" | "rounded" | "display">> {}
 
 function Button<T = React.HTMLProps<HTMLButtonElement>>({
+  rounded,
   action,
   size,
-  label
+  label,
+  display
 }: Props<T> & DefaultProps<T>) {
   const { as: HTMLElement, ...props } = action;
   const theme = useTheme();
@@ -43,7 +48,6 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
         touchAction: "manipulation",
         border: "none",
         boxSizing: "border-box",
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
         color: theme.colors.white,
@@ -51,7 +55,14 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
         position: "relative",
         fontWeight: 400,
         borderRadius: theme.constants.borderRadiusSmall,
-        width: "100%",
+        backgroundColor: theme.colors.primary,
+        ...(display === "block" && {
+          width: "100%",
+          display: "flex"
+        }),
+        ...(display === "inline" && {
+          display: "inline-flex"
+        }),
         "&:disabled": {
           cursor: "not-allowed"
         },
@@ -68,17 +79,16 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
         "&[disabled] > *": {
           pointerEvents: "none"
         },
+        // TODO: disabled styles
         "&[disabled], &[disabled]:hover, &[disabled]:active": {
           cursor: "not-allowed",
-          // color: theme.colors.grayLighter,
-          // backgroundColor: theme.color.grayLightest,
-          // border: `${theme.constants.borderWidthMedium} solid ${
-          // theme.color.grayLighter
-          // }`,
           textDecoration: "none",
           outline: 0,
           transition: "none"
-        }
+        },
+        ...(rounded && {
+          borderRadius: 40000
+        })
       })}
     >
       <Text type="strong" text={label} color="white" as="span" />
@@ -88,6 +98,8 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
 
 const defaultProps: DefaultProps<React.HTMLProps<HTMLButtonElement>> = {
   size: "medium",
+  display: "block",
+  rounded: true,
   action: {
     as: "button"
   }

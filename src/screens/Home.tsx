@@ -11,6 +11,8 @@ function Home(props: Props & RouteComponentProps) {
     <>
       <Text text="Home" type="display" />
       <Button<HTMLProps<HTMLButtonElement>>
+        rounded
+        display="inline"
         label="Go to Search"
         action={{
           as: "button",
