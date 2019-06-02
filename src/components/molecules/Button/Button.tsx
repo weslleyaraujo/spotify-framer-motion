@@ -4,17 +4,22 @@ import { useViewStyles, Props as ViewProps } from "../../atoms/View/View";
 import { Text } from "../../atoms/Text/Text";
 import { useTheme } from "../../../foundations/useTheme";
 import { SetIntersection } from "utility-types";
+import { Action } from "../../../interfaces/Action";
 
-interface Props {
-  as?: keyof JSX.IntrinsicElements;
+interface Props<T> {
+  action: Action<T>;
   size?: SetIntersection<ViewProps["padding"], "medium" | "large" | "small">;
   label: string;
 }
 
-interface DefaultProps extends Required<Pick<Props, "as" | "size">> {}
+interface DefaultProps<T> extends Required<Pick<Props<T>, "action" | "size">> {}
 
-function Button({ as, size, label }: Props & DefaultProps) {
-  const HTMLElement = as;
+function Button<T = React.HTMLProps<HTMLButtonElement>>({
+  action,
+  size,
+  label
+}: Props<T> & DefaultProps<T>) {
+  const { as: HTMLElement, ...props } = action;
   const theme = useTheme();
   const styles = useViewStyles({
     padding: size,
@@ -23,6 +28,7 @@ function Button({ as, size, label }: Props & DefaultProps) {
 
   return (
     <HTMLElement
+      {...props}
       css={css({
         ...styles,
         outline: 0,
@@ -80,9 +86,11 @@ function Button({ as, size, label }: Props & DefaultProps) {
   );
 }
 
-const defaultProps: DefaultProps = {
-  as: "button",
-  size: "medium"
+const defaultProps: DefaultProps<React.HTMLProps<HTMLButtonElement>> = {
+  size: "medium",
+  action: {
+    as: "button"
+  }
 };
 
 Button.defaultProps = defaultProps;

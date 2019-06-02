@@ -1,5 +1,29 @@
+type Image {
+  url: String!
+}
+
+type Artist {
+  id: ID!
+  name: String!
+  monthly_listeners: Int!
+  cover: Image!;
+}
+
+type Album {
+  id: ID!
+  artist: Artist!
+  songs: [Songs!]!
+}
+
+type Song {
+  id: ID!
+  name: String!
+  artist: Artist!
+  album: Album!
+}
+
 type User {
-  id: String!
+  id: ID!
   name: String!
 }
 
