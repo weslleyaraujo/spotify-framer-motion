@@ -1,11 +1,11 @@
 import React from "react";
-import { Text } from "../components/atoms/Text/Text";
+import { TextLine } from "../components/atoms/TextLine/TextLine";
 import { RouteComponentProps } from "@reach/router";
 
 interface Props {}
 
 function Search(props: Props & RouteComponentProps) {
-  return <Text text="Search" type="display" />;
+  return <TextLine text="Search" type="display" />;
 }
 
 export { Search };

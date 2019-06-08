@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { useViewStyles, Props as ViewProps } from "../../atoms/View/View";
-import { Text } from "../../atoms/Text/Text";
+import { TextLine } from "../../atoms/TextLine/TextLine";
 import { useTheme } from "../../../foundations/useTheme";
 import { SetIntersection } from "utility-types";
 import { Action } from "../../../interfaces/Action";
 
 interface Props<T> {
   action: Action<T>;
+  type?: "primary" | "secondary";
   size?: SetIntersection<ViewProps["padding"], "medium" | "large" | "small">;
   label: string;
   rounded?: boolean;
@@ -15,14 +16,26 @@ interface Props<T> {
 }
 
 interface DefaultProps<T>
-  extends Required<Pick<Props<T>, "action" | "size" | "rounded" | "display">> {}
+  extends Required<
+    Pick<Props<T>, "action" | "size" | "rounded" | "display" | "type">
+  > {}
+
+const MAP_TEXT_COLOR: {
+  [key in DefaultProps<{}>["type"]]: React.ComponentProps<
+    typeof TextLine
+  >["color"]
+} = {
+  primary: "white",
+  secondary: "black"
+};
 
 function Button<T = React.HTMLProps<HTMLButtonElement>>({
   rounded,
   action,
   size,
   label,
-  display
+  display,
+  type
 }: Props<T> & DefaultProps<T>) {
   const { as: HTMLElement, ...props } = action;
   const theme = useTheme();
@@ -50,12 +63,23 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
         boxSizing: "border-box",
         justifyContent: "center",
         alignItems: "center",
-        color: theme.colors.white,
         verticalAlign: "baseline",
         position: "relative",
         fontWeight: 400,
-        borderRadius: theme.constants.borderRadiusSmall,
-        backgroundColor: theme.colors.primary,
+        ...(rounded && {
+          borderRadius: theme.constants.borderRadiusSmall
+        }),
+
+        /** Button type */
+        ...(type === "primary" && {
+          backgroundColor: theme.colors.primary
+        }),
+
+        ...(type === "secondary" && {
+          backgroundColor: theme.colors.white
+        }),
+
+        /** Display */
         ...(display === "block" && {
           width: "100%",
           display: "flex"
@@ -63,6 +87,7 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
         ...(display === "inline" && {
           display: "inline-flex"
         }),
+
         "&:disabled": {
           cursor: "not-allowed"
         },
@@ -91,7 +116,12 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
         })
       })}
     >
-      <Text type="strong" text={label} color="white" as="span" />
+      <TextLine
+        type="strong"
+        text={label}
+        color={MAP_TEXT_COLOR[type]}
+        as="span"
+      />
     </HTMLElement>
   );
 }
@@ -99,6 +129,7 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
 const defaultProps: DefaultProps<React.HTMLProps<HTMLButtonElement>> = {
   size: "medium",
   display: "block",
+  type: "primary",
   rounded: true,
   action: {
     as: "button"

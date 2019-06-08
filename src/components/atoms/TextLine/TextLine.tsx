@@ -24,7 +24,13 @@ export interface Props {
 interface DefaultProps
   extends Required<Pick<Props, "numberOfLines" | "type" | "as" | "color">> {}
 
-function Text({ as, type, text, numberOfLines, color }: Props & DefaultProps) {
+function TextLine({
+  as,
+  type,
+  text,
+  numberOfLines,
+  color
+}: Props & DefaultProps) {
   const HTMLElement = as;
   const isTrucated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
@@ -59,6 +65,6 @@ const defaultProps: DefaultProps = {
   color: "neutral"
 };
 
-Text.defaultProps = defaultProps;
+TextLine.defaultProps = defaultProps;
 
-export { Text };
+export { TextLine };

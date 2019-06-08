@@ -6,13 +6,13 @@ type Artist {
   id: ID!
   name: String!
   monthly_listeners: Int!
-  cover: Image!;
+  cover: Image!
 }
 
 type Album {
   id: ID!
   artist: Artist!
-  songs: [Songs!]!
+  songs: [Song!]!
 }
 
 type Song {

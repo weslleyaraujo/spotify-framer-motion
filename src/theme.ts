@@ -1,7 +1,7 @@
 import { Theme } from "./foundations/Theme";
 import { IconTypes, icons } from "./foundations/icons";
 
-const fontFamily = "'Montserrat', sans-serif;";
+const fontFamily = "BlinkMacsystemFont,-apple-system,Segoe UI, Roboto";
 
 const theme: Theme<IconTypes> = {
   icons,
