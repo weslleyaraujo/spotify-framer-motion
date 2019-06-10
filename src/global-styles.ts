@@ -1,7 +1,6 @@
 import { css } from "@emotion/core";
 
 const globalStyles = css`
-  @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
   html,
   body,
   div,
@@ -89,6 +88,11 @@ const globalStyles = css`
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
   }
 `;
 

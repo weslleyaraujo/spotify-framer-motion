@@ -8,7 +8,7 @@ import { Action } from "../../../interfaces/Action";
 
 interface Props<T> {
   action: Action<T>;
-  type?: "primary" | "secondary";
+  type?: "normal" | "primary" | "secondary";
   size?: SetIntersection<ViewProps["padding"], "medium" | "large" | "small">;
   label: string;
   rounded?: boolean;
@@ -25,6 +25,7 @@ const MAP_TEXT_COLOR: {
     typeof TextLine
   >["color"]
 } = {
+  normal: "white",
   primary: "white",
   secondary: "black"
 };
@@ -40,7 +41,7 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
   const { as: HTMLElement, ...props } = action;
   const theme = useTheme();
   const styles = useViewStyles({
-    padding: size,
+    padding: ["large", "largest"],
     margin: "none"
   });
 
@@ -71,8 +72,13 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
         }),
 
         /** Button type */
+        ...(type === "normal" && {
+          backgroundColor: theme.colors.neutral
+        }),
+
         ...(type === "primary" && {
-          backgroundColor: theme.colors.primary
+          backgroundColor: theme.colors.primary,
+          textTransform: "uppercase"
         }),
 
         ...(type === "secondary" && {
@@ -129,7 +135,7 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>({
 const defaultProps: DefaultProps<React.HTMLProps<HTMLButtonElement>> = {
   size: "medium",
   display: "block",
-  type: "primary",
+  type: "normal",
   rounded: true,
   action: {
     as: "button"

@@ -1,17 +1,41 @@
 import { Theme } from "./foundations/Theme";
 import { IconTypes, icons } from "./foundations/icons";
 
-const fontFamily = "BlinkMacsystemFont,-apple-system,Segoe UI, Roboto";
+const fontFamily = "Circular";
 
 const theme: Theme<IconTypes> = {
   icons,
   colors: {
-    black: "#000",
     white: "#FFF",
+    black: "#000",
+    primaryDarkest: "#083518",
+    primaryDarker: "#0f612c",
+    primaryDark: "#168d40",
     primary: "#1DB954",
+    primaryLight: "#2bde6a",
+    primaryLighter: "#57e589",
+    primaryLightest: "#83eca8",
+    secondaryDarkest: "#775208",
+    secondaryDarker: "#a7730b",
+    secondaryDark: "#d7930e",
     secondary: "#F1AD27",
-    complementary: "#06BF73",
-    neutral: "#091E42"
+    secondaryLight: "#f4bf57",
+    secondaryLighter: "#f7d187",
+    secondaryLightest: "#fae4b7",
+    complementaryDarkest: "#000",
+    complementaryDarker: "#101111",
+    complementaryDark: "#292a2b",
+    complementary: "#424445",
+    complementaryLight: "#5b5e5f",
+    complementaryLighter: "#747779",
+    complementaryLightest: "#8e9192",
+    neutralDarkest: "#000",
+    neutralDarker: "#000",
+    neutralDark: "#030a15",
+    neutral: "#091E42",
+    neutralLight: "#0f326f",
+    neutralLighter: "#15479c",
+    neutralLightest: "#1b5bc9"
   },
   units: {
     smallest: 2,
@@ -22,7 +46,7 @@ const theme: Theme<IconTypes> = {
   },
   fonts: {
     display: {
-      fontSize: 30,
+      fontSize: 36,
       fontWeight: 800,
       fontStyle: "normal",
       lineHeight: 32,
@@ -73,7 +97,10 @@ const theme: Theme<IconTypes> = {
   constants: {
     borderRadiusSmall: 6,
     borderRadiusMedium: 12,
-    borderRadiusLarge: 18
+    borderRadiusLarge: 18,
+    borderWidthSmall: 0.5,
+    borderWidthMedium: 1,
+    borderWidthLarge: 2
   },
   scales: {
     smallest: 24,
