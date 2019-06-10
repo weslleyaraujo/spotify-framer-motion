@@ -14,9 +14,8 @@ function transformColor({ base, prefix }) {
 
 const colors = {
   primary: "#1DB954",
-  secondary: "#F1AD27",
-  complementary: "#424445",
-  neutral: "#091E42"
+  secondary: "#000",
+  complementary: "#FFF"
 };
 
 console.log(

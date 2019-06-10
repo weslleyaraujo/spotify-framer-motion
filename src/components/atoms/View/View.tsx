@@ -53,7 +53,7 @@ type ViewStyles = Subtract<
 >;
 
 export interface Props {
-  children: React.ReactElement;
+  children: React.ReactNode;
   margin?: Spacing;
   padding?: Spacing;
   radius?: "small" | "medium" | "large";
@@ -64,6 +64,7 @@ export interface Props {
   wrap?: FlexWrapProperty;
   supportsTruncation?: boolean;
   style?: ViewStyles;
+  debugTrace?: boolean;
 }
 
 interface DefaultProps extends Required<Pick<Props, "margin" | "padding">> {}
@@ -81,6 +82,7 @@ function useViewStyles(
     | "justify"
     | "direction"
     | "grow"
+    | "debugTrace"
   >
 ) {
   const {
@@ -93,7 +95,8 @@ function useViewStyles(
     justify: justifyContent,
     direction: flexDirection,
     grow: flexGrow,
-    padding
+    padding,
+    debugTrace
   } = props;
   const theme = useTheme();
   const display = [
@@ -150,11 +153,15 @@ function useViewStyles(
     alignItems,
     flexWrap,
     flexGrow,
+    flexDirection: display ? flexDirection : "column",
+    ...(debugTrace &&
+      process.env.NODE_ENV === "development" && {
+        outline: "1px dashed red"
+      }),
     ...(radius && { borderRadius: mapRadius(radius) }),
     ...(supportsTruncation && { minWidth: 0 }),
     ...(margin && { margin: mapSpacing(margin) }),
-    ...(padding && { padding: mapSpacing(padding) }),
-    flexDirection: display ? flexDirection : "column"
+    ...(padding && { padding: mapSpacing(padding) })
   };
 }
 

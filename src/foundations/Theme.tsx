@@ -28,31 +28,19 @@ export interface Colors {
   complementaryLight: string;
   complementaryLighter: string;
   complementaryLightest: string;
-
-  neutralDarkest: string;
-  neutralDarker: string;
-  neutralDark: string;
-  neutral: string;
-  neutralLight: string;
-  neutralLighter: string;
-  neutralLightest: string;
 }
 
 export interface Units {
   smallest: number;
+  smaller: number;
   small: number;
   medium: number;
   large: number;
+  larger: number;
   largest: number;
 }
 
-export interface Scales {
-  smallest: number;
-  small: number;
-  medium: number;
-  large: number;
-  largest: number;
-}
+export interface Scales extends Units {}
 
 export interface Constants {
   borderRadiusLarge: number;

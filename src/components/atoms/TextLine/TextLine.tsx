@@ -62,7 +62,7 @@ const defaultProps: DefaultProps = {
   as: "p",
   type: "body",
   numberOfLines: 1,
-  color: "neutral"
+  color: "black"
 };
 
 TextLine.defaultProps = defaultProps;

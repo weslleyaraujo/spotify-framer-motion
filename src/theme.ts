@@ -15,34 +15,38 @@ const theme: Theme<IconTypes> = {
     primaryLight: "#2bde6a",
     primaryLighter: "#57e589",
     primaryLightest: "#83eca8",
-    secondaryDarkest: "#775208",
-    secondaryDarker: "#a7730b",
-    secondaryDark: "#d7930e",
-    secondary: "#F1AD27",
-    secondaryLight: "#f4bf57",
-    secondaryLighter: "#f7d187",
-    secondaryLightest: "#fae4b7",
-    complementaryDarkest: "#000",
-    complementaryDarker: "#101111",
-    complementaryDark: "#292a2b",
-    complementary: "#424445",
-    complementaryLight: "#5b5e5f",
-    complementaryLighter: "#747779",
-    complementaryLightest: "#8e9192",
-    neutralDarkest: "#000",
-    neutralDarker: "#000",
-    neutralDark: "#030a15",
-    neutral: "#091E42",
-    neutralLight: "#0f326f",
-    neutralLighter: "#15479c",
-    neutralLightest: "#1b5bc9"
+    secondaryDarkest: "#000",
+    secondaryDarker: "#000",
+    secondaryDark: "#000",
+    secondary: "#000",
+    secondaryLight: "#1a1a1a",
+    secondaryLighter: "#333",
+    secondaryLightest: "#4d4d4d",
+    complementaryDarkest: "#b3b3b3",
+    complementaryDarker: "#ccc",
+    complementaryDark: "#e6e6e6",
+    complementary: "#FFF",
+    complementaryLight: "#fff",
+    complementaryLighter: "#fff",
+    complementaryLightest: "#fff"
   },
   units: {
     smallest: 2,
-    small: 4,
-    medium: 8,
-    large: 16,
-    largest: 32
+    smaller: 4,
+    small: 8,
+    medium: 16,
+    large: 32,
+    larger: 64,
+    largest: 128
+  },
+  scales: {
+    smallest: 8,
+    smaller: 16,
+    small: 32,
+    medium: 64,
+    large: 64,
+    larger: 128,
+    largest: 256
   },
   fonts: {
     display: {
@@ -54,7 +58,7 @@ const theme: Theme<IconTypes> = {
     },
     body: {
       fontSize: 14,
-      fontWeight: 400,
+      fontWeight: "normal",
       lineHeight: 20,
       fontFamily
     },
@@ -89,7 +93,7 @@ const theme: Theme<IconTypes> = {
     },
     featured: {
       fontWeight: 400,
-      fontSize: 16,
+      fontSize: 12,
       lineHeight: 20,
       fontFamily
     }
@@ -101,13 +105,6 @@ const theme: Theme<IconTypes> = {
     borderWidthSmall: 0.5,
     borderWidthMedium: 1,
     borderWidthLarge: 2
-  },
-  scales: {
-    smallest: 24,
-    small: 32,
-    medium: 48,
-    large: 64,
-    largest: 96
   }
 };
 

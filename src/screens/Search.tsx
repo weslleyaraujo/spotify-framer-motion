@@ -15,10 +15,10 @@ function Search(props: Props & RouteComponentProps) {
   return (
     <>
       <View justify="center" padding={["largest", "large", "none", "large"]}>
-        <TextLine text="Rock" type="display" color="white" />
+        <TextLine text="Search" type="display" color="white" />
       </View>
     </>
   );
 }
 
-export { Search };
+export { Search, Search as default };

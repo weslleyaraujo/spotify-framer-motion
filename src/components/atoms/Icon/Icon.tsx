@@ -51,7 +51,7 @@ function Icon<T = void>({
 }
 
 const defaultProps: DefaultProps<""> = {
-  color: "neutral",
+  color: "black",
   size: "medium"
 };
 
