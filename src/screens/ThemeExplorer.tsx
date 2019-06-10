@@ -54,7 +54,7 @@ function ThemeExplorer(props: Props & RouteComponentProps) {
         {Object.keys(theme.colors).map(key => (
           <View
             key={key}
-            padding="medium"
+            padding="largest"
             style={{
               backgroundColor: theme.colors[key as keyof typeof theme.colors]
             }}
@@ -73,11 +73,11 @@ const Section: React.FunctionComponent<{ title: string }> = function Section({
 }) {
   return (
     <View padding="large">
-      <View margin={["none", "none", "medium", "none"]}>
+      <View margin={["none", "none", "large", "none"]}>
         <TextLine text={title} type="display" color="white" />
       </View>
       {React.Children.map(children, item => (
-        <View margin={["medium", "none"]}>{item}</View>
+        <View margin={["large", "none"]}>{item}</View>
       ))}
     </View>
   );
