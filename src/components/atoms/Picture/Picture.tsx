@@ -1,8 +1,11 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { ObjectFitProperty } from "csstype";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useTheme } from "../../../foundations/useTheme";
+import { useInView } from "react-intersection-observer";
+// @ts-ignore
+import { useSpring, animated } from "react-spring";
 
 type ResizeMode = "cover" | "contain" | "stretch";
 type MediaOrientation = "portrait" | "landscape";
@@ -72,22 +75,36 @@ function Picture(props: Props & DefaultProps) {
     onLoad,
     alt
   } = props;
+
   const [error, setError] = useState(false);
-  const { paddingBottom, objectFit } = useMemo(() => {
-    const paddingBottom = `calc(100% / ${getAspectRatioValueWithLayout(
-      aspectRatio,
-      orientation
-    )})`;
-
-    const objectFit = getResizeMode(resizeMode);
-
-    return {
-      paddingBottom,
-      objectFit
-    };
-  }, [aspectRatio, orientation, resizeMode]);
-
+  const [viewed, setViewed] = useState(false);
   const theme = useTheme();
+  const [ref, inView] = useInView({
+    threshold: 0
+  });
+
+  useEffect(() => {
+    if (viewed) {
+      return;
+    }
+
+    if (inView) {
+      setViewed(true);
+    }
+  }, [inView, viewed]);
+
+  const spring = useSpring({
+    opacity: viewed ? 1 : 0,
+    from: { opacity: 0 }
+  });
+
+  const paddingBottom = useMemo(
+    () =>
+      `calc(100% / ${getAspectRatioValueWithLayout(aspectRatio, orientation)})`,
+    [aspectRatio, orientation]
+  );
+
+  const objectFit = useMemo(() => getResizeMode(resizeMode), [resizeMode]);
 
   return (
     <figure
@@ -100,28 +117,31 @@ function Picture(props: Props & DefaultProps) {
           backgroundColor: theme.colors.complementaryLight
         })
       }}
+      ref={ref}
       style={{ paddingBottom }}
     >
       <picture>
-        <img
-          src={source}
-          css={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            height: "100%"
-          }}
-          style={{ objectFit }}
-          onError={e => {
-            setError(true);
-            onError(e);
-          }}
-          onLoad={onLoad}
-          alt={alt}
-        />
+        {inView && (
+          <animated.img
+            src={source}
+            css={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              height: "100%"
+            }}
+            style={{ objectFit, ...spring }}
+            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+              setError(true);
+              onError(e);
+            }}
+            onLoad={onLoad}
+            alt={alt}
+          />
+        )}
       </picture>
       {children && (
         <div

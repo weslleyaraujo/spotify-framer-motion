@@ -20,7 +20,9 @@
     "react": "^16.8.5",
     "react-apollo": "^2.5.6",
     "react-dom": "^16.8.5",
+    "react-intersection-observer": "^8.23.0",
     "react-scripts": "3.0.1",
+    "react-spring": "^8.0.25",
     "typescript": "^3.3.4000",
     "utility-types": "^3.4.1"
   },

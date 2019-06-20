@@ -55,25 +55,43 @@ function Home(props: Props & RouteComponentProps) {
             maxVisibleItems={2}
           >
             <Picture
-              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e"
+              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?a"
               alt="Release Radar"
               aspectRatio="square"
             />
 
             <Picture
-              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e"
+              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?b"
               alt="Release Radar"
               aspectRatio="square"
             />
 
             <Picture
-              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e"
+              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?c"
               alt="Release Radar"
               aspectRatio="square"
             />
 
             <Picture
-              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e"
+              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?d"
+              alt="Release Radar"
+              aspectRatio="square"
+            />
+
+            <Picture
+              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?e"
+              alt="Release Radar"
+              aspectRatio="square"
+            />
+
+            <Picture
+              source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?f"
+              alt="Release Radar"
+              aspectRatio="square"
+            />
+
+            <Picture
+              source="https://replacecover.com/images/objects/thenight.png"
               alt="Release Radar"
               aspectRatio="square"
             />
