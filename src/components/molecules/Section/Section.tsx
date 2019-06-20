@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { View } from "../../atoms/View/View";
+import { View, useViewStyles } from "../../atoms/View/View";
 import { TextLine } from "../../atoms/TextLine/TextLine";
 import { Fragment } from "react";
 
@@ -29,15 +29,25 @@ function Section({
   justify,
   head
 }: Props & DefaultProps) {
+  const view = useViewStyles({
+    margin: "none",
+    justify,
+    padding
+  });
   return (
     <Fragment>
       <View {...head} direction="column">
         <TextLine text={title} color="white" type="heading" />
         {subtitle && <TextLine text={subtitle} color="complementaryDarkest" />}
       </View>
-      <View justify={justify} padding={padding}>
+      <div
+        css={{
+          ...view,
+          display: "initial"
+        }}
+      >
         {children}
-      </View>
+      </div>
     </Fragment>
   );
 }
