@@ -9,7 +9,7 @@ interface Props
     React.ComponentProps<typeof View>,
     "padding" | "justify" | "align"
   > {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   subtitle?: string;
   head: Pick<
@@ -30,20 +30,24 @@ function Section({
   head
 }: Props & DefaultProps) {
   const view = useViewStyles({
-    margin: "none",
+    padding,
     justify,
-    padding
+    margin: "none"
   });
   return (
     <Fragment>
-      <View {...head} direction="column">
-        <TextLine text={title} color="white" type="heading" />
-        {subtitle && <TextLine text={subtitle} color="complementaryDarkest" />}
-      </View>
+      {(title || subtitle) && (
+        <View {...head} direction="column">
+          {title && <TextLine text={title} color="white" type="heading" />}
+          {subtitle && (
+            <TextLine text={subtitle} color="complementaryDarkest" />
+          )}
+        </View>
+      )}
       <div
         css={{
           ...view,
-          display: "initial"
+          display: "block"
         }}
       >
         {children}
@@ -55,11 +59,11 @@ function Section({
 const defaultProps: DefaultProps = {
   justify: "center",
   align: "center",
-  padding: "medium",
+  padding: "large",
   head: {
     align: "center",
     justify: "center",
-    padding: ["small", "medium"]
+    padding: ["medium", "medium", "none", "medium"]
   }
 };
 

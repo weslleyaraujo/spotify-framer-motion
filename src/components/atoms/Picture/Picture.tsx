@@ -123,6 +123,7 @@ function Picture(props: Props & DefaultProps) {
       <picture>
         {inView && (
           <animated.img
+            alt={alt}
             src={source}
             css={{
               position: "absolute",
@@ -139,7 +140,6 @@ function Picture(props: Props & DefaultProps) {
               onError(e);
             }}
             onLoad={onLoad}
-            alt={alt}
           />
         )}
       </picture>

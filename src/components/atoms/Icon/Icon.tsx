@@ -37,12 +37,10 @@ function Icon<T = void>({
         React.cloneElement(root, {
           width: dimensions,
           height: dimensions,
+          stroke: theme.colors[color],
           children: React.Children.map(
             root.props.children,
-            (child: React.ReactElement<any>) =>
-              React.cloneElement(child, {
-                fill: theme.colors[color]
-              })
+            (child: React.ReactElement<any>) => React.cloneElement(child)
           )
         })
       )}

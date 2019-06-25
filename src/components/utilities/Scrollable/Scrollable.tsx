@@ -51,7 +51,6 @@ function Scrollable({
         overflowY: "hidden",
         overflowX: "scroll",
         whiteSpace: "nowrap",
-
         msOverflowStyle: "none",
         "&::-webkit-scrollbar": {
           display: "none"
@@ -69,6 +68,8 @@ function Scrollable({
               ...(!inlineItems && {
                 width: `calc(100% / ${maxVisibleItems})`
               }),
+              paddingTop: 0,
+              paddingBottom: 0,
               ...(isFirst && { paddingLeft: extraPadding }),
               ...(isLast && { paddingRight: extraPadding }),
               display: "inline-block"

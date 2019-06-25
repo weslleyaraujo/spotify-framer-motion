@@ -39,9 +39,11 @@ function useBodyBackground(
     const {
       backgroundImage,
       backgroundColor,
-      backgroundRepeat
+      backgroundRepeat,
+      backgroundAttachment
     } = window.getComputedStyle(body);
 
+    body.style.backgroundAttachment = "scroll";
     body.style.backgroundColor = theme.colors.black;
     body.style.backgroundRepeat = "no-repeat";
     body.style.backgroundImage = GRADIENT_STYLE_MAP[gradientStyle]({
@@ -50,6 +52,7 @@ function useBodyBackground(
     });
 
     return () => {
+      body.style.backgroundAttachment = backgroundAttachment;
       body.style.backgroundColor = backgroundColor;
       body.style.backgroundRepeat = backgroundRepeat;
       body.style.backgroundImage = backgroundImage;
