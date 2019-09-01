@@ -4,8 +4,7 @@ import { ObjectFitProperty } from "csstype";
 import { useState, useMemo, useEffect } from "react";
 import { useTheme } from "../../../foundations/useTheme";
 import { useInView } from "react-intersection-observer";
-// @ts-ignore
-import { useSpring, animated } from "react-spring";
+import { motion, Variants } from "framer-motion";
 
 type ResizeMode = "cover" | "contain" | "stretch";
 type MediaOrientation = "portrait" | "landscape";
@@ -88,15 +87,15 @@ function Picture(props: Props & DefaultProps) {
       return;
     }
 
-    if (inView) {
+    if (inView && !viewed) {
       setViewed(true);
     }
   }, [inView, viewed]);
 
-  const spring = useSpring({
-    opacity: viewed ? 1 : 0,
-    from: { opacity: 0 }
-  });
+  const variants: Variants = {
+    visible: { opacity: viewed ? 1 : 0 },
+    initial: { opacity: 0 }
+  };
 
   const paddingBottom = useMemo(
     () =>
@@ -121,27 +120,31 @@ function Picture(props: Props & DefaultProps) {
       style={{ paddingBottom }}
     >
       <picture>
-        {inView && (
-          <animated.img
-            alt={alt}
-            src={source}
-            css={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              height: "100%"
-            }}
-            style={{ objectFit, ...spring }}
-            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-              setError(true);
-              onError(e);
-            }}
-            onLoad={onLoad}
-          />
-        )}
+        {(inView && !viewed) ||
+          (viewed && (
+            <motion.img
+              alt={alt}
+              src={source}
+              variants={variants}
+              animate={viewed ? "visible" : "initial"}
+              css={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                opacity: 0
+              }}
+              style={{ objectFit }}
+              onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                setError(true);
+                onError(e);
+              }}
+              onLoad={onLoad}
+            />
+          ))}
       </picture>
       {children && (
         <div
@@ -168,21 +171,21 @@ function getAspectRatioValue(
   aspectRatio: MediaAspectRatio | undefined
 ): number {
   switch (aspectRatio) {
-    case "classic":
-      return 1.5; // 3/2;
+    case "classic": // 3/2;
+      return 1.5;
 
-    case "square":
-      return 1; // 1/1
+    case "square": // 1/1
+      return 1;
 
-    case "widescreen":
-      return 1.777; // 16/9;
+    case "widescreen": // 16/9;
+      return 1.777;
 
-    case "panorama":
-      return 3; // 3/1;
+    case "panorama": // 3/1;
+      return 3;
 
-    case "standard": // DEFAULT
+    case "standard": // 14/3
     default:
-      return 1.333; // 4/3;
+      return 1.333;
   }
 }
 

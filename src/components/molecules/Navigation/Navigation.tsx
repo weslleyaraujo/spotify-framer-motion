@@ -72,9 +72,10 @@ function Navigation<T>({ items }: Props<T>) {
       }}
     >
       <View justify="space-around" direction="row">
-        {items.map((item, index) => (
-          <Item<T> key={`navigation-item-${index}`} {...item} />
-        ))}
+        {items.map(
+          (item, index) => null
+          // <Item<T> key={`navigation-item-${index}`} {...item} />
+        )}
       </View>
     </div>
   );
