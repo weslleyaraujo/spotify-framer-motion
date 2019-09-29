@@ -2,10 +2,11 @@
 
 import { css, jsx } from "@emotion/core";
 
-import { Colors } from "../../../foundations/Theme";
+import { Colors } from "../../../foundations/Colors";
 import { Fonts } from "../../../foundations/Typography";
 import { PickEnum } from "../../../utils/pick-enum";
-import { useTheme } from "../../../foundations/useTheme";
+import { Theme } from "../../../foundations/Theme";
+import { useTheme } from "emotion-theming";
 
 // TODO: Move it to interfaces directory
 export type ForegroundColors = PickEnum<
@@ -44,7 +45,7 @@ function TextLine({
   const isTruncated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
   const isMultiline = isTruncated && numberOfLines > 1;
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const styles = css({
     ...theme.fonts[type],
     color: color ? theme.colors[color] : "inherit",

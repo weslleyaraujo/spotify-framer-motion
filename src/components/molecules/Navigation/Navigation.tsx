@@ -5,9 +5,10 @@ import { Assign } from "utility-types";
 import { Icon } from "../../atoms/Icon/Icon";
 import { Icons } from "../../../foundations/icons";
 import { TextLine } from "../../atoms/TextLine/TextLine";
+import { Theme } from "../../../foundations/Theme";
 import { View } from "../../atoms/View/View";
 import { jsx } from "@emotion/core";
-import { useTheme } from "../../../foundations/useTheme";
+import { useTheme } from "emotion-theming";
 
 interface ItemProps<T> {
   text: NonNullable<React.ComponentProps<typeof TextLine>["text"]>;
@@ -78,7 +79,7 @@ interface Props<T> {
 }
 
 function Navigation<T>({ items }: Props<T>) {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   return (
     <div
       css={{

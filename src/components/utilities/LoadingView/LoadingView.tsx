@@ -1,11 +1,12 @@
 import { ActivityIndicator } from "../../atoms/ActivityIndicator/ActivityIndicator";
 import React from "react";
 import { Splash } from "../../molecules/Splash/Splash";
+import { Theme } from "../../../foundations/Theme";
 import { useBodyBackground } from "../../../hooks/useBodyBackground";
-import { useTheme } from "../../../foundations/useTheme";
+import { useTheme } from "emotion-theming";
 
 function LoadingView() {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   useBodyBackground({
     color: theme.colors.background,
     gradientStyle: "topLeft"

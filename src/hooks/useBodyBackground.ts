@@ -1,6 +1,7 @@
-import { useLayoutEffect } from "react";
-import { useTheme } from "../foundations/useTheme";
+import { Theme } from "../foundations/Theme";
 import { transparentize } from "polished";
+import { useLayoutEffect } from "react";
+import { useTheme } from "emotion-theming";
 
 type GradientStyle = "topLeft";
 
@@ -32,7 +33,7 @@ function useBodyBackground(
     gradientStyle: "topLeft"
   }
 ) {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const { body } = document;
 
   useLayoutEffect(() => {

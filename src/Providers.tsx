@@ -1,7 +1,7 @@
 import { ApolloProvider } from "@apollo/react-common";
 import React from "react";
 import { Router } from "react-router-dom";
-import { ThemeContext } from "./foundations/Theme";
+import { ThemeProvider } from "emotion-theming";
 import { createApolloClient } from "./graphql/create-apollo-client";
 import { createBrowserHistory } from "history";
 import { theme } from "./theme";
@@ -11,11 +11,11 @@ const history = createBrowserHistory();
 
 const Providers: React.FunctionComponent = function Providers({ children }) {
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <Router history={history}>{children}</Router>
       </ApolloProvider>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 };
 

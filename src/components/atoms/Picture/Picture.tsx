@@ -7,10 +7,11 @@ import { Variants, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
 import { ObjectFitProperty } from "csstype";
+import { Theme } from "../../../foundations/Theme";
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useInView } from "react-intersection-observer";
-import { useTheme } from "../../../foundations/useTheme";
+import { useTheme } from "emotion-theming";
 
 interface Props {
   /** Image Url */
@@ -74,7 +75,7 @@ function Picture(props: Props & DefaultProps) {
 
   const [error, setError] = useState(false);
   const [viewed, setViewed] = useState(false);
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const [ref, inView] = useInView({
     threshold: 0
   });

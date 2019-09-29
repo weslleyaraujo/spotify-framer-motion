@@ -16,6 +16,7 @@
     "apollo-boost": "^0.4.0",
     "apollo-cache-inmemory": "^1.6.0",
     "emotion": "^10.0.9",
+    "emotion-theming": "^10.0.19",
     "framer-motion": "^1.6.7",
     "graphql": "^14.3.1",
     "history": "^4.10.1",

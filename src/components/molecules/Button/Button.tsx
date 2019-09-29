@@ -6,8 +6,9 @@ import { Action } from "../../atoms/Action/Action";
 import { ActionProps } from "../../../interfaces/Card";
 import { SetIntersection } from "utility-types";
 import { TextLine } from "../../atoms/TextLine/TextLine";
+import { Theme } from "../../../foundations/Theme";
 import { jsx } from "@emotion/core";
-import { useTheme } from "../../../foundations/useTheme";
+import { useTheme } from "emotion-theming";
 
 interface Props<T> {
   action: ActionProps<T>;
@@ -57,7 +58,7 @@ function useButtonStyles(
   props: Pick<Props<{}> & DefaultProps<{}>, "rounded" | "display" | "type">
 ) {
   const { rounded, display, type } = props;
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   return {
     outline: 0,
     margin: 0,

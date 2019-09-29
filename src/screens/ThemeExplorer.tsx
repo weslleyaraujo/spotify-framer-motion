@@ -1,16 +1,16 @@
 import { Button } from "../components/molecules/Button/Button";
-import { Colors } from "../foundations/Theme";
 import React from "react";
 import { TextLine } from "../components/atoms/TextLine/TextLine";
+import { Theme } from "../foundations/Theme";
 import { View } from "../components/atoms/View/View";
 import { useBodyBackground } from "../hooks/useBodyBackground";
-import { useTheme } from "../foundations/useTheme";
+import { useTheme } from "emotion-theming";
 
 interface Props {}
 
 function ThemeExplorer(props: Props) {
   useBodyBackground();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   return (
     <>
       <Section title="Buttons">

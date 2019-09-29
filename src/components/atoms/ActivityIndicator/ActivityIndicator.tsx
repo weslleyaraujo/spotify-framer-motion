@@ -1,9 +1,10 @@
 import { ForegroundColors } from "../TextLine/TextLine";
-import { Scales } from "../../../foundations/Theme";
+import { Scales } from "../../../foundations/Spacing";
+import { Theme } from "../../../foundations/Theme";
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { keyframes } from "@emotion/core";
-import { useTheme } from "../../../foundations/useTheme";
+import { useTheme } from "emotion-theming";
 
 interface Props {
   /** Size of the spinner. Default: "medium" */
@@ -27,7 +28,7 @@ const spin = keyframes({
 });
 
 function ActivityIndicator({ color, size }: Props & DefaultProps) {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   return (
     <svg
       viewBox="0 0 1024 1024"

@@ -11,8 +11,8 @@ const theme: Theme<Icons> = {
     foregroundSecondary: "#b3b3b3",
     absoluteLight: "#FFFFFF",
     absoluteDark: "#18262C",
-    background: "#1F2F35",
-    backgroundAccent: "#28393F",
+    background: "#121212",
+    backgroundAccent: "#222326",
     primary: "#3586F0",
     complement: "#25A781",
     callout: "#FF5E36"

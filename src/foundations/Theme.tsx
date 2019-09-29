@@ -1,29 +1,8 @@
+import { Scales, Units } from "./Spacing";
+
+import { Colors } from "./Colors";
 import { Fonts } from "./Typography";
 import React from "react";
-
-export interface Colors {
-  absoluteDark: string;
-  absoluteLight: string;
-  foregroundPrimary: string;
-  foregroundSecondary: string;
-  background: string;
-  backgroundAccent: string;
-  primary: string;
-  complement: string;
-  callout: string;
-}
-
-export interface Units {
-  smallest: number;
-  smaller: number;
-  small: number;
-  medium: number;
-  large: number;
-  larger: number;
-  largest: number;
-}
-
-export interface Scales extends Units {}
 
 export interface Constants {
   borderRadiusLarge: number;
@@ -34,20 +13,17 @@ export interface Constants {
   borderWidthLarge: number;
 }
 
-export interface Theme<T extends string> {
+export interface Theme<T extends symbol | string | number | Object = {}> {
   colors: Colors;
   units: Units;
   fonts: Fonts;
   constants: Constants;
   scales: Scales;
-  icons: Record<
-    T,
-    (args: {
+  icons: {
+    [key in T]: (args: {
       color: string;
       width: number;
       height: number;
-    }) => React.ReactElement
-  >;
+    }) => React.ReactElement;
+  };
 }
-
-export const ThemeContext = React.createContext<Theme<any> | null>(null);

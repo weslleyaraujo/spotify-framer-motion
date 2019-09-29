@@ -1,9 +1,12 @@
 /** @jsx jsx */
-import { Children } from "react";
-import { jsx } from "@emotion/core";
+
 import { View, useViewStyles } from "../../atoms/View/View";
-import { useTheme } from "../../../foundations/useTheme";
-import { Units } from "../../../foundations/Theme";
+
+import { Children } from "react";
+import { Theme } from "../../../foundations/Theme";
+import { Units } from "../../../foundations/Spacing";
+import { jsx } from "@emotion/core";
+import { useTheme } from "emotion-theming";
 
 type InlineItems = boolean;
 type MaxVisibleItems = number;
@@ -37,7 +40,7 @@ function Scrollable({
   inlineItems
 }: Props & DefaultProps) {
   const count = Children.count(children);
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const view = useViewStyles({
     padding,
     margin: "none"

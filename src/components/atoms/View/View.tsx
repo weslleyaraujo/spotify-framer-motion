@@ -11,10 +11,11 @@ import {
 import { CSSObject, CSSPseudosForCSSObject } from "@emotion/serialize";
 
 import { Subtract } from "utility-types";
-import { Units } from "../../../foundations/Theme";
+import { Theme } from "../../../foundations/Theme";
+import { Units } from "../../../foundations/Spacing";
 import { jsx } from "@emotion/core";
 import { useCallback } from "react";
-import { useTheme } from "../../../foundations/useTheme";
+import { useTheme } from "emotion-theming";
 
 type Value = keyof Units | "none";
 type Spacing =
@@ -99,7 +100,7 @@ function useViewStyles(
     padding,
     debugTrace
   } = props;
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const display = [
     justifyContent,
     alignItems,

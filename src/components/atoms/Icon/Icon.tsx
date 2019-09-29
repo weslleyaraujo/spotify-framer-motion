@@ -1,8 +1,12 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+
 import React, { useMemo } from "react";
-import { useTheme } from "../../../foundations/useTheme";
-import { Colors, Scales } from "../../../foundations/Theme";
+
+import { Colors } from "../../../foundations/Colors";
+import { Scales } from "../../../foundations/Spacing";
+import { Theme } from "../../../foundations/Theme";
+import { jsx } from "@emotion/core";
+import { useTheme } from "emotion-theming";
 
 interface Props<T> {
   color: keyof Colors;
@@ -20,9 +24,11 @@ function Icon<T = void>({
   T extends void ? "Missing icons list. E.g <Icon<'foo' | 'bar'> />" : string
 > &
   DefaultProps<T>): React.ReactElement {
-  const theme = useTheme();
+  const theme = useTheme<Theme<T>>();
   const dimensions = theme.scales[size];
   const el = useMemo(() => {
+    // TODO: figure out why theme.icons are not typed :(
+    // @ts-ignore
     const factory = theme.icons[type];
     return factory({
       width: dimensions,
