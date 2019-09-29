@@ -1,14 +1,14 @@
+import { Button } from "../components/molecules/Button/Button";
+import { Colors } from "../foundations/Theme";
 import React from "react";
 import { TextLine } from "../components/atoms/TextLine/TextLine";
 import { View } from "../components/atoms/View/View";
-import { RouteComponentProps } from "@reach/router";
-import { Button } from "../components/molecules/Button/Button";
 import { useBodyBackground } from "../hooks/useBodyBackground";
 import { useTheme } from "../foundations/useTheme";
 
 interface Props {}
 
-function ThemeExplorer(props: Props & RouteComponentProps) {
+function ThemeExplorer(props: Props) {
   useBodyBackground();
   const theme = useTheme();
   return (
@@ -56,7 +56,7 @@ function ThemeExplorer(props: Props & RouteComponentProps) {
             key={key}
             padding="largest"
             style={{
-              backgroundColor: theme.colors[key as keyof typeof theme.colors]
+              backgroundColor: theme.colors[key as keyof Colors]
             }}
           >
             <TextLine text={key} />
@@ -74,7 +74,7 @@ const Section: React.FunctionComponent<{ title: string }> = function Section({
   return (
     <View padding="large">
       <View margin={["none", "none", "large", "none"]}>
-        <TextLine text={title} type="display" color="white" />
+        <TextLine text={title} type="display" color="absoluteLight" />
       </View>
       {React.Children.map(children, item => (
         <View margin={["large", "none"]}>{item}</View>

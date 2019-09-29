@@ -1,33 +1,16 @@
-import React from "react";
 import { Fonts } from "./Typography";
+import React from "react";
 
 export interface Colors {
-  black: string;
-  white: string;
-
-  primaryDarkest: string;
-  primaryDarker: string;
-  primaryDark: string;
+  absoluteDark: string;
+  absoluteLight: string;
+  foregroundPrimary: string;
+  foregroundSecondary: string;
+  background: string;
+  backgroundAccent: string;
   primary: string;
-  primaryLight: string;
-  primaryLighter: string;
-  primaryLightest: string;
-
-  secondaryDarkest: string;
-  secondaryDarker: string;
-  secondaryDark: string;
-  secondary: string;
-  secondaryLight: string;
-  secondaryLighter: string;
-  secondaryLightest: string;
-
-  complementaryDarkest: string;
-  complementaryDarker: string;
-  complementaryDark: string;
-  complementary: string;
-  complementaryLight: string;
-  complementaryLighter: string;
-  complementaryLightest: string;
+  complement: string;
+  callout: string;
 }
 
 export interface Units {

@@ -1,16 +1,18 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import { View } from "../../atoms/View/View";
-import { TextLine } from "../../atoms/TextLine/TextLine";
-import { Colors } from "../../../foundations/Theme";
+
 import { Action } from "../../../interfaces/Action";
+import { Assign } from "utility-types";
 import { Icon } from "../../atoms/Icon/Icon";
-import { IconTypes } from "../../../foundations/icons";
+import { Icons } from "../../../foundations/icons";
+import { TextLine } from "../../atoms/TextLine/TextLine";
+import { View } from "../../atoms/View/View";
+import { jsx } from "@emotion/core";
+import { useTheme } from "../../../foundations/useTheme";
 
 interface ItemProps<T> {
   text: NonNullable<React.ComponentProps<typeof TextLine>["text"]>;
-  icon: IconTypes;
-  color?: keyof Colors;
+  icon: Icons;
+  color?: React.ComponentProps<typeof TextLine>["color"];
   action: Action<T>;
   active?: boolean;
 }
@@ -25,11 +27,14 @@ function Item<T>({
   action,
   active
 }: ItemProps<T> & ItemDefaultProps<T>) {
-  const { as: HTMLElement, ...actionProps } = action;
-  const selectedColor: keyof Colors = active ? "primary" : color;
+  const { as: ActionElement, ...actionProps } = action;
+  const selectedColor: typeof color = active ? color : "foregroundSecondary";
+
   return (
-    <div
+    <ActionElement
+      {...actionProps}
       css={{
+        flex: 1,
         flexGrow: 1,
         flexBasis: 0,
         display: "flex",
@@ -38,44 +43,53 @@ function Item<T>({
         appearance: "none"
       }}
     >
-      <HTMLElement {...actionProps}>
-        <View
-          direction="column"
-          align="center"
-          padding={["large", "medium", "medium", "medium"]}
-          supportsTruncation
-        >
-          {icon && <Icon<IconTypes> type={icon} color={selectedColor} />}
-          <View margin={["small", "none", "none", "none"]}>
-            <TextLine
-              type="caption"
-              text={text}
-              color={selectedColor}
-              numberOfLines={1}
-            />
-          </View>
+      <View
+        direction="column"
+        align="center"
+        padding={["small", "small", "small", "small"]}
+        supportsTruncation
+      >
+        {icon && <Icon<Icons> type={icon} color={selectedColor} size="small" />}
+        <View margin={["small", "none", "none", "none"]}>
+          <TextLine
+            type="caption"
+            text={text}
+            color={selectedColor}
+            numberOfLines={1}
+          />
         </View>
-      </HTMLElement>
-    </div>
+      </View>
+    </ActionElement>
   );
 }
 
+const defaultItemsProps: ItemDefaultProps<{}> = {
+  action: {
+    as: "div"
+  },
+  active: false,
+  color: "foregroundPrimary"
+};
+
+Item.defaultProps = defaultItemsProps;
+
 interface Props<T> {
-  items: ItemProps<T> & ItemDefaultProps<T>[];
+  items: Assign<ItemProps<T>, ItemDefaultProps<T>>[];
 }
 
 function Navigation<T>({ items }: Props<T>) {
+  const theme = useTheme();
   return (
     <div
       css={{
-        width: "100%"
+        width: "100%",
+        backgroundColor: theme.colors.backgroundAccent
       }}
     >
       <View justify="space-around" direction="row">
-        {items.map(
-          (item, index) => null
-          // <Item<T> key={`navigation-item-${index}`} {...item} />
-        )}
+        {items.map((item, index) => (
+          <Item<T> key={`navigation-item-${index}`} {...item} />
+        ))}
       </View>
     </div>
   );

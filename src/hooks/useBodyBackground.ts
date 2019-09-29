@@ -11,7 +11,7 @@ const GRADIENT_STYLE_MAP: {
   }: {
     color: string;
     backgroundColor: string;
-  }) => CSSStyleDeclaration["backgroundImage"]
+  }) => CSSStyleDeclaration["backgroundImage"];
 } = {
   topLeft: ({ color, backgroundColor }) => `linear-gradient(
       140deg,
@@ -44,11 +44,11 @@ function useBodyBackground(
     } = window.getComputedStyle(body);
 
     body.style.backgroundAttachment = "scroll";
-    body.style.backgroundColor = theme.colors.black;
+    body.style.backgroundColor = theme.colors.background;
     body.style.backgroundRepeat = "no-repeat";
     body.style.backgroundImage = GRADIENT_STYLE_MAP[gradientStyle]({
       color,
-      backgroundColor: theme.colors.black
+      backgroundColor: theme.colors.background
     });
 
     return () => {
@@ -57,7 +57,7 @@ function useBodyBackground(
       body.style.backgroundRepeat = backgroundRepeat;
       body.style.backgroundImage = backgroundImage;
     };
-  }, [body, color, gradientStyle, theme.colors.black]);
+  }, [body, color, gradientStyle, theme.colors.background]);
 }
 
 export { useBodyBackground };

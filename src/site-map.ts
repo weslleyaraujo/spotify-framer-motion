@@ -6,15 +6,20 @@ const ROOT = "/";
 const SEARCH = "/search";
 const SEARCH_RESULTS = `${SEARCH}/results`;
 
+/* Library */
+const LIBRARY = "/library";
+
 interface RouteSearchQuery {}
 
-const MAIN_ROUTES: string[] = [];
 const HOME = ROOT;
 const SITEMAP = {
   ROOT,
   SEARCH,
   SEARCH_RESULTS,
-  HOME
+  HOME,
+  LIBRARY
 };
+
+const MAIN_ROUTES: string[] = [HOME, SEARCH, LIBRARY];
 
 export { SITEMAP, MAIN_ROUTES };

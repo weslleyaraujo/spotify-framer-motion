@@ -113,7 +113,7 @@ function Picture(props: Props & DefaultProps) {
         height: "100%",
         position: "relative",
         ...(error && {
-          backgroundColor: theme.colors.complementaryLight
+          backgroundColor: theme.colors.absoluteDark
         })
       }}
       ref={ref}

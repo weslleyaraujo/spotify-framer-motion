@@ -1,3 +1,3 @@
 export type Action<T = {}> = {
-  as: keyof JSX.IntrinsicElements;
+  as: React.ReactType | string;
 } & T;

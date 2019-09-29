@@ -1,18 +1,19 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import { useCallback } from "react";
-import { CSSPseudosForCSSObject, CSSObject } from "@emotion/serialize";
-import { Units } from "../../../foundations/Theme";
-import { Subtract } from "utility-types";
+
 import {
+  AlignItemsProperty,
   FlexDirectionProperty,
   FlexWrapProperty,
-  JustifyContentProperty,
-  AlignItemsProperty,
   GlobalsNumber,
+  JustifyContentProperty,
   PropertiesFallback
 } from "csstype";
+import { CSSObject, CSSPseudosForCSSObject } from "@emotion/serialize";
 
+import { Subtract } from "utility-types";
+import { Units } from "../../../foundations/Theme";
+import { jsx } from "@emotion/core";
+import { useCallback } from "react";
 import { useTheme } from "../../../foundations/useTheme";
 
 type Value = keyof Units | "none";
@@ -172,8 +173,8 @@ function View(props: Props & DefaultProps) {
   return (
     <div
       css={{
-        ...style,
-        ...view
+        ...view,
+        ...style
       }}
       children={children}
     />

@@ -1,34 +1,21 @@
+import { Icons, icons } from "./foundations/icons";
+
 import { Theme } from "./foundations/Theme";
-import { IconTypes, icons } from "./foundations/icons";
 
 const fontFamily = "Circular";
 
-const theme: Theme<IconTypes> = {
+const theme: Theme<Icons> = {
   icons,
   colors: {
-    white: "#FFF",
-    black: "#000",
-    primaryDarkest: "#083518",
-    primaryDarker: "#0f612c",
-    primaryDark: "#168d40",
-    primary: "#1DB954",
-    primaryLight: "#2bde6a",
-    primaryLighter: "#57e589",
-    primaryLightest: "#83eca8",
-    secondaryDarkest: "#000",
-    secondaryDarker: "#000",
-    secondaryDark: "#000",
-    secondary: "#000",
-    secondaryLight: "#1a1a1a",
-    secondaryLighter: "#333",
-    secondaryLightest: "#4d4d4d",
-    complementaryDarkest: "#b3b3b3",
-    complementaryDarker: "#ccc",
-    complementaryDark: "#e6e6e6",
-    complementary: "#FFF",
-    complementaryLight: "#fff",
-    complementaryLighter: "#fff",
-    complementaryLightest: "#fff"
+    foregroundPrimary: "#FFFFFF",
+    foregroundSecondary: "#85979D",
+    absoluteLight: "#FFFFFF",
+    absoluteDark: "#18262C",
+    background: "#1F2F35",
+    backgroundAccent: "#28393F",
+    primary: "#3586F0",
+    complement: "#25A781",
+    callout: "#FF5E36"
   },
   units: {
     smallest: 2,
@@ -40,13 +27,13 @@ const theme: Theme<IconTypes> = {
     largest: 128
   },
   scales: {
-    smallest: 8,
-    smaller: 16,
-    small: 32,
-    medium: 64,
-    large: 64,
-    larger: 128,
-    largest: 256
+    smallest: 6,
+    smaller: 8,
+    small: 16,
+    medium: 32,
+    large: 48,
+    larger: 64,
+    largest: 128
   },
   fonts: {
     display: {

@@ -1,5 +1,7 @@
 import { css } from "@emotion/core";
 
+import circular from "./fonts/circular-book.woff2";
+
 const globalStyles = css`
   html,
   body,
@@ -93,6 +95,16 @@ const globalStyles = css`
   body,
   #root {
     height: 100%;
+    -webkit-font-smoothing: smoothing;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+  @font-face {
+    font-family: "Circular";
+    src: local("Circular"), url(${circular}) format("truetype");
   }
 `;
 

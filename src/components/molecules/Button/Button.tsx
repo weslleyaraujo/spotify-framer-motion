@@ -23,17 +23,17 @@ interface DefaultProps<T>
 const MAP_TEXT_COLOR: {
   [key in DefaultProps<{}>["type"]]: React.ComponentProps<
     typeof TextLine
-  >["color"]
+  >["color"];
 } = {
-  normal: "white",
-  primary: "white",
-  secondary: "black"
+  normal: "absoluteLight",
+  primary: "absoluteLight",
+  secondary: "absoluteDark"
 };
 
 const MAP_TEXT_TYPE: {
   [key in DefaultProps<{}>["size"]]: React.ComponentProps<
     typeof TextLine
-  >["type"]
+  >["type"];
 } = {
   small: "featured",
   medium: "body",
@@ -43,7 +43,7 @@ const MAP_TEXT_TYPE: {
 const PADDING_SIZE_MAP: {
   [key in DefaultProps<{}>["size"]]: Parameters<
     typeof useViewStyles
-  >[0]["padding"]
+  >[0]["padding"];
 } = {
   small: ["smallest", "medium"],
   medium: ["small", "large"],
@@ -79,7 +79,7 @@ function useButtonStyles(
 
     /** Button type */
     ...(type === "normal" && {
-      backgroundColor: theme.colors.secondaryLightest
+      backgroundColor: theme.colors.complement
     }),
 
     ...(type === "primary" && {
@@ -88,7 +88,7 @@ function useButtonStyles(
     }),
 
     ...(type === "secondary" && {
-      backgroundColor: theme.colors.white
+      backgroundColor: theme.colors.absoluteLight
     }),
 
     /** Display */
@@ -133,14 +133,14 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>(
   props: Props<T> & DefaultProps<T>
 ) {
   const { action } = props;
-  const { as: HTMLElement, ...actionProps } = action;
+  const { as: ActionElement, ...actionProps } = action;
   const view = useViewStyles({
     padding: PADDING_SIZE_MAP[props.size],
     margin: "none"
   });
   const button = useButtonStyles(props);
   return (
-    <HTMLElement
+    <ActionElement
       {...actionProps}
       css={{
         ...view,
@@ -153,7 +153,7 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>(
         color={MAP_TEXT_COLOR[props.type]}
         as="span"
       />
-    </HTMLElement>
+    </ActionElement>
   );
 }
 

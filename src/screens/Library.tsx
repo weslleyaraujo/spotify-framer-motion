@@ -5,19 +5,19 @@ import { useBodyBackground } from "../hooks/useBodyBackground";
 
 interface Props {}
 
-function Search(props: Props) {
+function Library(props: Props) {
   useBodyBackground({
-    color: "green",
+    color: "red",
     gradientStyle: "topLeft"
   });
 
   return (
     <>
       <View justify="center" padding={["largest", "large", "none", "large"]}>
-        <TextLine text="Search" type="display" color="foregroundPrimary" />
+        <TextLine text="Library" type="display" color="foregroundPrimary" />
       </View>
     </>
   );
 }
 
-export { Search, Search as default };
+export { Library, Library as default };

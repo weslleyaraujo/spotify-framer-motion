@@ -38,10 +38,10 @@ function Section({
     <Fragment>
       {(title || subtitle) && (
         <View {...head} direction="column">
-          {title && <TextLine text={title} color="white" type="heading" />}
-          {subtitle && (
-            <TextLine text={subtitle} color="complementaryDarkest" />
+          {title && (
+            <TextLine text={title} color="foregroundPrimary" type="heading" />
           )}
+          {subtitle && <TextLine text={subtitle} color="foregroundSecondary" />}
         </View>
       )}
       <div

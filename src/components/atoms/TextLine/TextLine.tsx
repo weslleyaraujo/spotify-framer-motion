@@ -1,8 +1,16 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+
+import { css, jsx } from "@emotion/core";
+
 import { Colors } from "../../../foundations/Theme";
-import { useTheme } from "../../../foundations/useTheme";
 import { Fonts } from "../../../foundations/Typography";
+import { PickEnum } from "../../../utils/pick-enum";
+import { useTheme } from "../../../foundations/useTheme";
+
+export type ForegroundColors = PickEnum<
+  keyof Colors,
+  "absoluteDark" | "absoluteLight" | "foregroundPrimary" | "foregroundSecondary"
+>;
 
 export interface Props {
   /* Text content to be rendered. */
@@ -15,7 +23,7 @@ export interface Props {
   as?: keyof JSX.IntrinsicElements;
 
   /* Text color */
-  color?: keyof Colors;
+  color?: ForegroundColors;
 
   /* Number of lines that text will render. Truncation will be used to hide remaining lines. */
   numberOfLines?: number;
@@ -31,16 +39,16 @@ function TextLine({
   numberOfLines,
   color
 }: Props & DefaultProps) {
-  const HTMLElement = as;
-  const isTrucated = Boolean(numberOfLines);
+  const ActionElement = as;
+  const isTruncated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
-  const isMultiline = isTrucated && numberOfLines > 1;
+  const isMultiline = isTruncated && numberOfLines > 1;
   const theme = useTheme();
   const styles = css({
     ...theme.fonts[type],
     color: color ? theme.colors[color] : "inherit",
     lineHeight: `${theme.fonts[type].lineHeight}px`,
-    ...(isTrucated && {
+    ...(isTruncated && {
       overflow: "hidden",
       textOverflow: "ellipsis",
       maxHeight: `calc(${theme.fonts[type].lineHeight}px * ${numberOfLines})`
@@ -55,14 +63,14 @@ function TextLine({
     })
   });
 
-  return <HTMLElement css={styles}>{text}</HTMLElement>;
+  return <ActionElement css={styles}>{text}</ActionElement>;
 }
 
 const defaultProps: DefaultProps = {
   as: "p",
   type: "body",
   numberOfLines: 1,
-  color: "black"
+  color: "foregroundPrimary"
 };
 
 TextLine.defaultProps = defaultProps;

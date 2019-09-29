@@ -1,17 +1,19 @@
-import React from "react";
-import { createApolloClient } from "./graphql/create-apollo-client";
 import { ApolloProvider } from "react-apollo";
+import React from "react";
+import { Router } from "react-router-dom";
 import { ThemeContext } from "./foundations/Theme";
+import { createApolloClient } from "./graphql/create-apollo-client";
+import { createBrowserHistory } from "history";
 import { theme } from "./theme";
-import { Router } from "@reach/router";
 
 const client = createApolloClient();
+const history = createBrowserHistory();
 
 const Providers: React.FunctionComponent = function Providers({ children }) {
   return (
     <ThemeContext.Provider value={theme}>
       <ApolloProvider client={client}>
-        <Router>{children}</Router>
+        <Router history={history}>{children}</Router>
       </ApolloProvider>
     </ThemeContext.Provider>
   );
