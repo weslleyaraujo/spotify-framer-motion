@@ -5,17 +5,19 @@ import { useBodyBackground } from "../hooks/useBodyBackground";
 
 interface Props {}
 
-function Library(props: Props) {
+function Settings(props: Props) {
   useBodyBackground({
-    color: "red",
+    color: "purple",
     gradientStyle: "topLeft"
   });
-
+  console.log("hello world");
   return (
-    <View justify="center" padding={["largest", "large", "none", "large"]}>
-      <TextLine text="Library" type="display" color="foregroundPrimary" />
-    </View>
+    <>
+      <View justify="center" padding={["largest", "large", "none", "large"]}>
+        <TextLine text="Settings" type="display" color="foregroundPrimary" />
+      </View>
+    </>
   );
 }
 
-export { Library, Library as default };
+export { Settings, Settings as default };

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/react-hooks": "^0.1.0-beta.7",
+    "@apollo/react-common": "^3.1.1",
+    "@apollo/react-hooks": "^3.1.1",
     "@emotion/core": "^10.0.9",
     "@emotion/css": "^10.0.9",
     "@types/graphql": "^14.2.0",
@@ -20,12 +21,11 @@
     "history": "^4.10.1",
     "polished": "^3.4.0",
     "react": "^16.8.5",
-    "react-apollo": "^2.5.6",
     "react-dom": "^16.10.0",
     "react-intersection-observer": "^8.23.0",
     "react-router": "^5.1.1",
     "react-router-dom": "^5.1.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "3.1.2",
     "typescript": "^3.3.4000",
     "utility-types": "^3.4.1"
   },
@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "tscheck": "tsc -p tsconfig.json --noEmit",
     "eject": "react-scripts eject",
-    "graphql-codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,9 +48,9 @@
   ],
   "devDependencies": {
     "@graphql-codegen/cli": "^1.2.0",
-    "@graphql-codegen/typescript": "1.2.0",
-    "@graphql-codegen/typescript-operations": "1.2.0",
-    "@graphql-codegen/typescript-react-apollo": "1.2.0",
+    "@graphql-codegen/typescript": "1.7.0",
+    "@graphql-codegen/typescript-operations": "1.7.0",
+    "@graphql-codegen/typescript-react-apollo": "1.7.0",
     "apollo-server": "^2.5.1"
   }
 }

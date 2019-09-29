@@ -1,4 +1,4 @@
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "@apollo/react-common";
 import React from "react";
 import { Router } from "react-router-dom";
 import { ThemeContext } from "./foundations/Theme";

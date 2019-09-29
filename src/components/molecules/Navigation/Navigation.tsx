@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import { Action } from "../../../interfaces/Action";
+import { ActionProps } from "../../../interfaces/Card";
 import { Assign } from "utility-types";
 import { Icon } from "../../atoms/Icon/Icon";
 import { Icons } from "../../../foundations/icons";
@@ -13,7 +13,7 @@ interface ItemProps<T> {
   text: NonNullable<React.ComponentProps<typeof TextLine>["text"]>;
   icon: Icons;
   color?: React.ComponentProps<typeof TextLine>["color"];
-  action: Action<T>;
+  action: ActionProps<T>;
   active?: boolean;
 }
 
@@ -83,10 +83,18 @@ function Navigation<T>({ items }: Props<T>) {
     <div
       css={{
         width: "100%",
-        backgroundColor: theme.colors.backgroundAccent
+        backgroundColor: theme.colors.backgroundAccent,
+        display: "flex",
+        justifyContent: "center"
       }}
     >
-      <View justify="space-around" direction="row">
+      <View
+        justify="space-around"
+        direction="row"
+        style={{
+          width: "80%"
+        }}
+      >
         {items.map((item, index) => (
           <Item<T> key={`navigation-item-${index}`} {...item} />
         ))}

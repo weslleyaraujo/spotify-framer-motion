@@ -9,6 +9,9 @@ const SEARCH_RESULTS = `${SEARCH}/results`;
 /* Library */
 const LIBRARY = "/library";
 
+/* Settings */
+const SETTINGS = "/settings";
+
 interface RouteSearchQuery {}
 
 const HOME = ROOT;
@@ -17,7 +20,8 @@ const SITEMAP = {
   SEARCH,
   SEARCH_RESULTS,
   HOME,
-  LIBRARY
+  LIBRARY,
+  SETTINGS
 };
 
 const MAIN_ROUTES: string[] = [HOME, SEARCH, LIBRARY];

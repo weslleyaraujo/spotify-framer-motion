@@ -19,11 +19,9 @@ function Shell({ children }: { children: React.ReactNode }) {
   };
   return (
     <View
-      debugTrace
       justify="space-between"
       direction="column"
       style={{
-        flex: 1,
         height: "100vh"
       }}
     >

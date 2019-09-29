@@ -8,7 +8,7 @@ const theme: Theme<Icons> = {
   icons,
   colors: {
     foregroundPrimary: "#FFFFFF",
-    foregroundSecondary: "#85979D",
+    foregroundSecondary: "#b3b3b3",
     absoluteLight: "#FFFFFF",
     absoluteDark: "#18262C",
     background: "#1F2F35",
@@ -28,12 +28,12 @@ const theme: Theme<Icons> = {
   },
   scales: {
     smallest: 6,
-    smaller: 8,
-    small: 16,
-    medium: 32,
-    large: 48,
-    larger: 64,
-    largest: 128
+    smaller: 12,
+    small: 24,
+    medium: 46,
+    large: 92,
+    larger: 184,
+    largest: 368
   },
   fonts: {
     display: {

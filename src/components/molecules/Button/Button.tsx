@@ -1,13 +1,16 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import { useViewStyles, Props as ViewProps } from "../../atoms/View/View";
-import { TextLine } from "../../atoms/TextLine/TextLine";
-import { useTheme } from "../../../foundations/useTheme";
+
+import { Props as ViewProps, useViewStyles } from "../../atoms/View/View";
+
+import { Action } from "../../atoms/Action/Action";
+import { ActionProps } from "../../../interfaces/Card";
 import { SetIntersection } from "utility-types";
-import { Action } from "../../../interfaces/Action";
+import { TextLine } from "../../atoms/TextLine/TextLine";
+import { jsx } from "@emotion/core";
+import { useTheme } from "../../../foundations/useTheme";
 
 interface Props<T> {
-  action: Action<T>;
+  action: ActionProps<T>;
   type?: "normal" | "primary" | "secondary";
   size?: SetIntersection<ViewProps["padding"], "medium" | "large" | "small">;
   label: string;
@@ -132,16 +135,14 @@ function useButtonStyles(
 function Button<T = React.HTMLProps<HTMLButtonElement>>(
   props: Props<T> & DefaultProps<T>
 ) {
-  const { action } = props;
-  const { as: ActionElement, ...actionProps } = action;
   const view = useViewStyles({
     padding: PADDING_SIZE_MAP[props.size],
     margin: "none"
   });
   const button = useButtonStyles(props);
   return (
-    <ActionElement
-      {...actionProps}
+    <Action
+      {...props.action}
       css={{
         ...view,
         ...button
@@ -153,7 +154,7 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>(
         color={MAP_TEXT_COLOR[props.type]}
         as="span"
       />
-    </ActionElement>
+    </Action>
   );
 }
 

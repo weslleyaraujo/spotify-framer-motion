@@ -1,26 +1,23 @@
+import {
+  MediaAspectRatio,
+  MediaOrientation,
+  MediaResizeMode
+} from "../../../interfaces/Media";
+import { Variants, motion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+
+import { ObjectFitProperty } from "csstype";
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { ObjectFitProperty } from "csstype";
-import { useState, useMemo, useEffect } from "react";
-import { useTheme } from "../../../foundations/useTheme";
 import { useInView } from "react-intersection-observer";
-import { motion, Variants } from "framer-motion";
-
-type ResizeMode = "cover" | "contain" | "stretch";
-type MediaOrientation = "portrait" | "landscape";
-type MediaAspectRatio =
-  | "standard"
-  | "classic"
-  | "square"
-  | "widescreen"
-  | "panorama";
+import { useTheme } from "../../../foundations/useTheme";
 
 interface Props {
   /** Image Url */
   source: string;
 
   /** Changes how the image will fit in its container. Default: "cover" */
-  resizeMode?: ResizeMode;
+  resizeMode?: MediaResizeMode;
 
   /** Calculates the height of the container give its width. Default: "standard" */
   aspectRatio?: MediaAspectRatio;
@@ -200,8 +197,8 @@ function getAspectRatioValueWithLayout(
   return value;
 }
 
-function getResizeMode(resizeMode: ResizeMode) {
-  const modes: { [key in ResizeMode]: ObjectFitProperty } = {
+function getResizeMode(resizeMode: MediaResizeMode) {
+  const modes: { [key in MediaResizeMode]: ObjectFitProperty } = {
     cover: "cover",
     stretch: "fill",
     contain: "contain"

@@ -7,6 +7,7 @@ import { Fonts } from "../../../foundations/Typography";
 import { PickEnum } from "../../../utils/pick-enum";
 import { useTheme } from "../../../foundations/useTheme";
 
+// TODO: Move it to interfaces directory
 export type ForegroundColors = PickEnum<
   keyof Colors,
   "absoluteDark" | "absoluteLight" | "foregroundPrimary" | "foregroundSecondary"
@@ -39,7 +40,7 @@ function TextLine({
   numberOfLines,
   color
 }: Props & DefaultProps) {
-  const ActionElement = as;
+  const ActionPropsPropsElement = as;
   const isTruncated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
   const isMultiline = isTruncated && numberOfLines > 1;
@@ -63,13 +64,13 @@ function TextLine({
     })
   });
 
-  return <ActionElement css={styles}>{text}</ActionElement>;
+  return <ActionPropsPropsElement css={styles}>{text}</ActionPropsPropsElement>;
 }
 
 const defaultProps: DefaultProps = {
   as: "p",
   type: "body",
-  numberOfLines: 1,
+  numberOfLines: 0,
   color: "foregroundPrimary"
 };
 
