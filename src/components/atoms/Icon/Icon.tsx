@@ -16,19 +16,14 @@ interface Props<T> {
 
 interface DefaultProps<T> extends Required<Pick<Props<T>, "color" | "size">> {}
 
-function Icon<T = void>({
+function Icon<T extends keyof any>({
   color,
   size,
   type
-}: Props<
-  T extends void ? "Missing icons list. E.g <Icon<'foo' | 'bar'> />" : string
-> &
-  DefaultProps<T>): React.ReactElement {
+}: Props<T> & DefaultProps<T>): React.ReactElement {
   const theme = useTheme<Theme<T>>();
   const dimensions = theme.scales[size];
   const el = useMemo(() => {
-    // TODO: figure out why theme.icons are not typed :(
-    // @ts-ignore
     const factory = theme.icons[type];
     return factory({
       width: dimensions,

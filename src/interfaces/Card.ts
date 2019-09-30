@@ -1,4 +1,4 @@
-import { Colors } from "../foundations/Theme";
+import { Colors } from "../foundations/Colors";
 import { Icons } from "../foundations/icons";
 import { Media } from "./Media";
 import { Required } from "utility-types";

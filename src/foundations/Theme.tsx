@@ -2,6 +2,7 @@ import { Scales, Units } from "./Spacing";
 
 import { Colors } from "./Colors";
 import { Fonts } from "./Typography";
+import { Icons } from "./icons";
 import React from "react";
 
 export interface Constants {
@@ -13,7 +14,8 @@ export interface Constants {
   borderWidthLarge: number;
 }
 
-export interface Theme<T extends symbol | string | number | Object = {}> {
+// TODO: do not include icons in this interface
+export interface Theme<T extends keyof any = Icons> {
   colors: Colors;
   units: Units;
   fonts: Fonts;

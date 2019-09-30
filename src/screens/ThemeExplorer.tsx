@@ -1,4 +1,5 @@
 import { Button } from "../components/molecules/Button/Button";
+import { Colors } from "../foundations/Colors";
 import React from "react";
 import { TextLine } from "../components/atoms/TextLine/TextLine";
 import { Theme } from "../foundations/Theme";
