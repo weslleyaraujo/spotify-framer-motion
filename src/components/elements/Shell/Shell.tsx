@@ -1,22 +1,81 @@
+import React, { useMemo } from "react";
 import { Link, LinkProps, useRouteMatch } from "react-router-dom";
-
-import { ForegroundColors } from "../../atoms/TextLine/TextLine";
 import { Icons } from "../../../foundations/icons";
 import { Layers } from "../../../foundations/Layers";
-import { Navigation } from "../../molecules/Navigation/Navigation";
-import React from "react";
 import { SITEMAP } from "../../../site-map";
+import { PickEnum } from "../../../utils/pick-enum";
+import { ForegroundColors } from "../../atoms/TextLine/TextLine";
 import { View } from "../../atoms/View/View";
+import { Navigation } from "../../molecules/Navigation/Navigation";
+
+const ICON_MAP: {
+  [key: string]: {
+    default: Icons;
+    active: Icons;
+  };
+} = {
+  [SITEMAP.HOME]: {
+    default: "homeOutline",
+    active: "homeFill"
+  },
+  [SITEMAP.LIBRARY]: {
+    default: "libraryOutline",
+    active: "libraryFill"
+  },
+  [SITEMAP.SEARCH]: {
+    default: "magnifyingGlassOutline",
+    active: "magnifyingGlassFill"
+  }
+};
+
+const TEXT_MAP: {
+  [key: string]: string;
+} = {
+  [SITEMAP.HOME]: "Home",
+  [SITEMAP.SEARCH]: "Search",
+  [SITEMAP.LIBRARY]: "Library"
+};
+
+const COLOR_MAP: {
+  default: ForegroundColors;
+  active: ForegroundColors;
+} = {
+  default: "foregroundPrimary",
+  active: "absoluteLight"
+};
+
+type ActionProps = LinkProps<{}>;
 
 function Shell({ children }: { children: React.ReactNode }) {
   const root = useRouteMatch(SITEMAP.ROOT);
   const search = useRouteMatch(SITEMAP.SEARCH);
   const library = useRouteMatch(SITEMAP.LIBRARY);
-  const active = {
+  const ACTIVE_MAP: {
+    [key: string]: boolean;
+  } = {
     [SITEMAP.ROOT]: Boolean(root && root.isExact),
     [SITEMAP.SEARCH]: Boolean(search && search.isExact),
     [SITEMAP.LIBRARY]: Boolean(library && library.isExact)
   };
+
+  const items = useMemo(() => {
+    const keys = (Object.keys as unknown) as (o: {}) => PickEnum<
+      keyof typeof SITEMAP,
+      "HOME" | "SEARCH" | "LIBRARY"
+    >[];
+
+    return keys(ACTIVE_MAP).map(key => {
+      const active = ACTIVE_MAP[key];
+      return {
+        active: ACTIVE_MAP[key],
+        action: { as: Link, to: key },
+        color: COLOR_MAP[active ? "active" : "default"],
+        text: TEXT_MAP[key],
+        icon: ICON_MAP[key][active ? "active" : "default"]
+      };
+    });
+  }, [ACTIVE_MAP]);
+
   return (
     <View
       justify="space-between"
@@ -34,41 +93,7 @@ function Shell({ children }: { children: React.ReactNode }) {
           zIndex: Layers.Stacks
         }}
       >
-        <Navigation<LinkProps<{}>>
-          items={[
-            {
-              action: { as: Link, to: SITEMAP.ROOT },
-              active: active[SITEMAP.ROOT],
-              color: active[SITEMAP.ROOT]
-                ? "foregroundPrimary"
-                : ("foregroundSecondary" as ForegroundColors),
-              icon: (active[SITEMAP.ROOT]
-                ? "homeFill"
-                : "homeOutline") as Icons,
-              text: "Home"
-            },
-            {
-              action: { as: Link, to: SITEMAP.SEARCH },
-              active: active[SITEMAP.SEARCH],
-              color: active[SITEMAP.SEARCH]
-                ? "foregroundPrimary"
-                : ("foregroundSecondary" as ForegroundColors),
-              icon: (search
-                ? "magnifyingGlassFill"
-                : "magnifyingGlassOutline") as Icons,
-              text: "Search"
-            },
-            {
-              action: { as: Link, to: SITEMAP.LIBRARY },
-              active: active[SITEMAP.LIBRARY],
-              color: active[SITEMAP.LIBRARY]
-                ? "foregroundPrimary"
-                : ("foregroundSecondary" as ForegroundColors),
-              icon: (search ? "libraryFill" : "libraryOutline") as Icons,
-              text: "Your Library"
-            }
-          ]}
-        />
+        <Navigation<ActionProps> items={items} />
       </div>
     </View>
   );
