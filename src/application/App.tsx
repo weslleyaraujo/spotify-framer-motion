@@ -3,13 +3,13 @@ import { Route, Switch } from "react-router";
 
 import { Global } from "@emotion/core";
 import { Home } from "./screens/Home";
-import { LoadingView } from "./components/utilities/LoadingView/LoadingView";
+import { LoadingView } from "../components/utilities/LoadingView/LoadingView";
 import { Providers } from "./Providers";
 import { SITEMAP } from "./site-map";
-import { Shell } from "./components/elements/Shell/Shell";
+import { Shell } from "./components/Shell/Shell";
 import { globalStyles } from "./global-styles";
 
-const ThemeExplorer = React.lazy(() => import("./screens/ThemeExplorer"));
+const Development = React.lazy(() => import("./screens/Development"));
 const Search = React.lazy(() =>
   import(/* webpackChunkName: 'Search' */ "./screens/Search")
 );
@@ -22,7 +22,6 @@ const Settings = React.lazy(() =>
 
 const fallback = <LoadingView />;
 
-// TODO: Create a loader component to be used as fallback
 function App() {
   return (
     <>
@@ -47,10 +46,12 @@ function App() {
                 </Suspense>
               </Shell>
             </Route>
-            <Route path="/theme-explorer" exact fallback={<div>Loading</div>}>
-              <ThemeExplorer />
-            </Route>
-            <Route path="/settings" exact>
+            {process.env.NODE_ENV === "development" && (
+              <Route path={SITEMAP.DEVELOPMENT} exact fallback={fallback}>
+                <Development />
+              </Route>
+            )}
+            <Route path={SITEMAP.SETTINGS} exact>
               <Settings />
             </Route>
           </Switch>

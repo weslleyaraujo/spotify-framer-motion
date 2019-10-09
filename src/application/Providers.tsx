@@ -2,9 +2,9 @@ import { ApolloProvider } from "@apollo/react-common";
 import React from "react";
 import { Router } from "react-router-dom";
 import { ThemeProvider } from "emotion-theming";
-import { createApolloClient } from "./graphql/create-apollo-client";
+import { createApolloClient } from "../graphql/create-apollo-client";
 import { createBrowserHistory } from "history";
-import { theme } from "./theme";
+import { theme } from "./application-theme";
 
 const client = createApolloClient();
 const history = createBrowserHistory();

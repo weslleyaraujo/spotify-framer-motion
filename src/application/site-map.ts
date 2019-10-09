@@ -14,6 +14,9 @@ const SETTINGS = "/settings";
 
 interface RouteSearchQuery {}
 
+/* Development */
+const DEVELOPMENT = "/development";
+
 const HOME = ROOT;
 const SITEMAP = {
   ROOT,
@@ -21,7 +24,8 @@ const SITEMAP = {
   SEARCH_RESULTS,
   HOME,
   LIBRARY,
-  SETTINGS
+  SETTINGS,
+  DEVELOPMENT
 };
 
 const MAIN_ROUTES: string[] = [HOME, SEARCH, LIBRARY];

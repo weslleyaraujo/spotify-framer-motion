@@ -1,6 +1,6 @@
 import { css } from "@emotion/core";
 
-import circular from "./fonts/circular-book.woff2";
+import circular from "../assets/fonts/circular-book.woff2";
 
 const globalStyles = css`
   html,

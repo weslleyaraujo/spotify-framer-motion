@@ -1,15 +1,15 @@
-import { Button } from "../components/molecules/Button/Button";
-import { Colors } from "../foundations/Colors";
+import { Button } from "../../components/molecules/Button/Button";
+import { Colors } from "../../foundations/Colors";
 import React from "react";
-import { TextLine } from "../components/atoms/TextLine/TextLine";
-import { Theme } from "../foundations/Theme";
-import { View } from "../components/atoms/View/View";
-import { useBodyBackground } from "../hooks/useBodyBackground";
+import { TextLine } from "../../components/atoms/TextLine/TextLine";
+import { Theme } from "../../foundations/Theme";
+import { View } from "../../components/atoms/View/View";
+import { useBodyBackground } from "../../hooks/useBodyBackground";
 import { useTheme } from "emotion-theming";
 
 interface Props {}
 
-function ThemeExplorer(props: Props) {
+function Development(props: Props) {
   useBodyBackground();
   const theme = useTheme<Theme>();
   return (
@@ -55,12 +55,12 @@ function ThemeExplorer(props: Props) {
         {Object.keys(theme.colors).map(key => (
           <View
             key={key}
-            padding="largest"
+            padding="large"
             style={{
               backgroundColor: theme.colors[key as keyof Colors]
             }}
           >
-            <TextLine text={key} />
+            <TextLine text={key} numberOfLines={2} />
           </View>
         ))}
       </Section>
@@ -84,4 +84,4 @@ const Section: React.FunctionComponent<{ title: string }> = function Section({
   );
 };
 
-export { ThemeExplorer, ThemeExplorer as default };
+export { Development, Development as default };

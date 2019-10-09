@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import { Link, LinkProps, useRouteMatch } from "react-router-dom";
 import { Icons } from "../../../foundations/icons";
 import { Layers } from "../../../foundations/Layers";
-import { SITEMAP } from "../../../site-map";
+import { SITEMAP } from "../../site-map";
 import { PickEnum } from "../../../utils/pick-enum";
-import { ForegroundColors } from "../../atoms/TextLine/TextLine";
-import { View } from "../../atoms/View/View";
-import { Navigation } from "../../molecules/Navigation/Navigation";
+import { ForegroundColors } from "../../../components/atoms/TextLine/TextLine";
+import { View } from "../../../components/atoms/View/View";
+import { Navigation } from "../../../components/molecules/Navigation/Navigation";
 
 const ICON_MAP: {
   [key: string]: {

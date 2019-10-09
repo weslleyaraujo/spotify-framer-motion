@@ -1,6 +1,6 @@
-import { Icons, icons } from "./foundations/icons";
+import { Icons, icons } from "../foundations/icons";
 
-import { Theme } from "./foundations/Theme";
+import { Theme } from "../foundations/Theme";
 
 const fontFamily = "Circular";
 

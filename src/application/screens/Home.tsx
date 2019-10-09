@@ -1,15 +1,15 @@
 import { Link, LinkProps } from "react-router-dom";
 
-import { CardCover } from "../components/elements/CardCover/CardCover";
-import { Icon } from "../components/atoms/Icon/Icon";
-import { Icons } from "../foundations/icons";
-import { Picture } from "../components/atoms/Picture/Picture";
+import { CardCover } from "../../components/elements/CardCover/CardCover";
+import { Icon } from "../../components/atoms/Icon/Icon";
+import { Icons } from "../../foundations/icons";
+import { Picture } from "../../components/atoms/Picture/Picture";
 import React from "react";
 import { SITEMAP } from "../site-map";
-import { Scrollable } from "../components/utilities/Scrollable/Scrollable";
-import { Section } from "../components/molecules/Section/Section";
-import { View } from "../components/atoms/View/View";
-import { useBodyBackground } from "../hooks/useBodyBackground";
+import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
+import { Section } from "../../components/molecules/Section/Section";
+import { View } from "../../components/atoms/View/View";
+import { useBodyBackground } from "../../hooks/useBodyBackground";
 
 interface Props {}
 
