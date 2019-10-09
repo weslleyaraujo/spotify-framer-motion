@@ -14,7 +14,7 @@ import { Subtract } from "utility-types";
 import { Theme } from "../../../foundations/Theme";
 import { Units } from "../../../foundations/Spacing";
 import { jsx } from "@emotion/core";
-import { useCallback } from "react";
+import { useCallback, forwardRef } from "react";
 import { useTheme } from "emotion-theming";
 
 type Value = keyof Units | "none";
@@ -73,7 +73,7 @@ interface DefaultProps extends Required<Pick<Props, "margin" | "padding">> {}
 
 function useViewStyles(
   props: Pick<
-    Props & DefaultProps,
+    Props,
     | "margin"
     | "padding"
     | "radius"
@@ -167,12 +167,16 @@ function useViewStyles(
   };
 }
 
-function View(props: Props & DefaultProps) {
+const View = forwardRef(function View(
+  props: Props,
+  ref?: React.Ref<HTMLDivElement>
+) {
   const { children, style } = props;
   const view = useViewStyles(props);
 
   return (
     <div
+      ref={ref}
       css={{
         ...view,
         ...style
@@ -180,7 +184,7 @@ function View(props: Props & DefaultProps) {
       children={children}
     />
   );
-}
+});
 
 const defaultProps: DefaultProps = {
   margin: "none",

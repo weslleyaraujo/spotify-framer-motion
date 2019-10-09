@@ -2,7 +2,7 @@ import { ActivityIndicator } from "../../atoms/ActivityIndicator/ActivityIndicat
 import React from "react";
 import { Splash } from "../../molecules/Splash/Splash";
 import { Theme } from "../../../foundations/Theme";
-import { useBodyBackground } from "../../../hooks/useBodyBackground";
+import { useBodyBackground } from "../../../hooks/use-body-background";
 import { useTheme } from "emotion-theming";
 
 function LoadingView() {

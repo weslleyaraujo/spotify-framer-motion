@@ -141,14 +141,12 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>(
     margin: "none"
   });
   const button = useButtonStyles(props);
+  const styles = {
+    ...view,
+    ...button
+  };
   return (
-    <Action
-      {...props.action}
-      css={{
-        ...view,
-        ...button
-      }}
-    >
+    <Action {...props.action} css={styles}>
       <TextLine
         type={MAP_TEXT_TYPE[props.size]}
         text={props.label}

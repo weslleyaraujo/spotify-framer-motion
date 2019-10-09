@@ -9,7 +9,9 @@ import { SITEMAP } from "./site-map";
 import { Shell } from "./components/Shell/Shell";
 import { globalStyles } from "./global-styles";
 
-const Development = React.lazy(() => import("./screens/Development"));
+const Development = React.lazy(() =>
+  import(/* webpackChunkName: 'Development' */ "./screens/Development")
+);
 const Search = React.lazy(() =>
   import(/* webpackChunkName: 'Search' */ "./screens/Search")
 );

@@ -12,8 +12,10 @@ export type Scalars = {
 export type Album = {
    __typename?: 'Album',
   id: Scalars['ID'],
+  name: Scalars['String'],
   artist: Artist,
   songs: Array<Song>,
+  cover: Image,
 };
 
 export type Artist = {
@@ -24,22 +26,33 @@ export type Artist = {
   cover: Image,
 };
 
+export type Feed = Node & {
+   __typename?: 'Feed',
+  id: Scalars['ID'],
+};
+
 export type Image = {
    __typename?: 'Image',
   url: Scalars['String'],
 };
 
+export type Node = {
+   __typename?: 'Node',
+  id: Scalars['ID'],
+};
+
 export type Query = {
    __typename?: 'Query',
   user: User,
+  feed: Feed,
 };
 
 export type Song = {
    __typename?: 'Song',
   id: Scalars['ID'],
   name: Scalars['String'],
-  artist: Artist,
-  album: Album,
+  artist_id: Scalars['ID'],
+  album_id: Scalars['ID'],
 };
 
 export type User = {

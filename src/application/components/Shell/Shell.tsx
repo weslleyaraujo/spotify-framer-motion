@@ -7,6 +7,7 @@ import { PickEnum } from "../../../utils/pick-enum";
 import { ForegroundColors } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
 import { Navigation } from "../../../components/molecules/Navigation/Navigation";
+import { StickyPlayer } from "../StickyPlayer/StickyPlayer";
 
 const ICON_MAP: {
   [key: string]: {
@@ -93,6 +94,7 @@ function Shell({ children }: { children: React.ReactNode }) {
           zIndex: Layers.Stacks
         }}
       >
+        <StickyPlayer />
         <Navigation<ActionProps> items={items} />
       </div>
     </View>

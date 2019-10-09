@@ -1,5 +1,5 @@
 import { Link, LinkProps } from "react-router-dom";
-
+import { useQuery } from "@apollo/react-hooks";
 import { CardCover } from "../../components/elements/CardCover/CardCover";
 import { Icon } from "../../components/atoms/Icon/Icon";
 import { Icons } from "../../foundations/icons";
@@ -9,7 +9,7 @@ import { SITEMAP } from "../site-map";
 import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
 import { Section } from "../../components/molecules/Section/Section";
 import { View } from "../../components/atoms/View/View";
-import { useBodyBackground } from "../../hooks/useBodyBackground";
+import { useBodyBackground } from "../../hooks/use-body-background";
 
 interface Props {}
 

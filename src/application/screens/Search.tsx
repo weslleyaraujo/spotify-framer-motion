@@ -1,7 +1,7 @@
 import React from "react";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { View } from "../../components/atoms/View/View";
-import { useBodyBackground } from "../../hooks/useBodyBackground";
+import { useBodyBackground } from "../../hooks/use-body-background";
 
 interface Props {}
 
