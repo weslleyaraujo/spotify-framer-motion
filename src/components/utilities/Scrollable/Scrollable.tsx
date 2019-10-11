@@ -73,9 +73,9 @@ function Scrollable({
               }),
               paddingTop: 0,
               paddingBottom: 0,
-              ...(isFirst && { paddingLeft: extraPadding }),
-              ...(isLast && { paddingRight: extraPadding }),
-              display: "inline-block"
+              display: "inline-block",
+              ...(isFirst && { marginLeft: extraPadding / 2 }),
+              ...(isLast && { marginRight: extraPadding / 2 })
             }}
           >
             {child}
