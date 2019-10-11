@@ -98,6 +98,9 @@ const globalStyles = css`
     -webkit-font-smoothing: smoothing;
     -moz-osx-font-smoothing: grayscale;
   }
+  * {
+    box-sizing: border-box;
+  }
   a {
     color: inherit;
     text-decoration: inherit;
