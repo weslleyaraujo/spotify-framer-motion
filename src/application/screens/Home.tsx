@@ -1,17 +1,15 @@
-import { Link, LinkProps } from "react-router-dom";
-import { useQuery } from "@apollo/react-hooks";
-import { CardCover } from "../../components/elements/CardCover/CardCover";
-import { Icon } from "../../components/atoms/Icon/Icon";
-import { Icons } from "../../foundations/icons";
-import { Picture } from "../../components/atoms/Picture/Picture";
 import React from "react";
-import { SITEMAP } from "../site-map";
-import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
-import { Section } from "../../components/molecules/Section/Section";
+import { Link } from "react-router-dom";
+import { Icon } from "../../components/atoms/Icon/Icon";
+import { Picture } from "../../components/atoms/Picture/Picture";
 import { View } from "../../components/atoms/View/View";
-import { useBodyBackground } from "../../hooks/use-body-background";
-import { motion } from "framer-motion";
+import { Section } from "../../components/molecules/Section/Section";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
+import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
+import { Icons } from "../../foundations/icons";
+import { useBodyBackground } from "../../hooks/use-body-background";
+import { SITEMAP } from "../site-map";
+import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/AnimatedMinimize";
 
 interface Props {}
 
@@ -23,34 +21,54 @@ function Home(props: Props) {
 
   return (
     <FadePresence>
-      <View justify="flex-end" padding="medium">
-        <Link to={SITEMAP.SETTINGS}>
-          <Icon<Icons> type="settings" color="absoluteLight" size="small" />
-        </Link>
-      </View>
-      {[...new Array(10)].map((item, index) => (
-        <Section
-          key={`home-section-${index}`}
-          title="Your heavy rotation"
-          subtitle="The music you've had on repeat this month."
-          padding={["medium", "none", "large", "none"]}
-        >
-          <Scrollable
-            padding="small"
-            horizontalPadding="medium"
-            maxVisibleItems={2}
+      <AnimatedMinimize
+        content={
+          <>
+            <View justify="flex-end" padding="medium">
+              <Link to={SITEMAP.SETTINGS}>
+                <Icon<Icons>
+                  type="settings"
+                  color="absoluteLight"
+                  size="small"
+                />
+              </Link>
+            </View>
+            <View justify="center" padding="medium">
+              <div
+                style={{
+                  backgroundColor: "purple",
+                  width: 150,
+                  height: 150
+                }}
+              ></div>
+            </View>
+          </>
+        }
+      >
+        {[...new Array(10)].map((item, index) => (
+          <Section
+            key={`home-section-${index}`}
+            title="Your heavy rotation"
+            subtitle="The music you've had on repeat this month."
+            padding={["medium", "none", "large", "none"]}
           >
-            {[...new Array(5)].map((item, index) => (
-              <Picture
-                key={`home-section-picture-${index}`}
-                source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?a"
-                alt="Release Radar"
-                aspectRatio="square"
-              />
-            ))}
-          </Scrollable>
-        </Section>
-      ))}
+            <Scrollable
+              padding="small"
+              horizontalPadding="medium"
+              maxVisibleItems={2}
+            >
+              {[...new Array(5)].map((item, index) => (
+                <Picture
+                  key={`home-section-picture-${index}`}
+                  source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?a"
+                  alt="Release Radar"
+                  aspectRatio="square"
+                />
+              ))}
+            </Scrollable>
+          </Section>
+        ))}
+      </AnimatedMinimize>
     </FadePresence>
   );
 }
