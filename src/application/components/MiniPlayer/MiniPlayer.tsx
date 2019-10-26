@@ -1,13 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useTheme } from "emotion-theming";
-import { motion, MotionCallbacks, useMotionValue } from "framer-motion";
-import { createContext, useContext, useMemo, useRef } from "react";
+import { createContext, useContext, useMemo } from "react";
 import useDimensions from "react-use-dimensions";
 import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
 import { Theme } from "../../../foundations/Theme";
-import { Marquee } from "../Marquee/Marquee";
+import { Marquee } from "../../../components/utilities/Marquee/Marquee";
 import { SongDisplay } from "../SongDisplay/SongDisplay";
 
 interface ContextInterface {

@@ -8,6 +8,7 @@ import { ForegroundColors } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
 import { Navigation } from "../../../components/molecules/Navigation/Navigation";
 import { MiniPlayer } from "../MiniPlayer/MiniPlayer";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ICON_MAP: {
   [key: string]: {
@@ -77,6 +78,15 @@ function Shell({ children }: { children: React.ReactNode }) {
     });
   }, [ACTIVE_MAP]);
 
+  const key = useMemo(() => {
+    const active = items.find(item => item.active);
+    if (active) {
+      return active.text;
+    }
+
+    return "not-found";
+  }, [items]);
+
   return (
     <View
       justify="space-between"
@@ -85,7 +95,7 @@ function Shell({ children }: { children: React.ReactNode }) {
         height: "100vh"
       }}
     >
-      {children}
+      <AnimatePresence key={key}>{children}</AnimatePresence>
       <div
         style={{
           position: "fixed",

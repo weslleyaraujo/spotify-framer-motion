@@ -115,8 +115,9 @@ const SongDisplay: React.FC<{ itemsHeight: number | string }> = forwardRef(
 
                 const next = 1 - value / 100;
 
-                // If the next opacity is >= 0.3 it means that the element is partially to close to the edges and
+                // If the next opacity is >= 0.3 it means that the element is partially too close to the edges
                 // in this case we want to speed up its opacity to a zero so it disappears completely
+                // TODO: this also causes a "flash" of the content with a 100% opacity somehow 👀
                 if (1 - next >= 0.3) {
                   handle.set(next - 0.5);
                   return;

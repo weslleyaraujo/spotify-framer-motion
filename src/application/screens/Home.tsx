@@ -10,6 +10,8 @@ import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
 import { Section } from "../../components/molecules/Section/Section";
 import { View } from "../../components/atoms/View/View";
 import { useBodyBackground } from "../../hooks/use-body-background";
+import { motion } from "framer-motion";
+import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 
 interface Props {}
 
@@ -20,7 +22,7 @@ function Home(props: Props) {
   });
 
   return (
-    <>
+    <FadePresence>
       <View justify="flex-end" padding="medium">
         <Link to={SITEMAP.SETTINGS}>
           <Icon<Icons> type="settings" color="absoluteLight" size="small" />
@@ -49,7 +51,7 @@ function Home(props: Props) {
           </Scrollable>
         </Section>
       ))}
-    </>
+    </FadePresence>
   );
 }
 

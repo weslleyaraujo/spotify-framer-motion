@@ -27,8 +27,8 @@ const fallback = <LoadingView />;
 function App() {
   return (
     <>
-      <Global styles={globalStyles} />
       <Providers>
+        <Global styles={globalStyles} />
         <Suspense fallback={fallback}>
           <Switch>
             <Route path={[SITEMAP.HOME, SITEMAP.SEARCH, SITEMAP.LIBRARY]} exact>

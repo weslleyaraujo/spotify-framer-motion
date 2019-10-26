@@ -1,8 +1,9 @@
-import { css } from "@emotion/core";
+import { css, InterpolationWithTheme } from "@emotion/core";
 
 import circular from "../assets/fonts/circular-book.woff2";
+import { Theme } from "../foundations/Theme";
 
-const globalStyles = css`
+const globalStyles: InterpolationWithTheme<Theme> = theme => css`
   html,
   body,
   div,
@@ -97,6 +98,9 @@ const globalStyles = css`
     height: 100%;
     -webkit-font-smoothing: smoothing;
     -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    background-color: ${theme.colors.background};
   }
   * {
     box-sizing: border-box;
