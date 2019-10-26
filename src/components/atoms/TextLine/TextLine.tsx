@@ -1,13 +1,13 @@
 /** @jsx jsx */
 
 import { css, jsx } from "@emotion/core";
-import { Children, cloneElement } from "react";
-
+import { TextAlignProperty } from "csstype";
+import { useTheme } from "emotion-theming";
+import { Children, cloneElement, forwardRef } from "react";
 import { Colors } from "../../../foundations/Colors";
+import { Theme } from "../../../foundations/Theme";
 import { Fonts } from "../../../foundations/Typography";
 import { PickEnum } from "../../../utils/pick-enum";
-import { Theme } from "../../../foundations/Theme";
-import { useTheme } from "emotion-theming";
 
 // TODO: Move it to interfaces directory
 export type ForegroundColors = PickEnum<
@@ -28,6 +28,9 @@ export type Props = {
   /* Number of lines that text will render. Truncation will be used to hide remaining lines. */
   numberOfLines?: number;
 
+  /** Alignment of the text */
+  textAlign?: TextAlignProperty;
+
   /** Renders the text as a block or an inline element. Default: undefined, which renders the "block" behavior (or "inline" for nexted TextLines) */
   display?: "inline" | "block";
 } & (
@@ -40,21 +43,27 @@ export type Props = {
 interface DefaultProps
   extends Required<Pick<Props, "numberOfLines" | "type" | "as" | "color">> {}
 
-function TextLine({
-  as,
-  type,
-  text,
-  numberOfLines,
-  color,
-  display,
-  children
-}: Props & DefaultProps) {
+const TextLine = forwardRef(function TextLine(
+  props: Props,
+  ref?: React.Ref<any>
+) {
+  const {
+    as,
+    type,
+    text,
+    numberOfLines,
+    color,
+    display,
+    children,
+    textAlign
+  } = props as Props & DefaultProps;
   const ActionPropsPropsElement = as;
   const isTruncated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
   const isMultiline = isTruncated && numberOfLines > 1;
   const theme = useTheme<Theme>();
   const styles = css({
+    textAlign,
     ...(display && {
       display
     }),
@@ -77,7 +86,7 @@ function TextLine({
   });
 
   return (
-    <ActionPropsPropsElement css={styles}>
+    <ActionPropsPropsElement css={styles} ref={ref}>
       {text ||
         Children.map(
           children as React.ReactChild,
@@ -107,7 +116,7 @@ function TextLine({
         )}
     </ActionPropsPropsElement>
   );
-}
+});
 
 const defaultProps: DefaultProps = {
   as: "p",

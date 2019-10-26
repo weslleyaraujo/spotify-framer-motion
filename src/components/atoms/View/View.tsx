@@ -6,7 +6,8 @@ import {
   FlexWrapProperty,
   GlobalsNumber,
   JustifyContentProperty,
-  PropertiesFallback
+  PropertiesFallback,
+  FlexProperty
 } from "csstype";
 import { CSSObject, CSSPseudosForCSSObject } from "@emotion/serialize";
 
@@ -67,6 +68,7 @@ export interface Props {
   supportsTruncation?: boolean;
   style?: ViewStyles;
   debugTrace?: boolean;
+  flex?: FlexProperty;
 }
 
 interface DefaultProps extends Required<Pick<Props, "margin" | "padding">> {}
@@ -84,6 +86,7 @@ function useViewStyles(
     | "justify"
     | "direction"
     | "grow"
+    | "flex"
     | "debugTrace"
   >
 ) {
@@ -98,7 +101,8 @@ function useViewStyles(
     direction: flexDirection,
     grow: flexGrow,
     padding,
-    debugTrace
+    debugTrace,
+    flex
   } = props;
   const theme = useTheme<Theme>();
   const display = [
@@ -155,6 +159,7 @@ function useViewStyles(
     alignItems,
     flexWrap,
     flexGrow,
+    flex,
     flexDirection: display ? flexDirection : "column",
     ...(debugTrace &&
       process.env.NODE_ENV === "development" && {
