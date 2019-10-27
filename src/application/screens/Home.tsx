@@ -24,7 +24,7 @@ function Home(props: Props) {
       <AnimatedMinimize
         content={
           <>
-            <View justify="flex-end" padding="medium">
+            {/* <View justify="flex-end" padding="medium">
               <Link to={SITEMAP.SETTINGS}>
                 <Icon<Icons>
                   type="settings"
@@ -32,15 +32,15 @@ function Home(props: Props) {
                   size="small"
                 />
               </Link>
-            </View>
-            <View justify="center" padding="medium">
-              <div
-                style={{
-                  backgroundColor: "purple",
-                  width: 150,
-                  height: 150
-                }}
-              ></div>
+            </View> */}
+            <View justify="center" padding={["large", "medium"]}>
+              <Picture
+                width={200}
+                height={200}
+                source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?a"
+                alt="Release Radar"
+                aspectRatio="square"
+              />
             </View>
           </>
         }

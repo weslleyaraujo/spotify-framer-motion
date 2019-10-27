@@ -1,15 +1,15 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import { useTheme } from "emotion-theming";
 import {
   motion,
-  useViewportScroll,
   useMotionValue,
-  useTransform
+  useTransform,
+  useViewportScroll
 } from "framer-motion";
-import useDimensions from "react-use-dimensions";
 import { useEffect, useRef } from "react";
+import useDimensions from "react-use-dimensions";
 import { Layers } from "../../../foundations/Layers";
-import { useTheme } from "emotion-theming";
 import { Theme } from "../../../foundations/Theme";
 
 // TODO: add option to opt-out scaling
@@ -19,34 +19,28 @@ const AnimatedMinimize: React.FC<{
 }> = function AnimatedMinimize({ children, content }) {
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
-  const [contentRef, { height }] = useDimensions();
+  const [contentRef, { height }] = useDimensions({
+    liveMeasure: false
+  });
   // We need to store a "paintHeight" here since later we going to start
   // messing up with the element transform: scale property which affects dimensions
   const paintHeight = useRef<number | null>(null);
   const scrollMotion = useMotionValue(1);
-  const opacity = useTransform(scrollMotion, y => {
-    const value = 1 - y / 100;
-    if (value >= 0.4) {
-      return value;
-    }
-
-    console.log(value);
-    return value <= 0.1 ? 0 : value;
-  });
-
-  const scale = useTransform(scrollMotion, y => {
-    const value = 1 - y / 100;
-    if (value >= 0.4) {
-      return 1;
-    }
-
-    return value + 0.6 <= 0.17 ? 0.17 : value + 0.4;
-  });
+  const value = useTransform(scrollMotion, y => 1 - y / 100);
+  const opacity = useTransform(
+    value,
+    [1, 0.8, 0.75, 0.65, 0.5],
+    [1, 0.75, 0.65, 0.5, 0]
+  );
+  const scale = useTransform(
+    value,
+    [1, 0.9, 0.88, 0.84, 0.82, 0.8],
+    [1, 0.98, 0.96, 0.94, 0.92, 0.9]
+  );
 
   if (height && !paintHeight.current) {
     paintHeight.current = height;
   }
-  console.log(scrollMotion.get(), paintHeight.current);
 
   useEffect(() => {
     const cancel = scrollY.onChange(value => {
@@ -87,11 +81,26 @@ const AnimatedMinimize: React.FC<{
         {content}
       </motion.div>
       <motion.div
-        style={{
-          marginTop: height,
+        css={{
+          ...(paintHeight.current && {
+            marginTop: paintHeight.current + paintHeight.current / 2.5
+          }),
           zIndex: Layers.Root + 10,
           position: "relative",
-          backgroundColor: theme.colors.background
+          backgroundColor: theme.colors.background,
+          "&:before": {
+            content: "''",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            // backgroundImage: `linear-gradient(to top, ${theme.colors.background} 20%, ${theme.colors.background} 0.5%, transparent)`,
+            backgroundImage: `linear-gradient(to top, ${theme.colors.background} 0px, transparent 100%)`,
+            ...(paintHeight.current && {
+              height: paintHeight.current / 2.5,
+              top: `-${paintHeight.current / 2.5}px`
+            })
+          }
         }}
       >
         {children}

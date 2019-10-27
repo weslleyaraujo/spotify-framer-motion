@@ -70,7 +70,9 @@ function Picture(props: Props & DefaultProps) {
     resizeMode,
     onError,
     onLoad,
-    alt
+    alt,
+    width,
+    height
   } = props;
 
   const [error, setError] = useState(false);
@@ -97,8 +99,12 @@ function Picture(props: Props & DefaultProps) {
 
   const paddingBottom = useMemo(
     () =>
-      `calc(100% / ${getAspectRatioValueWithLayout(aspectRatio, orientation)})`,
-    [aspectRatio, orientation]
+      `calc(100% / ${
+        height
+          ? height
+          : getAspectRatioValueWithLayout(aspectRatio, orientation)
+      })`,
+    [aspectRatio, orientation, height]
   );
 
   const objectFit = useMemo(() => getResizeMode(resizeMode), [resizeMode]);
@@ -107,8 +113,8 @@ function Picture(props: Props & DefaultProps) {
     <figure
       css={{
         margin: "unset",
-        width: "100%",
-        height: "100%",
+        width: width || "100%",
+        height: height || "100%",
         position: "relative",
         ...(error && {
           backgroundColor: theme.colors.absoluteDark
