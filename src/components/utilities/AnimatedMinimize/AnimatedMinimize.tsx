@@ -12,11 +12,27 @@ import useDimensions from "react-use-dimensions";
 import { Layers } from "../../../foundations/Layers";
 import { Theme } from "../../../foundations/Theme";
 
-// TODO: add option to opt-out scaling
-// TODO: if scale is active children wrapper should have backgroundColor and "content" should have a gradient from bottom up
-const AnimatedMinimize: React.FC<{
+interface Props {
   content: React.ReactNode;
-}> = function AnimatedMinimize({ children, content }) {
+  children: React.ReactNode;
+  enableScaling?: boolean;
+  enableBackground?: boolean;
+}
+
+interface DefaultProps
+  extends Required<Pick<Props, "enableBackground" | "enableScaling">> {}
+
+const defaultProps: DefaultProps = {
+  enableBackground: true,
+  enableScaling: true
+};
+
+function AnimatedMinimize({
+  children,
+  content,
+  enableBackground,
+  enableScaling
+}: Props & DefaultProps) {
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
   const [contentRef, { height }] = useDimensions({
@@ -63,7 +79,9 @@ const AnimatedMinimize: React.FC<{
         ref={contentRef}
         style={{
           opacity,
-          scale
+          ...(enableScaling && {
+            scale
+          })
         }}
         initial={{
           opacity: 0
@@ -82,23 +100,30 @@ const AnimatedMinimize: React.FC<{
       </motion.div>
       <motion.div
         css={{
+          ...(paintHeight.current &&
+            enableScaling && {
+              marginTop: paintHeight.current + paintHeight.current / 2.5
+            }),
           ...(paintHeight.current && {
-            marginTop: paintHeight.current + paintHeight.current / 2.5
+            marginTop: paintHeight.current
+          }),
+          ...(enableBackground && {
+            backgroundColor: theme.colors.background
           }),
           zIndex: Layers.Root + 10,
           position: "relative",
-          backgroundColor: theme.colors.background,
           "&:before": {
             content: "''",
             position: "absolute",
             top: 0,
             left: 0,
             width: "100%",
-            // backgroundImage: `linear-gradient(to top, ${theme.colors.background} 20%, ${theme.colors.background} 0.5%, transparent)`,
-            backgroundImage: `linear-gradient(to top, ${theme.colors.background} 0px, transparent 100%)`,
             ...(paintHeight.current && {
               height: paintHeight.current / 2.5,
               top: `-${paintHeight.current / 2.5}px`
+            }),
+            ...(enableBackground && {
+              backgroundImage: `linear-gradient(to top, ${theme.colors.background} 0px, transparent 100%)`
             })
           }
         }}
@@ -107,6 +132,8 @@ const AnimatedMinimize: React.FC<{
       </motion.div>
     </div>
   );
-};
+}
+
+AnimatedMinimize.defaultProps = defaultProps;
 
 export { AnimatedMinimize };
