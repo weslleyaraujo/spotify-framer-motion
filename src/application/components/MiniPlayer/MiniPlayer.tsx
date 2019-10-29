@@ -8,6 +8,8 @@ import { View } from "../../../components/atoms/View/View";
 import { Theme } from "../../../foundations/Theme";
 import { Marquee } from "../../../components/utilities/Marquee/Marquee";
 import { SongDisplay } from "../SongDisplay/SongDisplay";
+import { Icon } from "../../../components/atoms/Icon/Icon";
+import { Icons } from "../../../foundations/icons";
 
 interface ContextInterface {
   title: React.ComponentProps<typeof TextLine>["text"];
@@ -60,7 +62,7 @@ function MiniPlayer() {
       }}
     >
       <View
-        padding={["medium", "small"]}
+        padding="medium"
         justify="space-between"
         align="center"
         style={{
@@ -70,13 +72,16 @@ function MiniPlayer() {
         }}
       >
         <View
-          children={null}
+          justify="center"
+          align="center"
           style={{
-            backgroundColor: theme.colors.background,
             width: theme.scales.small,
             height: theme.scales.small
           }}
-        />
+        >
+          <Icon<Icons> type="strokeArrowUp" size="small" />
+        </View>
+
         <View
           flex={1}
           style={{
@@ -91,13 +96,15 @@ function MiniPlayer() {
           </SongDisplay>
         </View>
         <View
-          children={null}
+          justify="center"
+          align="center"
           style={{
-            backgroundColor: theme.colors.background,
             width: theme.scales.small,
             height: theme.scales.small
           }}
-        />
+        >
+          <Icon<Icons> type="strokePlay" size="small" />
+        </View>
       </View>
     </Context.Provider>
   );

@@ -12,7 +12,9 @@ export type Icons =
   | "magnifyingGlassFill"
   | "libraryOutline"
   | "libraryFill"
-  | "dotsVertical";
+  | "dotsVertical"
+  | "strokePlay"
+  | "strokeArrowUp";
 
 const icons: Theme<Icons>["icons"] = {
   libraryFill: ({ width, height, color }) => (
@@ -146,6 +148,32 @@ const icons: Theme<Icons>["icons"] = {
         d="M298 417.5C298 440.972 278.972 460 255.5 460C232.028 460 213 440.972 213 417.5C213 394.028 232.028 375 255.5 375C278.972 375 298 394.028 298 417.5Z"
         fill={color}
       />
+    </svg>
+  ),
+  strokePlay: ({ width, height, color }) => (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 53 53"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M52.5 26.5C52.5 40.8594 40.8594 52.5 26.5 52.5C12.1406 52.5 0.5 40.8594 0.5 26.5C0.5 12.1406 12.1406 0.5 26.5 0.5C40.8594 0.5 52.5 12.1406 52.5 26.5ZM26.5 51.5C40.3071 51.5 51.5 40.3071 51.5 26.5C51.5 12.6929 40.3071 1.5 26.5 1.5C12.6929 1.5 1.5 12.6929 1.5 26.5C1.5 40.3071 12.6929 51.5 26.5 51.5ZM20 37.1129V15.8871L37.5344 26.5L20 37.1129Z"
+        fill={color}
+        stroke={color}
+      />
+    </svg>
+  ),
+  strokeArrowUp: ({ width, height, color }) => (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 55 55"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M15 35L27.5 21L40 35" stroke={color} stroke-width="2" />
     </svg>
   )
 };
