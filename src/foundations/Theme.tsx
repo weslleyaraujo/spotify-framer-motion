@@ -4,15 +4,7 @@ import { Colors } from "./Colors";
 import { Fonts } from "./Typography";
 import { Icons } from "./icons";
 import React from "react";
-
-export interface Constants {
-  borderRadiusLarge: number;
-  borderRadiusMedium: number;
-  borderRadiusSmall: number;
-  borderWidthSmall: number;
-  borderWidthMedium: number;
-  borderWidthLarge: number;
-}
+import { Constants } from "./Constants";
 
 // TODO: do not include icons in this interface
 export interface Theme<T extends keyof any = Icons> {

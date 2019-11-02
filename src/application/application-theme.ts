@@ -91,7 +91,13 @@ const theme: Theme<Icons> = {
     borderRadiusLarge: 18,
     borderWidthSmall: 0.5,
     borderWidthMedium: 1,
-    borderWidthLarge: 2
+    borderWidthLarge: 2,
+    boxShadowOffsetY: 4,
+    boxShadowOffsetX: 0,
+    boxShadowBlurRadius: 14,
+    boxShadowSpreadRadius: 0,
+    boxShadowElevation: 4,
+    boxShadowOpacity: 0.25
   }
 };
 

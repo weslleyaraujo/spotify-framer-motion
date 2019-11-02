@@ -173,7 +173,7 @@ const icons: Theme<Icons>["icons"] = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M15 35L27.5 21L40 35" stroke={color} stroke-width="2" />
+      <path d="M15 35L27.5 21L40 35" stroke={color} strokeWidth="2" />
     </svg>
   )
 };

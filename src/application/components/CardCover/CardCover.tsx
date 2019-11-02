@@ -1,6 +1,6 @@
-import { Action } from "../../atoms/Action/Action";
+import { Action } from "../../../components/atoms/Action/Action";
 import { CardProps } from "../../../interfaces/Card";
-import { Picture } from "../../atoms/Picture/Picture";
+import { Picture } from "../../../components/atoms/Picture/Picture";
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 

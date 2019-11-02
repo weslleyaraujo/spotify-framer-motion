@@ -15,23 +15,23 @@ import { Theme } from "../../../foundations/Theme";
 interface Props {
   content: React.ReactNode;
   children: React.ReactNode;
-  enableScaling?: boolean;
-  enableBackground?: boolean;
+  disableScaling?: boolean;
+  disableBackground?: boolean;
 }
 
 interface DefaultProps
-  extends Required<Pick<Props, "enableBackground" | "enableScaling">> {}
+  extends Required<Pick<Props, "disableBackground" | "disableScaling">> {}
 
 const defaultProps: DefaultProps = {
-  enableBackground: true,
-  enableScaling: true
+  disableBackground: false,
+  disableScaling: false
 };
 
 function AnimatedMinimize({
   children,
   content,
-  enableBackground,
-  enableScaling
+  disableBackground,
+  disableScaling
 }: Props & DefaultProps) {
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
@@ -79,7 +79,7 @@ function AnimatedMinimize({
         ref={contentRef}
         style={{
           opacity,
-          ...(enableScaling && {
+          ...(!disableScaling && {
             scale
           })
         }}
@@ -101,13 +101,13 @@ function AnimatedMinimize({
       <motion.div
         css={{
           ...(paintHeight.current &&
-            enableScaling && {
+            !disableScaling && {
               marginTop: paintHeight.current + paintHeight.current / 2.5
             }),
           ...(paintHeight.current && {
             marginTop: paintHeight.current
           }),
-          ...(enableBackground && {
+          ...(!disableBackground && {
             backgroundColor: theme.colors.background
           }),
           zIndex: Layers.Root + 10,
@@ -122,7 +122,7 @@ function AnimatedMinimize({
               height: paintHeight.current / 2.5,
               top: `-${paintHeight.current / 2.5}px`
             }),
-            ...(enableBackground && {
+            ...(!disableBackground && {
               backgroundImage: `linear-gradient(to top, ${theme.colors.background} 0px, transparent 100%)`
             })
           }

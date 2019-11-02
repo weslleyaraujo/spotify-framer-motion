@@ -57,7 +57,7 @@ const TextLine = forwardRef(function TextLine(
     children,
     textAlign
   } = props as Props & DefaultProps;
-  const ActionPropsPropsElement = as;
+  const Element = as;
   const isTruncated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
   const isMultiline = isTruncated && numberOfLines > 1;
@@ -86,7 +86,7 @@ const TextLine = forwardRef(function TextLine(
   });
 
   return (
-    <ActionPropsPropsElement css={styles} ref={ref}>
+    <Element css={styles} ref={ref}>
       {text ||
         Children.map(
           children as React.ReactChild,
@@ -114,7 +114,7 @@ const TextLine = forwardRef(function TextLine(
             }
           }
         )}
-    </ActionPropsPropsElement>
+    </Element>
   );
 });
 

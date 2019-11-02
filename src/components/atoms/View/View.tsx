@@ -68,7 +68,7 @@ export interface Props {
   supportsTruncation?: boolean;
   style?: ViewStyles;
   debugTrace?: boolean;
-  flex?: FlexProperty;
+  flex?: FlexProperty<number>;
 }
 
 interface DefaultProps extends Required<Pick<Props, "margin" | "padding">> {}

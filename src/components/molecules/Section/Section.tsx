@@ -9,17 +9,20 @@ interface Props
     React.ComponentProps<typeof View>,
     "padding" | "justify" | "align"
   > {
-  title?: string;
-  children: React.ReactNode;
-  subtitle?: string;
   head: Pick<
     React.ComponentProps<typeof View>,
     "padding" | "justify" | "align"
   >;
+  title?: string;
+  titleType?: React.ComponentProps<typeof TextLine>["type"];
+  subtitle?: string;
+  children: React.ReactNode;
 }
 
 interface DefaultProps
-  extends Required<Pick<Props, "head" | "padding" | "justify" | "align">> {}
+  extends Required<
+    Pick<Props, "head" | "padding" | "justify" | "align" | "titleType">
+  > {}
 
 function Section({
   title,
@@ -27,7 +30,8 @@ function Section({
   subtitle,
   padding,
   justify,
-  head
+  head,
+  titleType
 }: Props & DefaultProps) {
   const view = useViewStyles({
     padding,
@@ -39,7 +43,7 @@ function Section({
       {(title || subtitle) && (
         <View {...head} direction="column">
           {title && (
-            <TextLine text={title} color="foregroundPrimary" type="heading" />
+            <TextLine text={title} color="foregroundPrimary" type={titleType} />
           )}
           {subtitle && <TextLine text={subtitle} color="foregroundSecondary" />}
         </View>
@@ -60,6 +64,7 @@ const defaultProps: DefaultProps = {
   justify: "center",
   align: "center",
   padding: "large",
+  titleType: "heading",
   head: {
     align: "center",
     justify: "center",

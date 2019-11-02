@@ -1,14 +1,14 @@
+import { AnimatePresence } from "framer-motion";
 import React, { useMemo } from "react";
 import { Link, LinkProps, useRouteMatch } from "react-router-dom";
-import { Icons } from "../../../foundations/icons";
-import { Layers } from "../../../foundations/Layers";
-import { SITEMAP } from "../../site-map";
-import { PickEnum } from "../../../utils/pick-enum";
 import { ForegroundColors } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
 import { Navigation } from "../../../components/molecules/Navigation/Navigation";
+import { Icons } from "../../../foundations/icons";
+import { Layers } from "../../../foundations/Layers";
+import { PickEnum } from "../../../utils/pick-enum";
+import { SITEMAP } from "../../site-map";
 import { MiniPlayer } from "../MiniPlayer/MiniPlayer";
-import { AnimatePresence, motion } from "framer-motion";
 
 const ICON_MAP: {
   [key: string]: {
