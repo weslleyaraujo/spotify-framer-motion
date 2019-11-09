@@ -14,7 +14,8 @@ export type Icons =
   | "libraryFill"
   | "dotsVertical"
   | "strokePlay"
-  | "strokeArrowUp";
+  | "strokeArrowUp"
+  | "strokeArrowLeft";
 
 const icons: Theme<Icons>["icons"] = {
   libraryFill: ({ width, height, color }) => (
@@ -174,6 +175,17 @@ const icons: Theme<Icons>["icons"] = {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M15 35L27.5 21L40 35" stroke={color} strokeWidth="2" />
+    </svg>
+  ),
+  strokeArrowLeft: ({ width, height, color }) => (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 55 55"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M35 40L21 27.5L35 15" stroke={color} strokeWidth="2" />
     </svg>
   )
 };

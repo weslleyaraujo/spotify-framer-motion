@@ -15,6 +15,9 @@ const Development = React.lazy(() =>
 const Search = React.lazy(() =>
   import(/* webpackChunkName: 'Search' */ "./screens/Search")
 );
+const SearchResults = React.lazy(() =>
+  import(/* webpackChunkName: 'SearchResults' */ "./screens/SearchResults")
+);
 const Library = React.lazy(() =>
   import(/* webpackChunkName: 'Library' */ "./screens/Library")
 );
@@ -38,15 +41,18 @@ function App() {
                     <Route path={SITEMAP.HOME} exact>
                       <Home />
                     </Route>
-                    <Route path="/search" exact>
+                    <Route path={SITEMAP.SEARCH} exact>
                       <Search />
                     </Route>
-                    <Route path="/library" exact>
+                    <Route path={SITEMAP.LIBRARY} exact>
                       <Library />
                     </Route>
                   </Switch>
                 </Suspense>
               </Shell>
+            </Route>
+            <Route path={SITEMAP.SEARCH_RESULTS}>
+              <SearchResults />
             </Route>
             {process.env.NODE_ENV === "development" && (
               <Route path={SITEMAP.DEVELOPMENT} exact fallback={fallback}>

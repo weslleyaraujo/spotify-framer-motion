@@ -9,7 +9,7 @@ import { Icon } from "../../../components/atoms/Icon/Icon";
 import { Icons } from "../../../foundations/icons";
 
 interface Props
-  extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder"> {}
+  extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus"> {}
 
 interface DefaultProps extends Required<Pick<Props, "placeholder">> {}
 
@@ -17,7 +17,7 @@ const defaultProps: DefaultProps = {
   placeholder: "Artists, songs, or podcasts"
 };
 
-function SearchBar({ placeholder }: Props & DefaultProps) {
+function SearchBar({ placeholder, onFocus }: Props & DefaultProps) {
   const theme = useTheme<Theme>();
   return (
     <View
@@ -50,6 +50,7 @@ function SearchBar({ placeholder }: Props & DefaultProps) {
         <TextLine text={placeholder} type="strong" color="absoluteDark" />
       </View>
       <input
+        onFocus={onFocus}
         css={{
           border: "none",
           paddingRight: theme.units.large,

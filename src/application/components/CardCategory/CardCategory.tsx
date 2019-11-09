@@ -16,11 +16,14 @@ interface Props<P extends Object>
       primary: P;
     };
     interactions: "primary";
-  }> {}
+  }> {
+  background: {
+    from: string;
+    to: string;
+  };
+}
 
-interface DefaultProps extends Required<Pick<Props<{}>, "interactions">> {}
-
-function CategoryCard<P>({ interactions, media, title }: Props<P>) {
+function CategoryCard<P>({ interactions, media, title, background }: Props<P>) {
   const theme = useTheme<Theme>();
   const boxShadow = useBoxShadow({
     color: theme.colors.absoluteDark
@@ -35,7 +38,7 @@ function CategoryCard<P>({ interactions, media, title }: Props<P>) {
         style={{
           position: "relative",
           overflow: "hidden",
-          backgroundColor: theme.colors.callout
+          backgroundImage: `linear-gradient(to bottom, ${background.from} 0px, ${background.to} 100%)`
         }}
       >
         <View

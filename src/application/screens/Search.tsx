@@ -7,10 +7,15 @@ import { SearchBar } from "../components/SearchBar/SearchBar";
 import { Section } from "../../components/molecules/Section/Section";
 import { CategoryCard } from "../components/CardCategory/CardCategory";
 import { Grid } from "../../components/utilities/Grid/Grid";
+import { useHistory } from "react-router";
+
+import source from "../../assets/images/tame-impala-currents.jpeg";
+import { SITEMAP } from "../site-map";
 
 interface Props {}
 
 function Search(props: Props) {
+  const history = useHistory();
   useBodyBackground({
     color: "white",
     gradientStyle: "topLeft"
@@ -18,11 +23,11 @@ function Search(props: Props) {
 
   return (
     <FadePresence>
-      <View justify="center" padding={["largest", "large", "none", "large"]}>
+      <View justify="center" padding={["larger", "large", "none", "large"]}>
         <TextLine text="Search" type="display" color="foregroundPrimary" />
       </View>
       <View margin={["large", "medium", "none", "medium"]}>
-        <SearchBar />
+        <SearchBar onFocus={event => history.push(SITEMAP.SEARCH_RESULTS)} />
       </View>
       <Section
         titleType="title"
@@ -37,8 +42,12 @@ function Search(props: Props) {
           {[...new Array(6)].map((item, key) => (
             <CategoryCard
               key={key}
+              background={{
+                from: "orange",
+                to: "pink"
+              }}
               media={{
-                source: "http://placehold.it/200x200",
+                source,
                 type: "image",
                 credits: "Spotify"
               }}

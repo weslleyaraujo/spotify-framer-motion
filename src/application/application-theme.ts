@@ -13,8 +13,8 @@ const theme: Theme<Icons> = {
     absoluteDark: "#18262C",
     background: "#121212",
     backgroundAccent: "#222326",
-    primary: "#3586F0",
-    complement: "#25A781",
+    complement: "#3586F0",
+    primary: "#25A781",
     callout: "#FF5E36"
   },
   units: {
