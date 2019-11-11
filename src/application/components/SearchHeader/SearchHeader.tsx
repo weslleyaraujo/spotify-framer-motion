@@ -29,23 +29,56 @@ const defaultProps: DefaultProps = {
 function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
   const ref = useRef<HTMLInputElement>(null);
   const theme = useTheme<Theme>();
+  const { scrollY } = useViewportScroll();
   const [focus, setFocus] = useState();
+  const scrollMotion = useMotionValue(1);
+  const [contentRef, { height }] = useDimensions({
+    liveMeasure: false
+  });
+
   const content = useViewStyles({
     justify: "center",
     align: "center"
   });
   const { lineHeight, ...font } = theme.fonts.body;
+
+  useEffect(() => {
+    const cancel = scrollY.onChange(value => {
+      const current = (Math.abs(Number(value)) * 100) / height;
+      scrollMotion.set(current);
+    });
+
+    return cancel;
+  });
+
+  const opacity = useTransform(
+    scrollMotion,
+    [0, 0.5, 0.7, 0.8, 100],
+    [0, 0.1, 0.2, 0.4, 1]
+  );
+
   return (
-    <View
+    <motion.div
+      ref={contentRef}
       style={{
         position: "sticky",
         top: 0,
         right: 0,
         left: 0,
-        zIndex: Layers.Stacks + 100,
-        backgroundColor: transparentize(0.8, theme.colors.absoluteLight)
+        zIndex: Layers.Stacks + 100
       }}
     >
+      <motion.div
+        style={{
+          opacity,
+          backdropFilter: "blur(200px)",
+          backgroundColor: theme.colors.backgroundAccent,
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          left: 0
+        }}
+      />
       <motion.div
         animate={{
           opacity: focus ? 0 : 1
@@ -163,7 +196,7 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
           </View>
         </motion.div>
       </View>
-    </View>
+    </motion.div>
   );
 }
 
