@@ -15,7 +15,7 @@ import { useViewStyles, View } from "../../../components/atoms/View/View";
 import { Icons } from "../../../foundations/icons";
 import { Layers } from "../../../foundations/Layers";
 import { Theme } from "../../../foundations/Theme";
-import { transparentize } from "polished";
+import { transparentize, lighten } from "polished";
 
 interface Props
   extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus"> {}
@@ -45,16 +45,24 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
   useEffect(() => {
     const cancel = scrollY.onChange(value => {
       const current = (Math.abs(Number(value)) * 100) / height;
-      scrollMotion.set(current);
+      if (current <= 100) {
+        scrollMotion.set(current);
+      }
     });
 
     return cancel;
   });
 
-  const opacity = useTransform(
+  const backgroundColor = useTransform(
     scrollMotion,
-    [0, 0.5, 0.7, 0.8, 100],
-    [0, 0.1, 0.2, 0.4, 1]
+    [0, 30, 40, 50, 60],
+    [
+      theme.colors.background,
+      lighten(0.005, theme.colors.backgroundAccent),
+      lighten(0.01, theme.colors.backgroundAccent),
+      lighten(0.02, theme.colors.backgroundAccent),
+      lighten(0.06, theme.colors.backgroundAccent)
+    ]
   );
 
   return (
@@ -70,9 +78,7 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
     >
       <motion.div
         style={{
-          opacity,
-          backdropFilter: "blur(200px)",
-          backgroundColor: theme.colors.backgroundAccent,
+          backgroundColor,
           position: "absolute",
           width: "100%",
           height: "100%",
@@ -100,7 +106,7 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
       <motion.div
         onClick={e => {
           if (ref.current) {
-            // ref.current.focus();
+            ref.current.focus();
           }
         }}
         animate={focus ? "active" : "default"}
@@ -153,12 +159,8 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
         </motion.div>
         <input
           ref={ref}
-          onFocus={e => {
-            setFocus(true);
-          }}
-          onBlur={e => {
-            setFocus(false);
-          }}
+          onFocus={e => setFocus(true)}
+          onBlur={e => setFocus(false)}
           type="text"
           css={{
             ...font,
@@ -172,7 +174,7 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
             paddingLeft: theme.units.small,
             paddingTop: theme.units.medium,
             paddingBottom: theme.units.medium,
-            positon: "relative",
+            position: "relative",
             zIndex: Layers.Stacks + 200,
             "&:focus": {
               outline: "transparent"
