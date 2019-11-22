@@ -14,7 +14,7 @@ const theme: Theme<Icons> = {
     background: "#121212",
     backgroundAccent: "#222326",
     complement: "#3586F0",
-    primary: "#25A781",
+    primary: "#1DB954",
     callout: "#FF5E36"
   },
   units: {

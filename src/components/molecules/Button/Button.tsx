@@ -12,7 +12,7 @@ import { useTheme } from "emotion-theming";
 
 interface Props<T> {
   action: ActionProps<T>;
-  type?: "normal" | "primary" | "secondary";
+  type?: "normal" | "primary" | "secondary" | "third";
   size?: SetIntersection<ViewProps["padding"], "medium" | "large" | "small">;
   label: string;
   rounded?: boolean;
@@ -93,6 +93,12 @@ function useButtonStyles(
 
     ...(type === "secondary" && {
       backgroundColor: theme.colors.absoluteLight
+    }),
+
+    ...(type === "third" && {
+      backgroundColor: "transparent",
+      border: `1px solid ${theme.colors.absoluteLight}`,
+      textTransform: "uppercase"
     }),
 
     /** Display */

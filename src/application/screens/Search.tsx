@@ -11,6 +11,7 @@ import { useHistory } from "react-router";
 
 import source from "../../assets/images/tame-impala-currents.jpeg";
 import { SITEMAP } from "../site-map";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -56,7 +57,8 @@ function Search(props: Props) {
                 primary: {
                   label: "Visit page",
                   action: {
-                    as: "div"
+                    as: Link,
+                    to: "/artist/tame-impala"
                   }
                 }
               }}

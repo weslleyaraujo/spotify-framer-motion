@@ -3,7 +3,7 @@ import { transparentize } from "polished";
 import { useLayoutEffect } from "react";
 import { useTheme } from "emotion-theming";
 
-type GradientStyle = "topLeft";
+type GradientStyle = "topLeft" | "topBottom";
 
 const GRADIENT_STYLE_MAP: {
   [key in GradientStyle]: ({
@@ -14,6 +14,11 @@ const GRADIENT_STYLE_MAP: {
     backgroundColor: string;
   }) => CSSStyleDeclaration["backgroundImage"];
 } = {
+  topBottom: ({ color, backgroundColor }) => `linear-gradient(
+      180deg,
+      ${transparentize(0.62, color)} 0%,
+      ${backgroundColor} 67%
+    )`,
   topLeft: ({ color, backgroundColor }) => `linear-gradient(
       140deg,
       ${transparentize(0.62, color)} 0%,

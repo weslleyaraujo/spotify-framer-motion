@@ -14,6 +14,13 @@ const SETTINGS = "/settings";
 
 interface RouteSearchQuery {}
 
+/* Artist */
+const ARTIST = "/artist/:id";
+
+export interface RouteArtistParameters {
+  id: string;
+}
+
 /* Development */
 const DEVELOPMENT = "/development";
 
@@ -22,6 +29,7 @@ const SITEMAP = {
   ROOT,
   SEARCH,
   SEARCH_RESULTS,
+  ARTIST,
   HOME,
   LIBRARY,
   SETTINGS,

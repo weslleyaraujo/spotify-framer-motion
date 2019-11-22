@@ -25,6 +25,10 @@ const Settings = React.lazy(() =>
   import(/* webpackChunkName: 'Settings' */ "./screens/Settings")
 );
 
+const Artist = React.lazy(() =>
+  import(/* webpackChunkName: 'Artist' */ "./screens/Artist")
+);
+
 const fallback = <LoadingView />;
 
 function App() {
@@ -54,6 +58,7 @@ function App() {
             <Route path={SITEMAP.SEARCH_RESULTS}>
               <SearchResults />
             </Route>
+            <Route path={SITEMAP.ARTIST} component={Artist} />
             {process.env.NODE_ENV === "development" && (
               <Route path={SITEMAP.DEVELOPMENT} exact fallback={fallback}>
                 <Development />

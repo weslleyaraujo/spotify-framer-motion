@@ -11,6 +11,9 @@ import { useBodyBackground } from "../../hooks/use-body-background";
 import { SITEMAP } from "../site-map";
 import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/AnimatedMinimize";
 
+import sourceAlbum from "../../assets/images/tame-impala-currents.jpeg";
+import sourceAlbum2 from "../../assets/images/parcels-parcels.jpeg";
+
 interface Props {}
 
 function Home(props: Props) {
@@ -47,7 +50,13 @@ function Home(props: Props) {
               {[...new Array(5)].map((item, index) => (
                 <Picture
                   key={`home-section-picture-${index}`}
-                  source="https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?a"
+                  source={
+                    Math.random() <= 0.5
+                      ? sourceAlbum2
+                      : index % 2
+                      ? "https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?a"
+                      : sourceAlbum
+                  }
                   alt="Release Radar"
                   aspectRatio="square"
                 />
