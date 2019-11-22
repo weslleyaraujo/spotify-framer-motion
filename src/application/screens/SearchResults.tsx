@@ -1,23 +1,22 @@
 /**  @jsx jsx */
 import { jsx } from "@emotion/core";
+import sourceAlbum from "../../assets/images/tame-impala-currents.jpeg";
+import source from "../../assets/images/tame-impala.jpeg";
+import { Icon } from "../../components/atoms/Icon/Icon";
+import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { View } from "../../components/atoms/View/View";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
-import { SearchHeader } from "../components/SearchHeader/SearchHeader";
 import { Grid } from "../../components/utilities/Grid/Grid";
-import { Picture } from "../../components/atoms/Picture/Picture";
-import { Icon } from "../../components/atoms/Icon/Icon";
 import { Icons } from "../../foundations/icons";
-
-import sourceAlbum from "../../assets/images/tame-impala-currents.jpeg";
-import source from "../../assets/images/tame-impala.jpeg";
+import { SearchInput } from "../components/SearchInput/SearchInput";
 
 interface Props {}
 
 function SearchResults(props: Props) {
   return (
     <FadePresence>
-      <SearchHeader />
+      <SearchInput />
       <Grid>
         <View
           padding={["small", "medium"]}

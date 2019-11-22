@@ -3,19 +3,20 @@ import { jsx } from "@emotion/core";
 import { useTheme } from "emotion-theming";
 import {
   motion,
-  useViewportScroll,
+  useMotionValue,
   useTransform,
-  useMotionValue
+  useViewportScroll
 } from "framer-motion";
+import { lighten } from "polished";
+import { useEffect, useRef, useState } from "react";
 import useDimensions from "react-use-dimensions";
-import { useRef, useState, useEffect } from "react";
 import { Icon } from "../../../components/atoms/Icon/Icon";
 import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { useViewStyles, View } from "../../../components/atoms/View/View";
 import { Icons } from "../../../foundations/icons";
 import { Layers } from "../../../foundations/Layers";
 import { Theme } from "../../../foundations/Theme";
-import { transparentize, lighten } from "polished";
+import { useClickOutSide } from "../../../hooks/use-click-outside";
 
 interface Props
   extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus"> {}
@@ -26,7 +27,7 @@ const defaultProps: DefaultProps = {
   placeholder: "Artists, songs, or podcasts"
 };
 
-function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
+function SearchInput({ placeholder, onFocus }: Props & DefaultProps) {
   const ref = useRef<HTMLInputElement>(null);
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
@@ -41,6 +42,13 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
     align: "center"
   });
   const { lineHeight, ...font } = theme.fonts.body;
+
+  useClickOutSide(ref, () => {
+    setFocus(false);
+    if (ref.current && focus) {
+      ref.current.blur();
+    }
+  });
 
   useEffect(() => {
     const cancel = scrollY.onChange(value => {
@@ -104,11 +112,6 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
         </View>
       </motion.div>
       <motion.div
-        onClick={e => {
-          if (ref.current) {
-            ref.current.focus();
-          }
-        }}
         animate={focus ? "active" : "default"}
         initial="default"
         variants={{
@@ -159,7 +162,7 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
         </motion.div>
         <input
           ref={ref}
-          onFocus={e => setFocus(true)}
+          onClick={e => setFocus(true)}
           onBlur={e => setFocus(false)}
           type="text"
           css={{
@@ -167,7 +170,7 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
             caretColor: theme.colors.primary,
             lineHeight: `${lineHeight}px`,
             width: "100%",
-            color: theme.colors.foregroundPrimary,
+            color: !focus ? "transparent" : theme.colors.foregroundPrimary,
             border: "none",
             backgroundColor: "transparent",
             paddingRight: theme.units.small,
@@ -202,6 +205,6 @@ function SearchHeader({ placeholder, onFocus }: Props & DefaultProps) {
   );
 }
 
-SearchHeader.defaultProps = defaultProps;
+SearchInput.defaultProps = defaultProps;
 
-export { SearchHeader };
+export { SearchInput };
