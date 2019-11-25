@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/react-hooks";
 import { Icon } from "../../components/atoms/Icon/Icon";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { View } from "../../components/atoms/View/View";
@@ -13,10 +14,37 @@ import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/An
 
 import sourceAlbum from "../../assets/images/tame-impala-currents.jpeg";
 import sourceAlbum2 from "../../assets/images/parcels-parcels.jpeg";
+import { gql } from "apollo-boost";
+import {
+  GQLGetFeedQuery,
+  GQLGetFeedQueryVariables
+} from "../../graphql/generated";
 
 interface Props {}
 
 function Home(props: Props) {
+  const { data, loading, error } = useQuery<
+    GQLGetFeedQuery,
+    GQLGetFeedQueryVariables
+  >(gql`
+    query GetFeed {
+      feed @client {
+        id
+        sections {
+          id
+          title
+          items {
+            id
+            ... on AlbumItem {
+              name
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  console.log({ data, loading, error });
   useBodyBackground({
     color: "yellow",
     gradientStyle: "topLeft"

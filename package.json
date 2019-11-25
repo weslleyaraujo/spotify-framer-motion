@@ -13,6 +13,7 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-router": "^5.1.2",
     "@types/react-router-dom": "^5.1.2",
+    "@types/uuid": "^3.4.6",
     "apollo-boost": "^0.4.0",
     "apollo-cache-inmemory": "^1.6.0",
     "emotion": "^10.0.23",
@@ -29,15 +30,15 @@
     "react-scripts": "3.2.0",
     "react-use-dimensions": "^1.2.1",
     "typescript": "^3.7.2",
-    "utility-types": "^3.10.0"
+    "utility-types": "^3.10.0",
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "tscheck": "tsc -p tsconfig.json --noEmit",
-    "eject": "react-scripts eject",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,10 +50,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.8.3",
+    "@graphql-codegen/cli": "1.8.3",
+    "@graphql-codegen/introspection": "1.8.3",
     "@graphql-codegen/typescript": "1.8.3",
     "@graphql-codegen/typescript-operations": "1.8.3",
-    "@graphql-codegen/typescript-react-apollo": "1.8.3",
-    "apollo-server": "^2.9.7"
+    "@graphql-codegen/typescript-resolvers": "1.8.3"
   }
 }

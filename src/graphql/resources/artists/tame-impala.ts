@@ -1,13 +1,12 @@
+import uuid from "uuid";
+import url from "../../../assets/images/tame-impala.jpg";
 import { GQLArtist } from "../../generated";
-import uuid from "uuid/v1";
-
-import url from "../../../assets/images/big-thief.jpg";
 
 const artist: GQLArtist = {
   __typename: "Artist",
   id: uuid(),
-  monthly_listeners: 2988,
-  name: "Big Thief",
+  monthly_listeners: 93827,
+  name: "Tame Impala",
   cover: {
     __typename: "Image",
     url

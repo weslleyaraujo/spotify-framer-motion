@@ -5,22 +5,22 @@ type Image {
   url: String!
 }
 
-type Artist {
+interface Artist {
   id: ID!
   name: String!
   monthly_listeners: Int!
   cover: Image!
 }
 
-type Album {
+interface Album {
   id: ID!
   name: String!
-  artist: Artist!
+  artist: ID!
   songs: [Song!]!
   cover: Image!
 }
 
-type Song {
+interface Song {
   id: ID!
   name: String!
   artist_id: ID!
@@ -30,17 +30,37 @@ type Song {
 # ==
 # Application interfaces
 # ==
+type Node {
+  id: ID!
+}
+
 type User {
   id: ID!
   name: String!
 }
 
-type Node {
+interface Item {
   id: ID!
 }
 
-type Feed implements Node {
+type AlbumItem implements Item {
   id: ID!
+  name: String!
+  artist: ID!
+  songs: [Song!]!
+  cover: Image!
+}
+
+interface Section {
+  id: ID!
+  title: String!
+  subtitle: String!
+  items: [Item!]!
+}
+
+type Feed {
+  id: ID!
+  sections: [Section!]!
 }
 
 type Query {

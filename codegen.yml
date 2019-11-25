@@ -1,11 +1,23 @@
 overwrite: true
 schema: "src/graphql/schema.graphql"
 generates:
-  src/graphql/generated.tsx:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+  ./src/graphql/generated.ts:
     config:
-      withResultType: true
-      hooksImportFrom: "@apollo/react-hooks"
+      namingConvention: change-case#pascalCase
+      transformUnderscore: true
+      typesPrefix: GQL
+      nonOptionalTypename: true
+      avoidOptionals: true
+    documents:
+      - src/**/*.@(ts|tsx)
+      - src/graphql/resolvers/**/*.@(ts|tsx)
+    plugins:
+      - typescript:
+          declarationKind: 'interface'
+      - typescript-operations:
+          dedupeOperationSuffix: true
+          exportFragmentSpreadSubTypes: true
+      - typescript-resolvers
+
+  ./src/graphql/fragment-types.json:
+    - introspection
