@@ -1,43 +1,86 @@
-import { GQLQueryResolvers, GQLFeed, GQLSection } from "../generated";
 import uuid from "uuid/v1";
+import { GQLQueryResolvers, GQLSection, GQLSectionType } from "../generated";
+import { albums } from "../resources/albums";
 
-interface Resolver extends Pick<GQLQueryResolvers, "feed"> {}
+function shuffle<T>(items: T[]) {
+  return items.sort(() => (0.5 <= Math.random() ? 1 : -1));
+}
 
-const data: Pick<GQLSection, "id" | "title">[] = [
+const data: GQLSection[] = shuffle([
   {
+    __typename: "Section",
     id: uuid(),
-    title: "Your heavy rotation"
+    title: "Your Heavy Rotation",
+    items: shuffle([
+      {
+        __typename: "SectionItem",
+        cover: albums.currents.cover,
+        id: uuid(),
+        type: GQLSectionType.Album,
+        name: albums.currents.name,
+        contentId: albums.currents.id
+      },
+      {
+        __typename: "SectionItem",
+        cover: albums.parcels.cover,
+        id: uuid(),
+        type: GQLSectionType.Album,
+        name: albums.parcels.name,
+        contentId: albums.parcels.id
+      },
+      {
+        __typename: "SectionItem",
+        cover: albums.twoHands.cover,
+        id: uuid(),
+        type: GQLSectionType.Album,
+        name: albums.parcels.name,
+        contentId: albums.twoHands.id
+      }
+    ])
   },
   {
+    __typename: "Section",
     id: uuid(),
-    title: "Recently Played"
-  },
-  {
-    id: uuid(),
-    title: "Your favorite albums and songs"
-  },
-  {
-    id: uuid(),
-    title: "Jump back in"
-  },
-  {
-    id: uuid(),
-    title: "Album picks"
+    title: "Recently Played",
+    items: [
+      {
+        __typename: "SectionItem",
+        cover: albums.parcels.cover,
+        id: uuid(),
+        type: GQLSectionType.Album,
+        name: albums.parcels.name,
+        contentId: albums.parcels.id
+      }
+    ]
   }
-].sort(() => 0.5 - Math.random());
+  // {
+  //   __typename: "Section",
+  //   id: uuid(),
+  //   title: "Your favorite albums and songs",
+  //   items: [
+  //     // {
+  //     //   id: uuid()
+  //     // }
+  //   ]
+  // },
+  // {
+  //   __typename: "Section",
+  //   id: uuid(),
+  //   title: "Jump back in",
+  //   items: [
+  //     // {
+  //     //   id: uuid()
+  //     // }
+  //   ]
+  // }
+]);
 
-const resolver: Resolver = {
-  feed: () => {
-    return {
-      __typename: "Feed",
-      id: uuid(),
-      sections: data.map(item => ({
-        __typename: "Section",
-        items: [],
-        ...item
-      }))
-    };
-  }
+const feed: GQLQueryResolvers["feed"] = () => {
+  return {
+    __typename: "Feed",
+    id: uuid(),
+    sections: data
+  };
 };
 
-export { resolver };
+export { feed };

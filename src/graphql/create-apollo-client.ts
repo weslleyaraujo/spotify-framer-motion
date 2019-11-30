@@ -6,16 +6,17 @@ import {
 import introspectionQueryResultData from "../graphql/fragment-types.json";
 import { resolvers } from "./resolvers/index";
 
-const cache = new InMemoryCache({
-  addTypename: true
-});
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
 });
 
+const cache = new InMemoryCache({
+  addTypename: true,
+  fragmentMatcher
+});
+
 function createApolloClient() {
   return new ApolloClient({
-    fragmentMatcher,
     clientState: {
       resolvers
     },

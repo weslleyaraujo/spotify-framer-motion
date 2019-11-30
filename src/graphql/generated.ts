@@ -14,49 +14,20 @@ export interface GQLAlbum {
   name: Scalars['String'],
   artist: Scalars['ID'],
   songs: Array<GQLSong>,
-  cover: GQLImage,
-}
-
-export interface GQLAlbumItem  extends GQLItem {
-   __typename: 'AlbumItem',
-  id: Scalars['ID'],
-  name: Scalars['String'],
-  artist: Scalars['ID'],
-  songs: Array<GQLSong>,
-  cover: GQLImage,
+  cover: Scalars['String'],
 }
 
 export interface GQLArtist {
   id: Scalars['ID'],
   name: Scalars['String'],
-  monthly_listeners: Scalars['Int'],
-  cover: GQLImage,
-}
-
-export interface GQLArtistItem  extends GQLItem {
-   __typename: 'ArtistItem',
-  id: Scalars['ID'],
-  name: Scalars['String'],
+  monthlyListeners: Scalars['Int'],
+  cover: Scalars['String'],
 }
 
 export interface GQLFeed {
    __typename: 'Feed',
   id: Scalars['ID'],
   sections: Array<GQLSection>,
-}
-
-/** 
- * ==
- * Global interfaces
- * ==
- */
-export interface GQLImage {
-   __typename: 'Image',
-  url: Scalars['String'],
-}
-
-export interface GQLItem {
-  id: Scalars['ID'],
 }
 
 /** 
@@ -69,12 +40,6 @@ export interface GQLNode {
   id: Scalars['ID'],
 }
 
-export interface GQLPlaylistItem  extends GQLItem {
-   __typename: 'PlaylistItem',
-  id: Scalars['ID'],
-  name: Scalars['String'],
-}
-
 export interface GQLQuery {
    __typename: 'Query',
   user: GQLUser,
@@ -85,14 +50,29 @@ export interface GQLSection {
    __typename: 'Section',
   id: Scalars['ID'],
   title: Scalars['String'],
-  items: Array<GQLItem>,
+  items: Array<GQLSectionItem>,
+}
+
+export interface GQLSectionItem {
+   __typename: 'SectionItem',
+  id: Scalars['ID'],
+  name: Scalars['String'],
+  cover: Scalars['String'],
+  type: GQLSectionType,
+  contentId: Scalars['ID'],
+}
+
+export enum GQLSectionType {
+  Album = 'ALBUM',
+  Artist = 'ARTIST',
+  Playlist = 'PLAYLIST'
 }
 
 export interface GQLSong {
   id: Scalars['ID'],
   name: Scalars['String'],
-  artist_id: Scalars['ID'],
-  album_id: Scalars['ID'],
+  artistId: Scalars['ID'],
+  albumId: Scalars['ID'],
 }
 
 export interface GQLUser {
@@ -104,17 +84,7 @@ export interface GQLUser {
 export type GQLGetFeedQueryVariables = {};
 
 
-export type GQLGetFeedQuery = (
-  { __typename: 'Query' }
-  & { feed: (
-    { __typename: 'Feed' }
-    & Pick<GQLFeed, 'id'>
-    & { sections: Array<(
-      { __typename: 'Section' }
-      & Pick<GQLSection, 'id' | 'title'>
-    )> }
-  ) }
-);
+export type GQLGetFeedQuery = { __typename: 'Query', feed: { __typename: 'Feed', id: string, sections: Array<{ __typename: 'Section', id: string, title: string, items: Array<{ __typename: 'SectionItem', id: string, name: string, cover: string, type: GQLSectionType }> }> } };
 
 
 
@@ -193,17 +163,14 @@ export type GQLResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Feed: ResolverTypeWrapper<GQLFeed>,
   Section: ResolverTypeWrapper<GQLSection>,
-  Item: ResolverTypeWrapper<GQLItem>,
+  SectionItem: ResolverTypeWrapper<GQLSectionItem>,
+  SectionType: GQLSectionType,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
-  Image: ResolverTypeWrapper<GQLImage>,
   Artist: ResolverTypeWrapper<GQLArtist>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
   Album: ResolverTypeWrapper<GQLAlbum>,
   Song: ResolverTypeWrapper<GQLSong>,
   Node: ResolverTypeWrapper<GQLNode>,
-  AlbumItem: ResolverTypeWrapper<GQLAlbumItem>,
-  ArtistItem: ResolverTypeWrapper<GQLArtistItem>,
-  PlaylistItem: ResolverTypeWrapper<GQLPlaylistItem>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -214,17 +181,14 @@ export type GQLResolversParentTypes = {
   String: Scalars['String'],
   Feed: GQLFeed,
   Section: GQLSection,
-  Item: GQLItem,
+  SectionItem: GQLSectionItem,
+  SectionType: GQLSectionType,
   Boolean: Scalars['Boolean'],
-  Image: GQLImage,
   Artist: GQLArtist,
   Int: Scalars['Int'],
   Album: GQLAlbum,
   Song: GQLSong,
   Node: GQLNode,
-  AlbumItem: GQLAlbumItem,
-  ArtistItem: GQLArtistItem,
-  PlaylistItem: GQLPlaylistItem,
 };
 
 export type GQLAlbumResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Album'] = GQLResolversParentTypes['Album']> = {
@@ -233,28 +197,15 @@ export type GQLAlbumResolvers<ContextType = any, ParentType extends GQLResolvers
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   songs: Resolver<Array<GQLResolversTypes['Song']>, ParentType, ContextType>,
-  cover: Resolver<GQLResolversTypes['Image'], ParentType, ContextType>,
-};
-
-export type GQLAlbumItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['AlbumItem'] = GQLResolversParentTypes['AlbumItem']> = {
-  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  songs: Resolver<Array<GQLResolversTypes['Song']>, ParentType, ContextType>,
-  cover: Resolver<GQLResolversTypes['Image'], ParentType, ContextType>,
+  cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
 };
 
 export type GQLArtistResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Artist'] = GQLResolversParentTypes['Artist']> = {
   __resolveType: TypeResolveFn<null, ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  monthly_listeners: Resolver<GQLResolversTypes['Int'], ParentType, ContextType>,
-  cover: Resolver<GQLResolversTypes['Image'], ParentType, ContextType>,
-};
-
-export type GQLArtistItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['ArtistItem'] = GQLResolversParentTypes['ArtistItem']> = {
-  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  monthlyListeners: Resolver<GQLResolversTypes['Int'], ParentType, ContextType>,
+  cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
 };
 
 export type GQLFeedResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Feed'] = GQLResolversParentTypes['Feed']> = {
@@ -262,22 +213,8 @@ export type GQLFeedResolvers<ContextType = any, ParentType extends GQLResolversP
   sections: Resolver<Array<GQLResolversTypes['Section']>, ParentType, ContextType>,
 };
 
-export type GQLImageResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Image'] = GQLResolversParentTypes['Image']> = {
-  url: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-};
-
-export type GQLItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Item'] = GQLResolversParentTypes['Item']> = {
-  __resolveType: TypeResolveFn<'AlbumItem' | 'ArtistItem' | 'PlaylistItem', ParentType, ContextType>,
-  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-};
-
 export type GQLNodeResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Node'] = GQLResolversParentTypes['Node']> = {
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-};
-
-export type GQLPlaylistItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['PlaylistItem'] = GQLResolversParentTypes['PlaylistItem']> = {
-  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
 };
 
 export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Query'] = GQLResolversParentTypes['Query']> = {
@@ -288,15 +225,23 @@ export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolvers
 export type GQLSectionResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Section'] = GQLResolversParentTypes['Section']> = {
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   title: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  items: Resolver<Array<GQLResolversTypes['Item']>, ParentType, ContextType>,
+  items: Resolver<Array<GQLResolversTypes['SectionItem']>, ParentType, ContextType>,
+};
+
+export type GQLSectionItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['SectionItem'] = GQLResolversParentTypes['SectionItem']> = {
+  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  type: Resolver<GQLResolversTypes['SectionType'], ParentType, ContextType>,
+  contentId: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
 };
 
 export type GQLSongResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Song'] = GQLResolversParentTypes['Song']> = {
   __resolveType: TypeResolveFn<null, ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  artist_id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  album_id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  artistId: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  albumId: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
 };
 
 export type GQLUserResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['User'] = GQLResolversParentTypes['User']> = {
@@ -306,16 +251,12 @@ export type GQLUserResolvers<ContextType = any, ParentType extends GQLResolversP
 
 export type GQLResolvers<ContextType = any> = {
   Album: GQLAlbumResolvers,
-  AlbumItem: GQLAlbumItemResolvers<ContextType>,
   Artist: GQLArtistResolvers,
-  ArtistItem: GQLArtistItemResolvers<ContextType>,
   Feed: GQLFeedResolvers<ContextType>,
-  Image: GQLImageResolvers<ContextType>,
-  Item: GQLItemResolvers,
   Node: GQLNodeResolvers<ContextType>,
-  PlaylistItem: GQLPlaylistItemResolvers<ContextType>,
   Query: GQLQueryResolvers<ContextType>,
   Section: GQLSectionResolvers<ContextType>,
+  SectionItem: GQLSectionItemResolvers<ContextType>,
   Song: GQLSongResolvers,
   User: GQLUserResolvers<ContextType>,
 };

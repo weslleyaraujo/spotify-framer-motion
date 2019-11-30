@@ -21,6 +21,7 @@ import {
 } from "../../graphql/generated";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
+import { CardCover } from "../components/CardCover/CardCover";
 
 interface Props {}
 
@@ -35,6 +36,12 @@ function Home(props: Props) {
         sections {
           id
           title
+          items {
+            id
+            name
+            cover
+            type
+          }
         }
       }
     }
@@ -66,10 +73,10 @@ function Home(props: Props) {
           </View>
         }
       >
-        {data?.feed.sections.map(item => (
+        {data?.feed.sections.map(({ id, items, title }) => (
           <Section
-            key={`feed-section-${item.id}`}
-            title={item.title}
+            key={`feed-section-${id}`}
+            title={title}
             head={{
               ...Section.defaultProps.head,
               align: "flex-start"
@@ -81,18 +88,22 @@ function Home(props: Props) {
               horizontalPadding="medium"
               maxVisibleItems={2}
             >
-              {[...new Array(5)].map((item, index) => (
-                <Picture
-                  key={`home-section-picture-${index}`}
-                  source={
-                    Math.random() <= 0.5
-                      ? sourceAlbum2
-                      : index % 2
-                      ? "https://i.scdn.co/image/7f587bc2606cdd9907d7452e92a2158c63fa8a6e?a"
-                      : sourceAlbum
-                  }
-                  alt="Release Radar"
-                  aspectRatio="square"
+              {items.map(({ id, name, cover }, index) => (
+                <CardCover
+                  title={name}
+                  interactions={{
+                    primary: {
+                      action: {
+                        as: "div"
+                      },
+                      label: "example"
+                    }
+                  }}
+                  media={{
+                    source: cover,
+                    credits: "",
+                    type: "image"
+                  }}
                 />
               ))}
             </Scrollable>

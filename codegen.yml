@@ -8,6 +8,7 @@ generates:
       typesPrefix: GQL
       nonOptionalTypename: true
       avoidOptionals: true
+      preResolveTypes: true
     documents:
       - src/**/*.@(ts|tsx)
       - src/graphql/resolvers/**/*.@(ts|tsx)
