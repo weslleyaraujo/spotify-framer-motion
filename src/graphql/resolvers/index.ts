@@ -1,15 +1,9 @@
-import { resolver as feed } from "./feed";
-import { resolver as AlbumItem } from "./album-item";
-import { Resolvers } from "apollo-boost";
-
-const resolvers: Resolvers = {
-  // @ts-ignore
+import { feed } from "./feed";
+import { GQLResolvers } from "../generated";
+const resolvers: Pick<GQLResolvers, "Query"> = {
   Query: {
-    ...feed
-  },
-
-  // @ts-ignore
-  ...AlbumItem
+    feed
+  }
 };
 
 export { resolvers };

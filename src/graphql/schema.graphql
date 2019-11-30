@@ -1,15 +1,12 @@
 # ==
 # Global interfaces
 # ==
-type Image {
-  url: String!
-}
 
 interface Artist {
   id: ID!
   name: String!
-  monthly_listeners: Int!
-  cover: Image!
+  monthlyListeners: Int!
+  cover: String!
 }
 
 interface Album {
@@ -17,14 +14,14 @@ interface Album {
   name: String!
   artist: ID!
   songs: [Song!]!
-  cover: Image!
+  cover: String!
 }
 
 interface Song {
   id: ID!
   name: String!
-  artist_id: ID!
-  album_id: ID!
+  artistId: ID!
+  albumId: ID!
 }
 
 # ==
@@ -39,32 +36,24 @@ type User {
   name: String!
 }
 
-interface Item {
-  id: ID!
+enum SectionType {
+  ALBUM
+  ARTIST
+  PLAYLIST
 }
 
-type AlbumItem implements Item {
+type SectionItem {
   id: ID!
   name: String!
-  artist: ID!
-  songs: [Song!]!
-  cover: Image!
-}
-
-type ArtistItem implements Item {
-  id: ID!
-  name: String!
-}
-
-type PlaylistItem implements Item {
-  id: ID!
-  name: String!
+  cover: String!
+  type: SectionType!
+  contentId: ID!
 }
 
 type Section {
   id: ID!
   title: String!
-  items: [Item!]!
+  items: [SectionItem!]!
 }
 
 type Feed {
