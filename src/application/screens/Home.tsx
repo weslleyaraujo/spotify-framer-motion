@@ -19,6 +19,8 @@ import {
   GQLGetFeedQuery,
   GQLGetFeedQueryVariables
 } from "../../graphql/generated";
+import { TextLine } from "../../components/atoms/TextLine/TextLine";
+import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 
 interface Props {}
 
@@ -33,22 +35,23 @@ function Home(props: Props) {
         sections {
           id
           title
-          items {
-            id
-            ... on AlbumItem {
-              name
-            }
-          }
         }
       }
     }
   `);
 
-  console.log({ data, loading, error });
   useBodyBackground({
     color: "yellow",
     gradientStyle: "topLeft"
   });
+
+  if (error) {
+    return <TextLine text="ErrorView TODO" />;
+  }
+
+  if (loading) {
+    return <LoadingView />;
+  }
 
   return (
     <FadePresence>
@@ -63,11 +66,14 @@ function Home(props: Props) {
           </View>
         }
       >
-        {[...new Array(10)].map((item, index) => (
+        {data?.feed.sections.map(item => (
           <Section
-            key={`home-section-${index}`}
-            title="Your heavy rotation"
-            subtitle="The music you've had on repeat this month."
+            key={`feed-section-${item.id}`}
+            title={item.title}
+            head={{
+              ...Section.defaultProps.head,
+              align: "flex-start"
+            }}
             padding={["medium", "none", "large", "none"]}
           >
             <Scrollable

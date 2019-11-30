@@ -51,10 +51,19 @@ type AlbumItem implements Item {
   cover: Image!
 }
 
-interface Section {
+type ArtistItem implements Item {
+  id: ID!
+  name: String!
+}
+
+type PlaylistItem implements Item {
+  id: ID!
+  name: String!
+}
+
+type Section {
   id: ID!
   title: String!
-  subtitle: String!
   items: [Item!]!
 }
 

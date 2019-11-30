@@ -14,10 +14,9 @@ generates:
     plugins:
       - typescript:
           declarationKind: 'interface'
-      - typescript-operations:
-          dedupeOperationSuffix: true
-          exportFragmentSpreadSubTypes: true
+      - typescript-operations
       - typescript-resolvers
+
 
   ./src/graphql/fragment-types.json:
     - introspection

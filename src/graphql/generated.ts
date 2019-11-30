@@ -33,6 +33,12 @@ export interface GQLArtist {
   cover: GQLImage,
 }
 
+export interface GQLArtistItem  extends GQLItem {
+   __typename: 'ArtistItem',
+  id: Scalars['ID'],
+  name: Scalars['String'],
+}
+
 export interface GQLFeed {
    __typename: 'Feed',
   id: Scalars['ID'],
@@ -43,7 +49,7 @@ export interface GQLFeed {
  * ==
  * Global interfaces
  * ==
- **/
+ */
 export interface GQLImage {
    __typename: 'Image',
   url: Scalars['String'],
@@ -57,10 +63,16 @@ export interface GQLItem {
  * ==
  * Application interfaces
  * ==
- **/
+ */
 export interface GQLNode {
    __typename: 'Node',
   id: Scalars['ID'],
+}
+
+export interface GQLPlaylistItem  extends GQLItem {
+   __typename: 'PlaylistItem',
+  id: Scalars['ID'],
+  name: Scalars['String'],
 }
 
 export interface GQLQuery {
@@ -70,9 +82,9 @@ export interface GQLQuery {
 }
 
 export interface GQLSection {
+   __typename: 'Section',
   id: Scalars['ID'],
   title: Scalars['String'],
-  subtitle: Scalars['String'],
   items: Array<GQLItem>,
 }
 
@@ -97,7 +109,10 @@ export type GQLGetFeedQuery = (
   & { feed: (
     { __typename: 'Feed' }
     & Pick<GQLFeed, 'id'>
-    & { sections: Array<> }
+    & { sections: Array<(
+      { __typename: 'Section' }
+      & Pick<GQLSection, 'id' | 'title'>
+    )> }
   ) }
 );
 
@@ -187,6 +202,8 @@ export type GQLResolversTypes = {
   Song: ResolverTypeWrapper<GQLSong>,
   Node: ResolverTypeWrapper<GQLNode>,
   AlbumItem: ResolverTypeWrapper<GQLAlbumItem>,
+  ArtistItem: ResolverTypeWrapper<GQLArtistItem>,
+  PlaylistItem: ResolverTypeWrapper<GQLPlaylistItem>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -206,6 +223,8 @@ export type GQLResolversParentTypes = {
   Song: GQLSong,
   Node: GQLNode,
   AlbumItem: GQLAlbumItem,
+  ArtistItem: GQLArtistItem,
+  PlaylistItem: GQLPlaylistItem,
 };
 
 export type GQLAlbumResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Album'] = GQLResolversParentTypes['Album']> = {
@@ -233,6 +252,11 @@ export type GQLArtistResolvers<ContextType = any, ParentType extends GQLResolver
   cover: Resolver<GQLResolversTypes['Image'], ParentType, ContextType>,
 };
 
+export type GQLArtistItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['ArtistItem'] = GQLResolversParentTypes['ArtistItem']> = {
+  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+};
+
 export type GQLFeedResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Feed'] = GQLResolversParentTypes['Feed']> = {
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   sections: Resolver<Array<GQLResolversTypes['Section']>, ParentType, ContextType>,
@@ -243,12 +267,17 @@ export type GQLImageResolvers<ContextType = any, ParentType extends GQLResolvers
 };
 
 export type GQLItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Item'] = GQLResolversParentTypes['Item']> = {
-  __resolveType: TypeResolveFn<'AlbumItem', ParentType, ContextType>,
+  __resolveType: TypeResolveFn<'AlbumItem' | 'ArtistItem' | 'PlaylistItem', ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
 };
 
 export type GQLNodeResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Node'] = GQLResolversParentTypes['Node']> = {
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+};
+
+export type GQLPlaylistItemResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['PlaylistItem'] = GQLResolversParentTypes['PlaylistItem']> = {
+  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
 };
 
 export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Query'] = GQLResolversParentTypes['Query']> = {
@@ -257,10 +286,8 @@ export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolvers
 };
 
 export type GQLSectionResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Section'] = GQLResolversParentTypes['Section']> = {
-  __resolveType: TypeResolveFn<null, ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   title: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  subtitle: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   items: Resolver<Array<GQLResolversTypes['Item']>, ParentType, ContextType>,
 };
 
@@ -281,12 +308,14 @@ export type GQLResolvers<ContextType = any> = {
   Album: GQLAlbumResolvers,
   AlbumItem: GQLAlbumItemResolvers<ContextType>,
   Artist: GQLArtistResolvers,
+  ArtistItem: GQLArtistItemResolvers<ContextType>,
   Feed: GQLFeedResolvers<ContextType>,
   Image: GQLImageResolvers<ContextType>,
   Item: GQLItemResolvers,
   Node: GQLNodeResolvers<ContextType>,
+  PlaylistItem: GQLPlaylistItemResolvers<ContextType>,
   Query: GQLQueryResolvers<ContextType>,
-  Section: GQLSectionResolvers,
+  Section: GQLSectionResolvers<ContextType>,
   Song: GQLSongResolvers,
   User: GQLUserResolvers<ContextType>,
 };

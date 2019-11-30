@@ -4,10 +4,13 @@ import uuid from "uuid/v1";
 interface Resolver extends Pick<GQLResolvers, "AlbumItem"> {}
 
 const resolver: Resolver = {
-  // @ts-ignore
   AlbumItem: {
-    // @ts-ignore
-    __typename: () => "AlbumItem",
+    artist: () => "example",
+    cover: () => ({
+      __typename: "Image",
+      url: "example"
+    }),
+    songs: () => [],
     id: (a, b, c) => {
       console.log({ a, b, c });
       return uuid();
