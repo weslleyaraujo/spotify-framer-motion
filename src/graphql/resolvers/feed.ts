@@ -6,7 +6,7 @@ function shuffle<T>(items: T[]) {
   return items.sort(() => (0.5 <= Math.random() ? 1 : -1));
 }
 
-const data: GQLSection[] = shuffle([
+const data: GQLSection[] = [
   {
     __typename: "Section",
     id: uuid(),
@@ -73,7 +73,7 @@ const data: GQLSection[] = shuffle([
   //     // }
   //   ]
   // }
-]);
+];
 
 const feed: GQLQueryResolvers["feed"] = () => {
   return {
