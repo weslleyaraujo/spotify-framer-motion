@@ -1,33 +1,10 @@
 [
   {
     "id": "recXxeujNuaRhIrWa",
-    "cover": [
-      {
-        "id": "attr6xA22bxqCOJDS",
-        "url": "https://dl.airtable.com/.attachments/5bc8c9403e3e22b16b60954369004c2f/3251758b/tame-impala.jpeg",
-        "filename": "tame-impala.jpeg",
-        "size": 125838,
-        "type": "image/jpeg",
-        "thumbnails": {
-          "small": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/2e96088ff537436170c205f7a9f3dac7/ae589dc0",
-            "width": 36,
-            "height": 36
-          },
-          "large": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/106115dca2667dab675c5ad39f979891/22b33681",
-            "width": 512,
-            "height": 512
-          },
-          "full": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/3e32e27114dc8d1221d5c43eae8e313e/7add22c0",
-            "width": 3000,
-            "height": 3000
-          }
-        }
-      }
+    "cover": "https://dl.airtable.com/.attachments/5bc8c9403e3e22b16b60954369004c2f/3251758b/tame-impala.jpeg",
+    "albums": [
+      "rec0NmrP6sgpe3hDK"
     ],
-    "albums": ["rec0NmrP6sgpe3hDK"],
     "tracks": [
       "recCyrysB6p80HS7w",
       "recUvHohtAFOBTah5",
@@ -43,38 +20,16 @@
       "recduK3hOkCVAW4Ae",
       "recTXMj9u0y2obkfZ"
     ],
-    "name": "Tame Imapala\n"
+    "name": "Tame Imapala"
   },
   {
     "id": "recrPh8LOmhkPwk7A",
-    "cover": [
-      {
-        "id": "attOQ52kjWtO7JWyL",
-        "url": "https://dl.airtable.com/.attachments/acc851a91d8d1150dad17dd1132bd08a/79124f58/mac-demarco.jpeg",
-        "filename": "mac-demarco.jpeg",
-        "size": 23947,
-        "type": "image/jpeg",
-        "thumbnails": {
-          "small": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/fa89336d9426354da15584f4b97f349e/0f04b147",
-            "width": 36,
-            "height": 36
-          },
-          "large": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/d7ef407f007248786f3dd29bcc7967fd/1d68f982",
-            "width": 320,
-            "height": 320
-          },
-          "full": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/dc254ace9685737c3103c2141294c84d/59e014e7",
-            "width": 3000,
-            "height": 3000
-          }
-        }
-      }
+    "cover": "https://dl.airtable.com/.attachments/acc851a91d8d1150dad17dd1132bd08a/79124f58/mac-demarco.jpeg",
+    "name": "Mac Demarco",
+    "albums": [
+      "recgs5KY8O4u9WGFM",
+      "recjhT0MhueOYrMuw"
     ],
-    "name": "Mac Demarco\n",
-    "albums": ["recgs5KY8O4u9WGFM", "recjhT0MhueOYrMuw"],
     "tracks": [
       "recOd79dj3qZjfx5p",
       "rec3FcwRaenfaa1yZ",
@@ -104,34 +59,11 @@
   },
   {
     "id": "rec0NAqdvcgsigP6o",
-    "cover": [
-      {
-        "id": "attdbmWihxaYxZFy9",
-        "url": "https://dl.airtable.com/.attachments/74bdfac22482830b4fd0de66edb8e9c4/97f1341c/fkj.jpeg",
-        "filename": "fkj.jpeg",
-        "size": 48498,
-        "type": "image/jpeg",
-        "thumbnails": {
-          "small": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/85180f48fb9a4e28cc8f7d554720968a/269f6e44",
-            "width": 36,
-            "height": 36
-          },
-          "large": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/c7e8fd0b492b3824f6f1c13ca51b9dbc/180a6da5",
-            "width": 513,
-            "height": 512
-          },
-          "full": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/22ce3105631a852395c2c9be1fa86b8c/84cba8c8",
-            "width": 3000,
-            "height": 3000
-          }
-        }
-      }
+    "cover": "https://dl.airtable.com/.attachments/74bdfac22482830b4fd0de66edb8e9c4/97f1341c/fkj.jpeg",
+    "name": "FKJ",
+    "albums": [
+      "rec8MBq2SxmAJtD1c"
     ],
-    "name": "FKJ\n",
-    "albums": ["rec8MBq2SxmAJtD1c"],
     "tracks": [
       "recPpNPNC76pENMmO",
       "recCJ09YRlZG5ICki",
@@ -149,34 +81,11 @@
   },
   {
     "id": "recQUO0Zsc0kD3QLx",
-    "name": "Parcels\n",
-    "cover": [
-      {
-        "id": "att8CGvQWoNJZiHI2",
-        "url": "https://dl.airtable.com/.attachments/7d2af27d2e00057a741328483668cc9b/7aa51b9f/parcels.jpeg",
-        "filename": "parcels.jpeg",
-        "size": 122241,
-        "type": "image/jpeg",
-        "thumbnails": {
-          "small": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/f0ed509ae173b857e377be630b4cc36d/357d3704",
-            "width": 36,
-            "height": 36
-          },
-          "large": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/7cb02b66ab5bf6965376e2150e2a7821/49eabe8a",
-            "width": 512,
-            "height": 512
-          },
-          "full": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/9cbb30e2fcabfb08a86fed842519585a/ece508d0",
-            "width": 3000,
-            "height": 3000
-          }
-        }
-      }
+    "name": "Parcels",
+    "cover": "https://dl.airtable.com/.attachments/7d2af27d2e00057a741328483668cc9b/7aa51b9f/parcels.jpeg",
+    "albums": [
+      "rec9xiFJYwwTgVtdb"
     ],
-    "albums": ["rec9xiFJYwwTgVtdb"],
     "tracks": [
       "recL6IQQNP2dqQX8C",
       "recNQP2oRUUkMrtGV",
@@ -193,34 +102,11 @@
   },
   {
     "id": "recQPTSPWWma4AGDD",
-    "cover": [
-      {
-        "id": "attnmaMEfsuBfikCu",
-        "url": "https://dl.airtable.com/.attachments/2d10d799e8abf9c9a800107ccf1a064e/740d2472/rhye.jpeg",
-        "filename": "rhye.jpeg",
-        "size": 50585,
-        "type": "image/jpeg",
-        "thumbnails": {
-          "small": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/24ac1ee1e2d3c15adddbb2111fa7a3f5/498ff955",
-            "width": 36,
-            "height": 36
-          },
-          "large": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/4edb4a0f4f60f19558f2f588c0edcae0/d3eb7e34",
-            "width": 512,
-            "height": 512
-          },
-          "full": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/868c13d33ce8012a2467c9f784c9e786/13ee4ef3",
-            "width": 3000,
-            "height": 3000
-          }
-        }
-      }
+    "cover": "https://dl.airtable.com/.attachments/2d10d799e8abf9c9a800107ccf1a064e/740d2472/rhye.jpeg",
+    "name": "Rhye",
+    "albums": [
+      "rec5hRLyNsfPjnmQz"
     ],
-    "name": "Rhye\n",
-    "albums": ["rec5hRLyNsfPjnmQz"],
     "tracks": [
       "recbopmryNDYVIHkd",
       "recXaXqX9RbkYJ5DW",
@@ -234,34 +120,11 @@
   },
   {
     "id": "recSdYMfCazlYbeBL",
-    "name": "Big Thief\n",
-    "cover": [
-      {
-        "id": "attPBnssjUL5mS28p",
-        "url": "https://dl.airtable.com/.attachments/ddf5460fb17fe478dc214fae2d8c54cd/dcccb4c3/big-thief.jpeg",
-        "filename": "big-thief.jpeg",
-        "size": 171678,
-        "type": "image/jpeg",
-        "thumbnails": {
-          "small": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/ddd78b4ef73e494d640a753d0d2f4679/71ccb811",
-            "width": 36,
-            "height": 36
-          },
-          "large": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/9e933e598faca3ad8ae492e1f5c034ff/c4482c01",
-            "width": 512,
-            "height": 512
-          },
-          "full": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/3290f05b21c10ae9a66b0f962d32b8f4/e4498a3d",
-            "width": 3000,
-            "height": 3000
-          }
-        }
-      }
+    "name": "Big Thief",
+    "cover": "https://dl.airtable.com/.attachments/ddf5460fb17fe478dc214fae2d8c54cd/dcccb4c3/big-thief.jpeg",
+    "albums": [
+      "recYqblDcc9e0Q9XR"
     ],
-    "albums": ["recYqblDcc9e0Q9XR"],
     "tracks": [
       "recOPgwKCX3PcTJAl",
       "receugcwL4CSQMAkv",
@@ -273,6 +136,42 @@
       "recdUo1BiZROqtuhl",
       "recaUg0wDVmiyTx5s",
       "recjD2Oub88TLzLXx"
+    ]
+  },
+  {
+    "id": "rec69lHAqpbSjsqce",
+    "name": "Tyler, The Creator",
+    "cover": "https://dl.airtable.com/.attachments/ee541c0e7f041d12548d53965fcda8c1/e1461995/tyler-the-creator.jpeg",
+    "albums": [
+      "rec8ODh9axY58cJau",
+      "recFuymgRLAoIC3eq"
+    ],
+    "tracks": [
+      "rectEwpryZ35qd772",
+      "recwVcjh6qYrdrjyj",
+      "recqxjoR1lE5nM8AQ",
+      "recswCVvvvaFJFJVT",
+      "recpVnJInp0XlzKQt",
+      "recc05c81LZ3cBEEp",
+      "recVOEZ4i62Bn4idV",
+      "recOWCwVb0yFta5gv",
+      "reccJ6Bmx1sqmeDMB",
+      "recLYgPgZOWOS7ent",
+      "recySzXf3H9WQxRF0",
+      "recu87ZLyjOkcdE6X",
+      "recghKPm9dFVJJQhb",
+      "rec7n9jFlhTRnG8hY",
+      "recBfoEgD3811Hl24",
+      "recND8LJDk8ik0AmJ",
+      "recnQdnbDNNEuynuz",
+      "recVgE778ZTj07zXg",
+      "rec34eR6WZamcnsCC",
+      "recqEiQ3Ir8LRKnYm",
+      "recFyGihZtPYQIzDJ",
+      "recwZLn4yzIMTCnS9",
+      "rec2ivJ0hXyka8uJs",
+      "recnRA0grp6niupZE",
+      "recn3q4zroBE5U15V"
     ]
   }
 ]
