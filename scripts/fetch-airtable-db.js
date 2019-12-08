@@ -66,6 +66,8 @@ async function run() {
   await fetchBase("Artists", "Grid view", "artists");
   await fetchBase("Albums", "Grid view", "albums");
   await fetchBase("Tracks", "Grid view", "tracks");
+  await fetchBase("Feed", "Grid view", "feed");
+  await fetchBase("Playlists", "Grid view", "playlists");
 }
 
 run();

@@ -38,7 +38,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "tscheck": "tsc -p tsconfig.json --noEmit",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fetch-db": "node scripts/fetch-airtable-db.js"
   },
   "eslintConfig": {
     "extends": "react-app"

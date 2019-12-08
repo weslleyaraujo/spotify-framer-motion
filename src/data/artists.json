@@ -1,6 +1,7 @@
 [
   {
     "id": "recXxeujNuaRhIrWa",
+    "name": "Tame Imapala",
     "cover": "https://dl.airtable.com/.attachments/5bc8c9403e3e22b16b60954369004c2f/3251758b/tame-impala.jpeg",
     "albums": [
       "rec0NmrP6sgpe3hDK"
@@ -19,13 +20,12 @@
       "recN4MDdoyPcMOqWz",
       "recduK3hOkCVAW4Ae",
       "recTXMj9u0y2obkfZ"
-    ],
-    "name": "Tame Imapala"
+    ]
   },
   {
     "id": "recrPh8LOmhkPwk7A",
-    "cover": "https://dl.airtable.com/.attachments/acc851a91d8d1150dad17dd1132bd08a/79124f58/mac-demarco.jpeg",
     "name": "Mac Demarco",
+    "cover": "https://dl.airtable.com/.attachments/acc851a91d8d1150dad17dd1132bd08a/79124f58/mac-demarco.jpeg",
     "albums": [
       "recgs5KY8O4u9WGFM",
       "recjhT0MhueOYrMuw"
@@ -59,8 +59,8 @@
   },
   {
     "id": "rec0NAqdvcgsigP6o",
-    "cover": "https://dl.airtable.com/.attachments/74bdfac22482830b4fd0de66edb8e9c4/97f1341c/fkj.jpeg",
     "name": "FKJ",
+    "cover": "https://dl.airtable.com/.attachments/74bdfac22482830b4fd0de66edb8e9c4/97f1341c/fkj.jpeg",
     "albums": [
       "rec8MBq2SxmAJtD1c"
     ],
@@ -98,12 +98,15 @@
       "reclaoJNdpxEY6BEW",
       "recmgpyrgvfbKvTAz",
       "reckCvdX2A6baNptD"
+    ],
+    "feed": [
+      "recrZM9SCoITHwCBi"
     ]
   },
   {
     "id": "recQPTSPWWma4AGDD",
-    "cover": "https://dl.airtable.com/.attachments/2d10d799e8abf9c9a800107ccf1a064e/740d2472/rhye.jpeg",
     "name": "Rhye",
+    "cover": "https://dl.airtable.com/.attachments/2d10d799e8abf9c9a800107ccf1a064e/740d2472/rhye.jpeg",
     "albums": [
       "rec5hRLyNsfPjnmQz"
     ],
@@ -172,6 +175,39 @@
       "rec2ivJ0hXyka8uJs",
       "recnRA0grp6niupZE",
       "recn3q4zroBE5U15V"
+    ]
+  },
+  {
+    "id": "recRaw1xzNQAqNZbL",
+    "name": "Jordan Rakei",
+    "cover": "https://dl.airtable.com/.attachments/7dd90f0f10aa1a9b83dd2a1c545a0fab/07fb2a69/jordan-rakei.jpeg",
+    "albums": [
+      "recTLfA5C2ExieItc",
+      "recs5EZVSYGaJUo6n"
+    ],
+    "tracks": [
+      "recG0rnXBAaS4WQep",
+      "recogsFrHlY3y1r8x",
+      "rec5pVVhLqzMboAHM",
+      "recwuXQdANHHnTIPg",
+      "recdGYyD4IP5saHQg",
+      "recD1IQ55J5E7kllp",
+      "recxEkLB4KjzCtFx8",
+      "recjjUl0btPzbAtlM",
+      "rec029eTKhmBiznWf",
+      "rechz1qkRIb9yLgHl",
+      "reczG4gyIsSzKfoKU",
+      "rec8PEJiuPbq5ioSl",
+      "recVEugWlwPjSGjM1",
+      "rec4l67Lz9vXFoIzO",
+      "recHlTONko30thVox",
+      "recy7VgRUhJadqoN2",
+      "recpB75H3biym9QYp",
+      "rec7pumBTcToVqLVO",
+      "recFpBgCND3m4AD4U",
+      "recJY8LBAh2BNdLit",
+      "recK0kRkhlSw2nk1o",
+      "rec3pwU9fIXzPhJwB"
     ]
   }
 ]

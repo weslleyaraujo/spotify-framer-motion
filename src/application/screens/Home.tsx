@@ -1,27 +1,23 @@
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/react-hooks";
 import { Icon } from "../../components/atoms/Icon/Icon";
-import { Picture } from "../../components/atoms/Picture/Picture";
+import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { View } from "../../components/atoms/View/View";
 import { Section } from "../../components/molecules/Section/Section";
+import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/AnimatedMinimize";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
+import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
 import { Icons } from "../../foundations/icons";
-import { useBodyBackground } from "../../hooks/use-body-background";
-import { SITEMAP } from "../site-map";
-import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/AnimatedMinimize";
-
-import sourceAlbum from "../../assets/images/tame-impala-currents.jpeg";
-import sourceAlbum2 from "../../assets/images/parcels-parcels.jpeg";
-import { gql } from "apollo-boost";
 import {
   GQLGetFeedQuery,
   GQLGetFeedQueryVariables
 } from "../../graphql/generated";
-import { TextLine } from "../../components/atoms/TextLine/TextLine";
-import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
+import { useBodyBackground } from "../../hooks/use-body-background";
 import { CardCover } from "../components/CardCover/CardCover";
+import { SITEMAP } from "../site-map";
 
 interface Props {}
 
@@ -90,6 +86,7 @@ function Home(props: Props) {
             >
               {items.map(({ id, name, cover }, index) => (
                 <CardCover
+                  key={`feed-card-cover-${id}`}
                   title={name}
                   interactions={{
                     primary: {

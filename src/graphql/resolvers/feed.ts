@@ -1,85 +1,77 @@
+import { ValuesType } from "utility-types";
 import uuid from "uuid/v1";
-import { GQLQueryResolvers, GQLSection, GQLSectionType } from "../generated";
-import { albums } from "../resources/albums";
+import albums from "../../data/albums.json";
+import artists from "../../data/artists.json";
+import playlists from "../../data/playlists.json";
+import data from "../../data/feed.json";
+import {
+  GQLQueryResolvers,
+  GQLSection,
+  GQLSectionItem,
+  GQLSectionType
+} from "../generated";
 
-function shuffle<T>(items: T[]) {
-  return items.sort(() => (0.5 <= Math.random() ? 1 : -1));
+function parseJSON<T extends { id: string; cover: string; name: string }>({
+  data,
+  type,
+  items
+}: {
+  items: string[];
+  data: T[];
+  type: GQLSectionType;
+}) {
+  return items
+    .map((id): GQLSectionItem | undefined => {
+      const item: ValuesType<typeof data> | undefined = data.find(
+        i => i.id === id
+      );
+
+      if (item) {
+        return {
+          __typename: "SectionItem",
+          contentId: item.id,
+          cover: item.cover,
+          id: uuid(),
+          name: item.name,
+          type
+        };
+      }
+
+      return undefined;
+    })
+    .filter(Boolean) as GQLSectionItem[];
 }
 
-const data: GQLSection[] = [
-  {
+const sections = data.map(
+  (item): GQLSection => ({
     __typename: "Section",
-    id: uuid(),
-    title: "Your Heavy Rotation",
-    items: shuffle([
-      {
-        __typename: "SectionItem",
-        cover: albums.currents.cover,
-        id: uuid(),
-        type: GQLSectionType.Album,
-        name: albums.currents.name,
-        contentId: albums.currents.id
-      },
-      {
-        __typename: "SectionItem",
-        cover: albums.parcels.cover,
-        id: uuid(),
-        type: GQLSectionType.Album,
-        name: albums.parcels.name,
-        contentId: albums.parcels.id
-      },
-      {
-        __typename: "SectionItem",
-        cover: albums.twoHands.cover,
-        id: uuid(),
-        type: GQLSectionType.Album,
-        name: albums.parcels.name,
-        contentId: albums.twoHands.id
-      }
-    ])
-  },
-  {
-    __typename: "Section",
-    id: uuid(),
-    title: "Recently Played",
+    id: item.id,
+    title: item.name,
     items: [
-      {
-        __typename: "SectionItem",
-        cover: albums.parcels.cover,
-        id: uuid(),
-        type: GQLSectionType.Album,
-        name: albums.parcels.name,
-        contentId: albums.parcels.id
-      }
+      ...parseJSON({
+        items: item.albums,
+        data: albums,
+        type: GQLSectionType.Album
+      }),
+      ...parseJSON({
+        items: item.artists,
+        data: artists,
+        type: GQLSectionType.Artist
+      }),
+      ...parseJSON({
+        items: item.playlists,
+        data: playlists,
+        type: GQLSectionType.Playlist
+      })
     ]
-  }
-  // {
-  //   __typename: "Section",
-  //   id: uuid(),
-  //   title: "Your favorite albums and songs",
-  //   items: [
-  //     // {
-  //     //   id: uuid()
-  //     // }
-  //   ]
-  // },
-  // {
-  //   __typename: "Section",
-  //   id: uuid(),
-  //   title: "Jump back in",
-  //   items: [
-  //     // {
-  //     //   id: uuid()
-  //     // }
-  //   ]
-  // }
-];
+  })
+);
 
 const feed: GQLQueryResolvers["feed"] = () => {
   return {
     __typename: "Feed",
     id: uuid(),
-    sections: data
+    sections
   };
 };
 

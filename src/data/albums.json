@@ -1,6 +1,8 @@
 [
   {
     "id": "rec0NmrP6sgpe3hDK",
+    "name": "Currents",
+    "cover": "https://dl.airtable.com/.attachments/816150a7864c5042b9d6d35a7004c506/1f9c5325/tame-impala-currents.jpeg",
     "artists": [
       "recXxeujNuaRhIrWa"
     ],
@@ -19,16 +21,17 @@
       "recduK3hOkCVAW4Ae",
       "recTXMj9u0y2obkfZ"
     ],
-    "name": "Currents",
-    "cover": "https://dl.airtable.com/.attachments/816150a7864c5042b9d6d35a7004c506/1f9c5325/tame-impala-currents.jpeg"
+    "feed": [
+      "recrZM9SCoITHwCBi"
+    ]
   },
   {
     "id": "rec9xiFJYwwTgVtdb",
     "name": "Parcels",
+    "cover": "https://dl.airtable.com/.attachments/c5670b930b0d1348f12d69b5e466456c/0554bc2f/parcels-parcels.jpeg",
     "artists": [
       "recQUO0Zsc0kD3QLx"
     ],
-    "cover": "https://dl.airtable.com/.attachments/c5670b930b0d1348f12d69b5e466456c/0554bc2f/parcels-parcels.jpeg",
     "songs": [
       "recL6IQQNP2dqQX8C",
       "recNQP2oRUUkMrtGV",
@@ -46,10 +49,10 @@
   {
     "id": "recYqblDcc9e0Q9XR",
     "name": "Two Hands",
+    "cover": "https://dl.airtable.com/.attachments/bd9fed364eefd16b04365467582e4911/5c6366dc/big-thief-two-hands.jpeg",
     "artists": [
       "recSdYMfCazlYbeBL"
     ],
-    "cover": "https://dl.airtable.com/.attachments/bd9fed364eefd16b04365467582e4911/5c6366dc/big-thief-two-hands.jpeg",
     "songs": [
       "recOPgwKCX3PcTJAl",
       "receugcwL4CSQMAkv",
@@ -61,15 +64,18 @@
       "recdUo1BiZROqtuhl",
       "recaUg0wDVmiyTx5s",
       "recjD2Oub88TLzLXx"
+    ],
+    "feed": [
+      "recrZM9SCoITHwCBi"
     ]
   },
   {
     "id": "recgs5KY8O4u9WGFM",
     "name": "Here Comes the Cowboy",
+    "cover": "https://dl.airtable.com/.attachments/c53db80bf385e2e6e9574172594d311e/d17c5dd2/mac-demarco-here-comes-the-cowboy.jpeg",
     "artists": [
       "recrPh8LOmhkPwk7A"
     ],
-    "cover": "https://dl.airtable.com/.attachments/c53db80bf385e2e6e9574172594d311e/d17c5dd2/mac-demarco-here-comes-the-cowboy.jpeg",
     "songs": [
       "recOd79dj3qZjfx5p",
       "rec3FcwRaenfaa1yZ",
@@ -89,10 +95,10 @@
   {
     "id": "recjhT0MhueOYrMuw",
     "name": "Salad Days",
+    "cover": "https://dl.airtable.com/.attachments/a65f27001b331f09ddaf528e9ea5ea0f/866775bd/mac-demarco-salad-days.jpeg",
     "artists": [
       "recrPh8LOmhkPwk7A"
     ],
-    "cover": "https://dl.airtable.com/.attachments/a65f27001b331f09ddaf528e9ea5ea0f/866775bd/mac-demarco-salad-days.jpeg",
     "songs": [
       "rec27mE8I55JtZf3c",
       "rec7UZBO77OGVbyqD",
@@ -110,10 +116,10 @@
   {
     "id": "rec8MBq2SxmAJtD1c",
     "name": "French Kiwi Juice",
+    "cover": "https://dl.airtable.com/.attachments/4f6c79ad32e657efde0e4baed0ed60e3/801ce770/fkj-french-kiwi-juice.jpeg",
     "artists": [
       "rec0NAqdvcgsigP6o"
     ],
-    "cover": "https://dl.airtable.com/.attachments/4f6c79ad32e657efde0e4baed0ed60e3/801ce770/fkj-french-kiwi-juice.jpeg",
     "songs": [
       "recPpNPNC76pENMmO",
       "recCJ09YRlZG5ICki",
@@ -132,10 +138,10 @@
   {
     "id": "rec5hRLyNsfPjnmQz",
     "name": "Spirit",
+    "cover": "https://dl.airtable.com/.attachments/bcd904cbfbd390a9303de261ce483268/695a1c6e/rhye-spirit.jpeg",
     "artists": [
       "recQPTSPWWma4AGDD"
     ],
-    "cover": "https://dl.airtable.com/.attachments/bcd904cbfbd390a9303de261ce483268/695a1c6e/rhye-spirit.jpeg",
     "songs": [
       "recbopmryNDYVIHkd",
       "recXaXqX9RbkYJ5DW",
@@ -169,15 +175,18 @@
       "recu87ZLyjOkcdE6X",
       "recghKPm9dFVJJQhb",
       "rec7n9jFlhTRnG8hY"
+    ],
+    "feed": [
+      "recrZM9SCoITHwCBi"
     ]
   },
   {
     "id": "recFuymgRLAoIC3eq",
     "name": "Igor",
+    "cover": "https://dl.airtable.com/.attachments/e17abb88e3e36aba357c05636ea0a7fb/5bb9ab78/tyler-the-creator-igor.jpeg",
     "artists": [
       "rec69lHAqpbSjsqce"
     ],
-    "cover": "https://dl.airtable.com/.attachments/e17abb88e3e36aba357c05636ea0a7fb/5bb9ab78/tyler-the-creator-igor.jpeg",
     "songs": [
       "recBfoEgD3811Hl24",
       "recND8LJDk8ik0AmJ",
@@ -190,6 +199,48 @@
       "rec2ivJ0hXyka8uJs",
       "recnRA0grp6niupZE",
       "recn3q4zroBE5U15V"
+    ]
+  },
+  {
+    "id": "recTLfA5C2ExieItc",
+    "name": "Origin",
+    "cover": "https://dl.airtable.com/.attachments/f512664b6e14e47e1371a81b26605e62/917f0d8c/jordan-rakei-origin.jpeg",
+    "artists": [
+      "recRaw1xzNQAqNZbL"
+    ],
+    "songs": [
+      "recG0rnXBAaS4WQep",
+      "recogsFrHlY3y1r8x",
+      "rec5pVVhLqzMboAHM",
+      "recwuXQdANHHnTIPg",
+      "recdGYyD4IP5saHQg",
+      "recD1IQ55J5E7kllp",
+      "recxEkLB4KjzCtFx8",
+      "recjjUl0btPzbAtlM",
+      "rec029eTKhmBiznWf",
+      "rechz1qkRIb9yLgHl",
+      "reczG4gyIsSzKfoKU"
+    ]
+  },
+  {
+    "id": "recs5EZVSYGaJUo6n",
+    "name": "Wallflower",
+    "cover": "https://dl.airtable.com/.attachments/56739931e494167a2f77e0bcfe29d945/0ed91f4a/jordan-rakei-wallflower.jpeg",
+    "artists": [
+      "recRaw1xzNQAqNZbL"
+    ],
+    "songs": [
+      "rec8PEJiuPbq5ioSl",
+      "recVEugWlwPjSGjM1",
+      "rec4l67Lz9vXFoIzO",
+      "recHlTONko30thVox",
+      "recy7VgRUhJadqoN2",
+      "recpB75H3biym9QYp",
+      "rec7pumBTcToVqLVO",
+      "recFpBgCND3m4AD4U",
+      "recJY8LBAh2BNdLit",
+      "recK0kRkhlSw2nk1o",
+      "rec3pwU9fIXzPhJwB"
     ]
   }
 ]
