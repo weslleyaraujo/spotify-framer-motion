@@ -10,6 +10,7 @@ import {
   GQLSectionItem,
   GQLSectionType
 } from "../generated";
+import shuffle from "lodash.shuffle";
 
 const resources: {
   [key in GQLSectionType]: { id: string; cover: string; name: string }[];
@@ -19,9 +20,15 @@ const resources: {
   [GQLSectionType.Playlist]: playlists
 };
 
-function parseJSON({ type, items }: { items: string[]; type: GQLSectionType }) {
+function parseJSON({
+  type,
+  items
+}: {
+  items?: string[];
+  type: GQLSectionType;
+}) {
   const data = resources[type];
-  return items
+  return [...(items ? items : [])]
     .map((id): GQLSectionItem | undefined => {
       const item: ValuesType<typeof data> | undefined = data.find(
         i => i.id === id
@@ -48,7 +55,7 @@ const sections = data.map(
     __typename: "Section",
     id: item.id,
     title: item.name,
-    items: [
+    items: shuffle([
       ...parseJSON({
         items: item.albums,
         type: GQLSectionType.Album
@@ -61,7 +68,7 @@ const sections = data.map(
         items: item.playlists,
         type: GQLSectionType.Playlist
       })
-    ]
+    ])
   })
 );
 
