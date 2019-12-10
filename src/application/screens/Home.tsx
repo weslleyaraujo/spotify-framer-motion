@@ -87,6 +87,7 @@ function Home(props: Props) {
               maxVisibleItems={2}
             >
               {items.map(({ id, name, cover, type }, index) => {
+                const label = `Go to ${name}`;
                 switch (type) {
                   case GQLSectionType.Artist: {
                     return (
@@ -95,15 +96,15 @@ function Home(props: Props) {
                         title={name}
                         interactions={{
                           primary: {
+                            label,
                             action: {
                               as: "div"
-                            },
-                            label: "example"
+                            }
                           }
                         }}
                         media={{
                           source: cover,
-                          credits: "",
+                          credits: "spotify",
                           type: "image"
                         }}
                       />
@@ -117,15 +118,15 @@ function Home(props: Props) {
                         title={name}
                         interactions={{
                           primary: {
+                            label,
                             action: {
                               as: "div"
-                            },
-                            label: "example"
+                            }
                           }
                         }}
                         media={{
                           source: cover,
-                          credits: "",
+                          credits: "spotify",
                           type: "image"
                         }}
                       />
