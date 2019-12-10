@@ -13,11 +13,13 @@ import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
 import { Icons } from "../../foundations/icons";
 import {
   GQLGetFeedQuery,
-  GQLGetFeedQueryVariables
+  GQLGetFeedQueryVariables,
+  GQLSectionType
 } from "../../graphql/generated";
 import { useBodyBackground } from "../../hooks/use-body-background";
 import { CardCover } from "../components/CardCover/CardCover";
 import { SITEMAP } from "../site-map";
+import { CardCircle } from "../components/CardCircle/CardCircle";
 
 interface Props {}
 
@@ -84,25 +86,53 @@ function Home(props: Props) {
               horizontalPadding="medium"
               maxVisibleItems={2}
             >
-              {items.map(({ id, name, cover }, index) => (
-                <CardCover
-                  key={`feed-card-cover-${id}`}
-                  title={name}
-                  interactions={{
-                    primary: {
-                      action: {
-                        as: "div"
-                      },
-                      label: "example"
-                    }
-                  }}
-                  media={{
-                    source: cover,
-                    credits: "",
-                    type: "image"
-                  }}
-                />
-              ))}
+              {items.map(({ id, name, cover, type }, index) => {
+                switch (type) {
+                  case GQLSectionType.Artist: {
+                    return (
+                      <CardCircle
+                        key={`feed-card-cover-${id}`}
+                        title={name}
+                        interactions={{
+                          primary: {
+                            action: {
+                              as: "div"
+                            },
+                            label: "example"
+                          }
+                        }}
+                        media={{
+                          source: cover,
+                          credits: "",
+                          type: "image"
+                        }}
+                      />
+                    );
+                  }
+
+                  default: {
+                    return (
+                      <CardCover
+                        key={`feed-card-cover-${id}`}
+                        title={name}
+                        interactions={{
+                          primary: {
+                            action: {
+                              as: "div"
+                            },
+                            label: "example"
+                          }
+                        }}
+                        media={{
+                          source: cover,
+                          credits: "",
+                          type: "image"
+                        }}
+                      />
+                    );
+                  }
+                }
+              })}
             </Scrollable>
           </Section>
         ))}

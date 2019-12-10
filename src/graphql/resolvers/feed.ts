@@ -11,15 +11,16 @@ import {
   GQLSectionType
 } from "../generated";
 
-function parseJSON<T extends { id: string; cover: string; name: string }>({
-  data,
-  type,
-  items
-}: {
-  items: string[];
-  data: T[];
-  type: GQLSectionType;
-}) {
+const resources: {
+  [key in GQLSectionType]: { id: string; cover: string; name: string }[];
+} = {
+  [GQLSectionType.Album]: albums,
+  [GQLSectionType.Artist]: artists,
+  [GQLSectionType.Playlist]: playlists
+};
+
+function parseJSON({ type, items }: { items: string[]; type: GQLSectionType }) {
+  const data = resources[type];
   return items
     .map((id): GQLSectionItem | undefined => {
       const item: ValuesType<typeof data> | undefined = data.find(
@@ -50,17 +51,14 @@ const sections = data.map(
     items: [
       ...parseJSON({
         items: item.albums,
-        data: albums,
         type: GQLSectionType.Album
       }),
       ...parseJSON({
         items: item.artists,
-        data: artists,
         type: GQLSectionType.Artist
       }),
       ...parseJSON({
         items: item.playlists,
-        data: playlists,
         type: GQLSectionType.Playlist
       })
     ]

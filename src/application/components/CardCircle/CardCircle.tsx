@@ -15,15 +15,27 @@ interface Props<P extends Object>
     interactions: "primary";
   }> {}
 
-function CardCover<P>(props: Props<P>) {
+function CardCircle<P>(props: Props<P>) {
   return (
     <Action {...props.interactions.primary.action}>
-      <Picture {...props.media} alt={props.title} aspectRatio="square" />
+      <div
+        css={{
+          borderRadius: 4000,
+          overflow: "hidden"
+        }}
+      >
+        <Picture {...props.media} alt={props.title} aspectRatio="square" />
+      </div>
       <View margin={["small", "none"]}>
-        <TextLine text={props.title} color="foregroundPrimary" type="title" />
+        <TextLine
+          text={props.title}
+          color="foregroundPrimary"
+          type="title"
+          textAlign="center"
+        />
       </View>
     </Action>
   );
 }
 
-export { CardCover };
+export { CardCircle };
