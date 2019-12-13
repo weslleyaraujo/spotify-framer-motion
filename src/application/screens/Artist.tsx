@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useTheme } from "emotion-theming";
-import sourceAlbum from "../../assets/images/tame-impala-currents.jpeg";
-import source from "../../assets/images/tame-impala.jpeg";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { View } from "../../components/atoms/View/View";
@@ -42,7 +40,7 @@ function Artist() {
               >
                 <Picture
                   alt="Tame Impala"
-                  source={source}
+                  source=""
                   aspectRatio="square"
                   width={dimensions}
                   height={dimensions}
@@ -93,7 +91,7 @@ function Artist() {
                 width={60}
                 height={60}
                 alt="Music"
-                source={sourceAlbum}
+                source=""
                 aspectRatio="square"
               />
             </View>

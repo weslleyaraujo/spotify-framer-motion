@@ -9,11 +9,10 @@ import { CategoryCard } from "../components/CardCategory/CardCategory";
 import { Grid } from "../../components/utilities/Grid/Grid";
 import { useHistory } from "react-router";
 
-import source from "../../assets/images/tame-impala-currents.jpeg";
 import { SITEMAP } from "../site-map";
 import { Link } from "react-router-dom";
 
-interface Props {}
+interface Props { }
 
 function Search(props: Props) {
   const history = useHistory();
@@ -48,7 +47,7 @@ function Search(props: Props) {
                 to: "pink"
               }}
               media={{
-                source,
+                source: "",
                 type: "image",
                 credits: "Spotify"
               }}

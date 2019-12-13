@@ -1,7 +1,5 @@
 /**  @jsx jsx */
 import { jsx } from "@emotion/core";
-import sourceAlbum from "../../assets/images/tame-impala-currents.jpeg";
-import source from "../../assets/images/tame-impala.jpeg";
 import { Icon } from "../../components/atoms/Icon/Icon";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
@@ -11,7 +9,7 @@ import { Grid } from "../../components/utilities/Grid/Grid";
 import { Icons } from "../../foundations/icons";
 import { SearchInput } from "../components/SearchInput/SearchInput";
 
-interface Props {}
+interface Props { }
 
 function SearchResults(props: Props) {
   return (
@@ -36,7 +34,7 @@ function SearchResults(props: Props) {
                 width={60}
                 height={60}
                 alt="Music"
-                source={source}
+                source=""
                 aspectRatio="square"
               />
             </div>
@@ -60,7 +58,7 @@ function SearchResults(props: Props) {
                 width={60}
                 height={60}
                 alt="Music"
-                source={sourceAlbum}
+                source=""
                 aspectRatio="square"
               />
             </View>
