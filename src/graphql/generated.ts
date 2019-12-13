@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
   ID: string,
@@ -18,9 +19,10 @@ export interface GQLAlbum {
 }
 
 export interface GQLArtist {
+   __typename: 'Artist',
   id: Scalars['ID'],
   name: Scalars['String'],
-  monthlyListeners: Scalars['Int'],
+  listeners: Scalars['Int'],
   cover: Scalars['String'],
 }
 
@@ -42,8 +44,14 @@ export interface GQLNode {
 
 export interface GQLQuery {
    __typename: 'Query',
-  user: GQLUser,
+  /** user: User! */
   feed: GQLFeed,
+  artist: GQLArtist,
+}
+
+
+export interface GQLQueryArtistArgs {
+  id: Scalars['ID']
 }
 
 export interface GQLSection {
@@ -80,6 +88,13 @@ export interface GQLUser {
   id: Scalars['ID'],
   name: Scalars['String'],
 }
+
+export type GQLGetArtistQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number } };
 
 export type GQLGetFeedQueryVariables = {};
 
@@ -158,37 +173,37 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type GQLResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
-  User: ResolverTypeWrapper<GQLUser>,
-  ID: ResolverTypeWrapper<Scalars['ID']>,
-  String: ResolverTypeWrapper<Scalars['String']>,
   Feed: ResolverTypeWrapper<GQLFeed>,
+  ID: ResolverTypeWrapper<Scalars['ID']>,
   Section: ResolverTypeWrapper<GQLSection>,
+  String: ResolverTypeWrapper<Scalars['String']>,
   SectionItem: ResolverTypeWrapper<GQLSectionItem>,
   SectionType: GQLSectionType,
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Artist: ResolverTypeWrapper<GQLArtist>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Album: ResolverTypeWrapper<GQLAlbum>,
   Song: ResolverTypeWrapper<GQLSong>,
   Node: ResolverTypeWrapper<GQLNode>,
+  User: ResolverTypeWrapper<GQLUser>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type GQLResolversParentTypes = {
   Query: {},
-  User: GQLUser,
-  ID: Scalars['ID'],
-  String: Scalars['String'],
   Feed: GQLFeed,
+  ID: Scalars['ID'],
   Section: GQLSection,
+  String: Scalars['String'],
   SectionItem: GQLSectionItem,
   SectionType: GQLSectionType,
-  Boolean: Scalars['Boolean'],
   Artist: GQLArtist,
   Int: Scalars['Int'],
+  Boolean: Scalars['Boolean'],
   Album: GQLAlbum,
   Song: GQLSong,
   Node: GQLNode,
+  User: GQLUser,
 };
 
 export type GQLAlbumResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Album'] = GQLResolversParentTypes['Album']> = {
@@ -201,10 +216,9 @@ export type GQLAlbumResolvers<ContextType = any, ParentType extends GQLResolvers
 };
 
 export type GQLArtistResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Artist'] = GQLResolversParentTypes['Artist']> = {
-  __resolveType: TypeResolveFn<null, ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  monthlyListeners: Resolver<GQLResolversTypes['Int'], ParentType, ContextType>,
+  listeners: Resolver<GQLResolversTypes['Int'], ParentType, ContextType>,
   cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
 };
 
@@ -218,8 +232,8 @@ export type GQLNodeResolvers<ContextType = any, ParentType extends GQLResolversP
 };
 
 export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Query'] = GQLResolversParentTypes['Query']> = {
-  user: Resolver<GQLResolversTypes['User'], ParentType, ContextType>,
   feed: Resolver<GQLResolversTypes['Feed'], ParentType, ContextType>,
+  artist: Resolver<GQLResolversTypes['Artist'], ParentType, ContextType, RequireFields<GQLQueryArtistArgs, 'id'>>,
 };
 
 export type GQLSectionResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Section'] = GQLResolversParentTypes['Section']> = {
@@ -251,7 +265,7 @@ export type GQLUserResolvers<ContextType = any, ParentType extends GQLResolversP
 
 export type GQLResolvers<ContextType = any> = {
   Album: GQLAlbumResolvers,
-  Artist: GQLArtistResolvers,
+  Artist: GQLArtistResolvers<ContextType>,
   Feed: GQLFeedResolvers<ContextType>,
   Node: GQLNodeResolvers<ContextType>,
   Query: GQLQueryResolvers<ContextType>,

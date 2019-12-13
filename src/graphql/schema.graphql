@@ -2,10 +2,10 @@
 # Global interfaces
 # ==
 
-interface Artist {
+type Artist {
   id: ID!
   name: String!
-  monthlyListeners: Int!
+  listeners: Int!
   cover: String!
 }
 
@@ -62,6 +62,7 @@ type Feed {
 }
 
 type Query {
-  user: User!
+  # user: User!
   feed: Feed!
+  artist(id: ID!): Artist!
 }

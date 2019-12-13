@@ -9,16 +9,52 @@ import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/An
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 import { Theme } from "../../foundations/Theme";
 import { useBodyBackground } from "../../hooks/use-body-background";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import { GQLGetArtistQuery, GQLGetArtistQueryVariables } from "../../graphql/generated";
+import { RouteComponentProps } from "react-router-dom"
+import { RouteArtistParameters } from "../site-map";
+import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 
-function Artist() {
+interface Props extends RouteComponentProps<RouteArtistParameters> { }
+
+function Artist(props: Props) {
+  const { match: { params: { id } } } = props;
   useBodyBackground({
     color: "green",
     gradientStyle: "topBottom"
   });
 
+  const { data, error, loading } = useQuery<GQLGetArtistQuery, GQLGetArtistQueryVariables>(gql`
+    query GetArtist($id: ID!) {
+      artist (id: $id) @client {
+        id
+        name
+        cover
+        listeners
+      }
+    }
+  `, {
+    variables: {
+      id
+    }
+  })
+
   const theme = useTheme<Theme>();
 
   const dimensions = 150;
+
+  if (error) {
+    return <TextLine text="TODO: ErrorView" />
+  }
+
+  if (loading) {
+    return <LoadingView />
+  }
+
+  if (!data) {
+    return null; // TODO
+  }
 
   return (
     <FadePresence>
@@ -39,7 +75,7 @@ function Artist() {
                 }}
               >
                 <Picture
-                  alt="Tame Impala"
+                  alt={data.artist.name}
                   source=""
                   aspectRatio="square"
                   width={dimensions}
@@ -48,10 +84,10 @@ function Artist() {
               </div>
             </View>
             <View justify="center" direction="column" align="center">
-              <TextLine text="Tame Impala" type="heading" />
+              <TextLine text={data.artist.name} type="heading" />
               <View margin={["medium", "none"]}>
                 <TextLine
-                  text="8,112,592 MONTHLY LISTENERS"
+                  text={`${data.artist.listeners} MONTHLY LISTENERS`}
                   type="caption"
                   color="foregroundSecondary"
                 />
