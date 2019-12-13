@@ -1,9 +1,13 @@
 import { Theme } from "../foundations/Theme";
 import { transparentize } from "polished";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useTheme } from "emotion-theming";
 
 type GradientStyle = "topLeft" | "topBottom";
+
+const entries = Object.entries as <T>(
+  o: T
+) => [Extract<keyof T, string>, T[keyof T]][];
 
 const GRADIENT_STYLE_MAP: {
   [key in GradientStyle]: ({
@@ -38,32 +42,41 @@ function useBodyBackground(
     gradientStyle: "topLeft"
   }
 ) {
-  const theme = useTheme<Theme>();
-  const { body } = document;
+  const {
+    colors: { background }
+  } = useTheme<Theme>();
+  const initial = useRef(() => {
+    const style = window.getComputedStyle(document.body);
+    return {
+      backgroundImage: style.backgroundImage,
+      backgroundColor: style.backgroundColor,
+      backgroundRepeat: style.backgroundRepeat,
+      backgroundAttachment: style.backgroundAttachment
+    };
+  });
 
   useLayoutEffect(() => {
-    const {
-      backgroundImage,
-      backgroundColor,
-      backgroundRepeat,
-      backgroundAttachment
-    } = window.getComputedStyle(body);
-
-    body.style.backgroundAttachment = "scroll";
-    body.style.backgroundColor = theme.colors.background;
-    body.style.backgroundRepeat = "no-repeat";
-    body.style.backgroundImage = GRADIENT_STYLE_MAP[gradientStyle]({
-      color,
-      backgroundColor: theme.colors.background
-    });
-
-    return () => {
-      body.style.backgroundAttachment = backgroundAttachment;
-      body.style.backgroundColor = backgroundColor;
-      body.style.backgroundRepeat = backgroundRepeat;
-      body.style.backgroundImage = backgroundImage;
+    const style = {
+      backgroundAttachment: "scroll",
+      backgroundColor: background,
+      backgroundRepeat: "no-repeat",
+      backgroundImage: GRADIENT_STYLE_MAP[gradientStyle]({
+        color,
+        backgroundColor: background
+      })
     };
-  }, [body, color, gradientStyle, theme.colors.background]);
+
+    entries(style).forEach(
+      ([key, value]) => (document.body.style[key] = value)
+    );
+
+    const cleanup = initial.current;
+    return () => {
+      entries(cleanup).forEach(
+        ([key, value]) => (document.body.style[key] = value)
+      );
+    };
+  }, [color, gradientStyle, background]);
 }
 
 export { useBodyBackground };
