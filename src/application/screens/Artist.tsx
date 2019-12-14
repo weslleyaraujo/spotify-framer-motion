@@ -11,45 +11,58 @@ import { Theme } from "../../foundations/Theme";
 import { useBodyBackground } from "../../hooks/use-body-background";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { GQLGetArtistQuery, GQLGetArtistQueryVariables } from "../../graphql/generated";
-import { RouteComponentProps } from "react-router-dom"
+import {
+  GQLGetArtistQuery,
+  GQLGetArtistQueryVariables
+} from "../../graphql/generated";
+import { RouteComponentProps } from "react-router-dom";
 import { RouteArtistParameters } from "../site-map";
 import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 
-interface Props extends RouteComponentProps<RouteArtistParameters> { }
+interface Props extends RouteComponentProps<RouteArtistParameters> {}
 
 function Artist(props: Props) {
-  const { match: { params: { id } } } = props;
+  const {
+    match: {
+      params: { id }
+    }
+  } = props;
   useBodyBackground({
     color: "green",
     gradientStyle: "topBottom"
   });
 
-  const { data, error, loading } = useQuery<GQLGetArtistQuery, GQLGetArtistQueryVariables>(gql`
-    query GetArtist($id: ID!) {
-      artist (id: $id) @client {
+  const { data, error, loading } = useQuery<
+    GQLGetArtistQuery,
+    GQLGetArtistQueryVariables
+  >(
+    gql`
+      query GetArtist($id: ID!) {
+        artist(id: $id) @client {
+          id
+          name
+          cover
+          listeners
+        }
+      }
+    `,
+    {
+      variables: {
         id
-        name
-        cover
-        listeners
       }
     }
-  `, {
-    variables: {
-      id
-    }
-  })
+  );
 
   const theme = useTheme<Theme>();
 
   const dimensions = 150;
 
   if (error) {
-    return <TextLine text="TODO: ErrorView" />
+    return <TextLine text="TODO: ErrorView" />;
   }
 
   if (loading) {
-    return <LoadingView />
+    return <LoadingView />;
   }
 
   if (!data) {
