@@ -62,8 +62,22 @@ type Feed {
   sections: [Section!]!
 }
 
+enum SearchResultType {
+  TRACK
+  ALBUM
+  ARTIST
+  PLAYLIST
+}
+
+type SearchResult {
+  name: String!
+  type: SearchResultType
+  id: ID!
+}
+
 type Query {
   # user: User!
   feed: Feed!
   artist(id: ID!): Artist!
+  search(term: String!): [SearchResult!]!
 }

@@ -1,5 +1,7 @@
 /**  @jsx jsx */
+import { useLazyQuery } from "@apollo/react-hooks";
 import { jsx } from "@emotion/core";
+import { gql } from "apollo-boost";
 import { Icon } from "../../components/atoms/Icon/Icon";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
@@ -8,13 +10,42 @@ import { FadePresence } from "../../components/utilities/FadePresence/FadePresen
 import { Grid } from "../../components/utilities/Grid/Grid";
 import { Icons } from "../../foundations/icons";
 import { SearchInput } from "../components/SearchInput/SearchInput";
+import {
+  GQLGetSearchResultsQuery,
+  GQLGetSearchResultsQueryVariables
+} from "../../graphql/generated";
 
-interface Props { }
+interface Props {}
 
 function SearchResults(props: Props) {
+  const [search, { data, loading, error }] = useLazyQuery<
+    GQLGetSearchResultsQuery,
+    GQLGetSearchResultsQueryVariables
+  >(
+    gql`
+      query GetSearchResults($term: String!) {
+        search(term: $term) @client {
+          type
+          name
+          id
+        }
+      }
+    `,
+    {}
+  );
+
+  console.log(JSON.stringify(data, null, 2));
   return (
     <FadePresence>
-      <SearchInput />
+      <SearchInput
+        onChange={event => {
+          search({
+            variables: {
+              term: event.target.value
+            }
+          });
+        }}
+      />
       <Grid>
         <View
           padding={["small", "medium"]}

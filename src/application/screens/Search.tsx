@@ -1,18 +1,17 @@
 import React from "react";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { View } from "../../components/atoms/View/View";
-import { useBodyBackground } from "../../hooks/use-body-background";
-import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
-import { SearchBar } from "../components/SearchBar/SearchBar";
 import { Section } from "../../components/molecules/Section/Section";
-import { CategoryCard } from "../components/CardCategory/CardCategory";
+import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 import { Grid } from "../../components/utilities/Grid/Grid";
-import { useHistory } from "react-router";
-
+import { useBodyBackground } from "../../hooks/use-body-background";
+import { CategoryCard } from "../components/CardCategory/CardCategory";
+import { SearchBar } from "../components/SearchBar/SearchBar";
 import { SITEMAP } from "../site-map";
-import { Link } from "react-router-dom";
 
-interface Props { }
+interface Props {}
 
 function Search(props: Props) {
   const history = useHistory();

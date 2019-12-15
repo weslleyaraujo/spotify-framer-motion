@@ -49,11 +49,31 @@ export interface GQLQuery {
   /** user: User! */
   feed: GQLFeed,
   artist: GQLArtist,
+  search: Array<GQLSearchResult>,
 }
 
 
 export interface GQLQueryArtistArgs {
   id: Scalars['ID']
+}
+
+
+export interface GQLQuerySearchArgs {
+  term: Scalars['String']
+}
+
+export interface GQLSearchResult {
+   __typename: 'SearchResult',
+  name: Scalars['String'],
+  type: Maybe<GQLSearchResultType>,
+  id: Scalars['ID'],
+}
+
+export enum GQLSearchResultType {
+  Track = 'TRACK',
+  Album = 'ALBUM',
+  Artist = 'ARTIST',
+  Playlist = 'PLAYLIST'
 }
 
 export interface GQLSection {
@@ -97,12 +117,19 @@ export type GQLGetArtistQueryVariables = {
 };
 
 
-export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, popular: Array<{ __typename: 'Song', name: string }> } };
+export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, popular: Array<{ __typename: 'Song', name: string, album: string }> } };
 
 export type GQLGetFeedQueryVariables = {};
 
 
 export type GQLGetFeedQuery = { __typename: 'Query', feed: { __typename: 'Feed', id: string, sections: Array<{ __typename: 'Section', id: string, title: string, items: Array<{ __typename: 'SectionItem', id: string, name: string, cover: string, type: GQLSectionType }> }> } };
+
+export type GQLGetSearchResultsQueryVariables = {
+  term: Scalars['String']
+};
+
+
+export type GQLGetSearchResultsQuery = { __typename: 'Query', search: Array<{ __typename: 'SearchResult', type: Maybe<GQLSearchResultType>, name: string, id: string }> };
 
 
 
@@ -185,6 +212,8 @@ export type GQLResolversTypes = {
   Artist: ResolverTypeWrapper<GQLArtist>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
   Song: ResolverTypeWrapper<GQLSong>,
+  SearchResult: ResolverTypeWrapper<GQLSearchResult>,
+  SearchResultType: GQLSearchResultType,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Album: ResolverTypeWrapper<GQLAlbum>,
   Node: ResolverTypeWrapper<GQLNode>,
@@ -203,6 +232,8 @@ export type GQLResolversParentTypes = {
   Artist: GQLArtist,
   Int: Scalars['Int'],
   Song: GQLSong,
+  SearchResult: GQLSearchResult,
+  SearchResultType: GQLSearchResultType,
   Boolean: Scalars['Boolean'],
   Album: GQLAlbum,
   Node: GQLNode,
@@ -237,6 +268,13 @@ export type GQLNodeResolvers<ContextType = any, ParentType extends GQLResolversP
 export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Query'] = GQLResolversParentTypes['Query']> = {
   feed: Resolver<GQLResolversTypes['Feed'], ParentType, ContextType>,
   artist: Resolver<GQLResolversTypes['Artist'], ParentType, ContextType, RequireFields<GQLQueryArtistArgs, 'id'>>,
+  search: Resolver<Array<GQLResolversTypes['SearchResult']>, ParentType, ContextType, RequireFields<GQLQuerySearchArgs, 'term'>>,
+};
+
+export type GQLSearchResultResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['SearchResult'] = GQLResolversParentTypes['SearchResult']> = {
+  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  type: Resolver<Maybe<GQLResolversTypes['SearchResultType']>, ParentType, ContextType>,
+  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
 };
 
 export type GQLSectionResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Section'] = GQLResolversParentTypes['Section']> = {
@@ -271,6 +309,7 @@ export type GQLResolvers<ContextType = any> = {
   Feed: GQLFeedResolvers<ContextType>,
   Node: GQLNodeResolvers<ContextType>,
   Query: GQLQueryResolvers<ContextType>,
+  SearchResult: GQLSearchResultResolvers<ContextType>,
   Section: GQLSectionResolvers<ContextType>,
   SectionItem: GQLSectionItemResolvers<ContextType>,
   Song: GQLSongResolvers<ContextType>,

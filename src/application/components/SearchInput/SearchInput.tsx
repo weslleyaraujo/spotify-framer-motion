@@ -19,7 +19,7 @@ import { Theme } from "../../../foundations/Theme";
 import { useClickOutSide } from "../../../hooks/use-click-outside";
 
 interface Props
-  extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus"> {}
+  extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus" | "onChange"> {}
 
 interface DefaultProps extends Required<Pick<Props, "placeholder">> {}
 
@@ -27,7 +27,7 @@ const defaultProps: DefaultProps = {
   placeholder: "Artists, songs, or podcasts"
 };
 
-function SearchInput({ placeholder, onFocus }: Props & DefaultProps) {
+function SearchInput({ placeholder, onFocus, onChange }: Props & DefaultProps) {
   const ref = useRef<HTMLInputElement>(null);
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
@@ -164,6 +164,7 @@ function SearchInput({ placeholder, onFocus }: Props & DefaultProps) {
           ref={ref}
           onClick={e => setFocus(true)}
           onBlur={e => setFocus(false)}
+          onChange={onChange}
           type="text"
           css={{
             ...font,
