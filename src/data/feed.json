@@ -33,12 +33,12 @@
   {
     "id": "recIbXdJigVsuE7ty",
     "name": "Your favorite albums and songs",
-    "artists": [
-      "recQPTSPWWma4AGDD"
-    ],
     "albums": [
       "recTLfA5C2ExieItc",
       "rec8ODh9axY58cJau"
+    ],
+    "artists": [
+      "recQPTSPWWma4AGDD"
     ]
   }
 ]

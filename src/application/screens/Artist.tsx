@@ -43,6 +43,10 @@ function Artist(props: Props) {
           name
           cover
           listeners
+          popular {
+            name
+            album ## TODO: use it as a variable to query album
+          }
         }
       }
     `,
@@ -54,8 +58,6 @@ function Artist(props: Props) {
   );
 
   const theme = useTheme<Theme>();
-
-  const dimensions = 150;
 
   if (error) {
     return <TextLine text="TODO: ErrorView" />;
@@ -81,18 +83,16 @@ function Artist(props: Props) {
             >
               <div
                 style={{
-                  width: dimensions,
-                  height: dimensions,
                   overflow: "hidden",
                   borderRadius: "4000px"
                 }}
               >
                 <Picture
                   alt={data.artist.name}
-                  source=""
+                  source={data.artist.cover}
                   aspectRatio="square"
-                  width={dimensions}
-                  height={dimensions}
+                  width={theme.scales.larger}
+                  height={theme.scales.larger}
                 />
               </div>
             </View>
@@ -127,8 +127,7 @@ function Artist(props: Props) {
             <TextLine text="Popular" />
           </View>
         </View>
-
-        {[...new Array(12)].map((item, key) => (
+        {data.artist.popular.map((item, key) => (
           <View
             key={key}
             padding={["small", "medium"]}
@@ -137,15 +136,15 @@ function Artist(props: Props) {
           >
             <View>
               <Picture
-                width={60}
-                height={60}
+                width={theme.scales.medium}
+                height={theme.scales.medium}
                 alt="Music"
                 source=""
                 aspectRatio="square"
               />
             </View>
             <View flex={1} padding={["small", "medium"]}>
-              <TextLine text="Currents" />
+              <TextLine text={item.name} />
               <TextLine text="2015 - Album" color="foregroundSecondary" />
             </View>
           </View>

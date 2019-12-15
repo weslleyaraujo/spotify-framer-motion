@@ -11,6 +11,7 @@ export interface Scalars {
 }
 
 export interface GQLAlbum {
+   __typename: 'Album',
   id: Scalars['ID'],
   name: Scalars['String'],
   artist: Scalars['ID'],
@@ -24,6 +25,7 @@ export interface GQLArtist {
   name: Scalars['String'],
   listeners: Scalars['Int'],
   cover: Scalars['String'],
+  popular: Array<GQLSong>,
 }
 
 export interface GQLFeed {
@@ -77,10 +79,11 @@ export enum GQLSectionType {
 }
 
 export interface GQLSong {
+   __typename: 'Song',
   id: Scalars['ID'],
   name: Scalars['String'],
-  artistId: Scalars['ID'],
-  albumId: Scalars['ID'],
+  artist: Scalars['ID'],
+  album: Scalars['ID'],
 }
 
 export interface GQLUser {
@@ -94,7 +97,7 @@ export type GQLGetArtistQueryVariables = {
 };
 
 
-export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number } };
+export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, popular: Array<{ __typename: 'Song', name: string }> } };
 
 export type GQLGetFeedQueryVariables = {};
 
@@ -181,9 +184,9 @@ export type GQLResolversTypes = {
   SectionType: GQLSectionType,
   Artist: ResolverTypeWrapper<GQLArtist>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
+  Song: ResolverTypeWrapper<GQLSong>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Album: ResolverTypeWrapper<GQLAlbum>,
-  Song: ResolverTypeWrapper<GQLSong>,
   Node: ResolverTypeWrapper<GQLNode>,
   User: ResolverTypeWrapper<GQLUser>,
 };
@@ -199,15 +202,14 @@ export type GQLResolversParentTypes = {
   SectionType: GQLSectionType,
   Artist: GQLArtist,
   Int: Scalars['Int'],
+  Song: GQLSong,
   Boolean: Scalars['Boolean'],
   Album: GQLAlbum,
-  Song: GQLSong,
   Node: GQLNode,
   User: GQLUser,
 };
 
 export type GQLAlbumResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Album'] = GQLResolversParentTypes['Album']> = {
-  __resolveType: TypeResolveFn<null, ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
@@ -220,6 +222,7 @@ export type GQLArtistResolvers<ContextType = any, ParentType extends GQLResolver
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   listeners: Resolver<GQLResolversTypes['Int'], ParentType, ContextType>,
   cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  popular: Resolver<Array<GQLResolversTypes['Song']>, ParentType, ContextType>,
 };
 
 export type GQLFeedResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Feed'] = GQLResolversParentTypes['Feed']> = {
@@ -251,11 +254,10 @@ export type GQLSectionItemResolvers<ContextType = any, ParentType extends GQLRes
 };
 
 export type GQLSongResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Song'] = GQLResolversParentTypes['Song']> = {
-  __resolveType: TypeResolveFn<null, ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  artistId: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  albumId: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  album: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
 };
 
 export type GQLUserResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['User'] = GQLResolversParentTypes['User']> = {
@@ -264,14 +266,14 @@ export type GQLUserResolvers<ContextType = any, ParentType extends GQLResolversP
 };
 
 export type GQLResolvers<ContextType = any> = {
-  Album: GQLAlbumResolvers,
+  Album: GQLAlbumResolvers<ContextType>,
   Artist: GQLArtistResolvers<ContextType>,
   Feed: GQLFeedResolvers<ContextType>,
   Node: GQLNodeResolvers<ContextType>,
   Query: GQLQueryResolvers<ContextType>,
   Section: GQLSectionResolvers<ContextType>,
   SectionItem: GQLSectionItemResolvers<ContextType>,
-  Song: GQLSongResolvers,
+  Song: GQLSongResolvers<ContextType>,
   User: GQLUserResolvers<ContextType>,
 };
 

@@ -17,9 +17,19 @@ import {
   GQLSectionType
 } from "../../graphql/generated";
 import { useBodyBackground } from "../../hooks/use-body-background";
+import {
+  INTERACTIONS,
+  useLazyInteractions
+} from "../../hooks/use-interactions";
+import { CardCircle } from "../components/CardCircle/CardCircle";
 import { CardCover } from "../components/CardCover/CardCover";
 import { SITEMAP } from "../site-map";
-import { CardCircle } from "../components/CardCircle/CardCircle";
+
+const interactions = {
+  [GQLSectionType.Artist]: INTERACTIONS.NAVIGATE_ARTIST,
+  [GQLSectionType.Album]: INTERACTIONS.NAVIGATE_ALBUM,
+  [GQLSectionType.Playlist]: INTERACTIONS.NAVIGATE_PLAYLIST
+};
 
 interface Props {}
 
@@ -44,6 +54,8 @@ function Home(props: Props) {
       }
     }
   `);
+
+  const createInteraction = useLazyInteractions();
 
   useBodyBackground({
     color: "yellow",
@@ -87,7 +99,10 @@ function Home(props: Props) {
               maxVisibleItems={2}
             >
               {items.map(({ id, name, cover, type }, index) => {
-                const label = `Go to ${name}`;
+                const primary = createInteraction(interactions[type], {
+                  id,
+                  label: `Go to ${name}`
+                });
                 switch (type) {
                   case GQLSectionType.Artist: {
                     return (
@@ -95,12 +110,7 @@ function Home(props: Props) {
                         key={`feed-card-cover-${id}`}
                         title={name}
                         interactions={{
-                          primary: {
-                            label,
-                            action: {
-                              as: "div"
-                            }
-                          }
+                          primary
                         }}
                         media={{
                           source: cover,
@@ -117,12 +127,7 @@ function Home(props: Props) {
                         key={`feed-card-cover-${id}`}
                         title={name}
                         interactions={{
-                          primary: {
-                            label,
-                            action: {
-                              as: "div"
-                            }
-                          }
+                          primary
                         }}
                         media={{
                           source: cover,

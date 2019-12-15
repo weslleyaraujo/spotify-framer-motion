@@ -95,7 +95,6 @@ const globalStyles: InterpolationWithTheme<Theme> = theme => css`
   html,
   body,
   #root {
-    height: 100%;
     -webkit-font-smoothing: smoothing;
     -moz-osx-font-smoothing: grayscale;
   }
