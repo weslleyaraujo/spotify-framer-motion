@@ -1,5 +1,6 @@
 import { Link, LinkProps } from "react-router-dom";
 import { Interaction } from "../interfaces/Card";
+import { SITEMAP } from "../application/site-map";
 
 interface Identifier {
   id: string;
@@ -27,15 +28,15 @@ function useInteractions<T extends INTERACTIONS>(
     case INTERACTIONS.NAVIGATE_ALBUM:
     case INTERACTIONS.NAVIGATE_ARTIST: {
       const paths = {
-        [INTERACTIONS.NAVIGATE_ARTIST]: "/artist/foo/", // TODO: use SITEMAP
-        [INTERACTIONS.NAVIGATE_ALBUM]: "/album/foo/", // TODO: use SITEMAP
-        [INTERACTIONS.NAVIGATE_PLAYLIST]: "/album/foo/" // TODO: use SITEMAP
+        [INTERACTIONS.NAVIGATE_ARTIST]: SITEMAP.ARTIST,
+        [INTERACTIONS.NAVIGATE_ALBUM]: SITEMAP.ALBUM,
+        [INTERACTIONS.NAVIGATE_PLAYLIST]: SITEMAP.PLAYLIST
       };
       const { id } = data;
       const interaction: Interaction<LinkProps> = {
         action: {
           as: Link,
-          to: paths[type] + id // TODO: use interpolate
+          to: paths[type] + id // TODO: use "interpolate" fn
         },
         label,
         icon,

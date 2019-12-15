@@ -21,6 +21,20 @@ export interface RouteArtistParameters {
   id: string;
 }
 
+/* Album */
+const ALBUM = "/album/:id";
+
+export interface RouteAlbumParameters {
+  id: string;
+}
+
+/* Playlist */
+const PLAYLIST = "/playlist/:id";
+
+export interface RoutePlaylistParameters {
+  id: string;
+}
+
 /* Development */
 const DEVELOPMENT = "/development";
 
@@ -30,6 +44,8 @@ const SITEMAP = {
   SEARCH,
   SEARCH_RESULTS,
   ARTIST,
+  ALBUM,
+  PLAYLIST,
   HOME,
   LIBRARY,
   SETTINGS,
