@@ -1,6 +1,7 @@
 import { Link, LinkProps } from "react-router-dom";
 import { Interaction } from "../interfaces/Card";
 import { SITEMAP } from "../application/site-map";
+import { createUrl } from "../utils/create-url";
 
 interface Identifier {
   id: string;
@@ -36,7 +37,11 @@ function useInteractions<T extends INTERACTIONS>(
       const interaction: Interaction<LinkProps> = {
         action: {
           as: Link,
-          to: paths[type] + id // TODO: use "interpolate" fn
+          to: createUrl<Payload[typeof type]>(paths[type], {
+            interpolate: {
+              id
+            }
+          })
         },
         label,
         icon,

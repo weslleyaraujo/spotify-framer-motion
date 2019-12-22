@@ -28,6 +28,7 @@ function CardCircle<P>(props: Props<P>) {
       </div>
       <View margin={["small", "none"]}>
         <TextLine
+          numberOfLines={1}
           text={props.title}
           color="foregroundPrimary"
           type="title"

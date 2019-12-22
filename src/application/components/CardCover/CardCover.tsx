@@ -20,7 +20,12 @@ function CardCover<P>(props: Props<P>) {
     <Action {...props.interactions.primary.action}>
       <Picture {...props.media} alt={props.title} aspectRatio="square" />
       <View margin={["small", "none"]}>
-        <TextLine text={props.title} color="foregroundPrimary" type="title" />
+        <TextLine
+          text={props.title}
+          color="foregroundPrimary"
+          type="title"
+          numberOfLines={1}
+        />
       </View>
     </Action>
   );

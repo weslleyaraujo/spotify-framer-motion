@@ -14,7 +14,7 @@ type Album {
   id: ID!
   name: String!
   artist: ID!
-  songs: [Song!]!
+  songs: [ID!]!
   cover: String!
 }
 
@@ -80,4 +80,5 @@ type Query {
   feed: Feed!
   artist(id: ID!): Artist!
   search(term: String!): [SearchResult!]!
+  album(id: ID!): Album!
 }

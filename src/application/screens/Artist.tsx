@@ -18,6 +18,8 @@ import {
 import { RouteComponentProps } from "react-router-dom";
 import { RouteArtistParameters } from "../site-map";
 import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
+import { ErrorView } from "../components/ErrorView/ErrorView";
+import { Fragment } from "react";
 
 interface Props extends RouteComponentProps<RouteArtistParameters> {}
 
@@ -45,7 +47,7 @@ function Artist(props: Props) {
           listeners
           popular {
             name
-            album ## TODO: use it as a variable to query album
+            album
           }
         }
       }
@@ -60,7 +62,7 @@ function Artist(props: Props) {
   const theme = useTheme<Theme>();
 
   if (error) {
-    return <TextLine text="TODO: ErrorView" />;
+    return <ErrorView error={error} />;
   }
 
   if (loading) {
@@ -151,6 +153,28 @@ function Artist(props: Props) {
         ))}
       </AnimatedMinimize>
     </FadePresence>
+  );
+}
+
+function PopularSong({ id, name }: { id: string; name: string }) {
+  const theme = useTheme<Theme>();
+  const {} = useQuery(gql);
+  return (
+    <Fragment>
+      <View>
+        <Picture
+          width={theme.scales.medium}
+          height={theme.scales.medium}
+          alt="Music"
+          source=""
+          aspectRatio="square"
+        />
+      </View>
+      <View flex={1} padding={["small", "medium"]}>
+        {/* <TextLine text={item.name} /> */}
+        <TextLine text="2015 - Album" color="foregroundSecondary" />
+      </View>
+    </Fragment>
   );
 }
 

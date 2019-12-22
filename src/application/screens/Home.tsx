@@ -46,6 +46,7 @@ function Home(props: Props) {
           title
           items {
             id
+            contentId
             name
             cover
             type
@@ -98,9 +99,9 @@ function Home(props: Props) {
               horizontalPadding="medium"
               maxVisibleItems={2}
             >
-              {items.map(({ id, name, cover, type }, index) => {
+              {items.map(({ id, name, cover, type, contentId }, index) => {
                 const primary = createInteraction(interactions[type], {
-                  id,
+                  id: contentId,
                   label: `Go to ${name}`
                 });
                 switch (type) {
