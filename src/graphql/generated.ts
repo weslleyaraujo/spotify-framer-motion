@@ -125,6 +125,13 @@ export type GQLGetArtistQueryVariables = {
 
 export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, popular: Array<{ __typename: 'Song', name: string, album: string }> } };
 
+export type GQLGetPopularAlbumQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type GQLGetPopularAlbumQuery = { __typename: 'Query', album: { __typename: 'Album', cover: string, name: string } };
+
 export type GQLGetFeedQueryVariables = {};
 
 

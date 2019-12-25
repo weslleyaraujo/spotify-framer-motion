@@ -27,7 +27,7 @@ function ErrorView({ error, title, body }: Props & DefaultProps) {
 
     if (error instanceof Error) {
       if (isApolloError(error)) {
-        return `Apollo: ${error.message}`;
+        return `Apollo Error: ${error.message}`;
       }
 
       return `Error: ${error.message}`;
@@ -45,10 +45,12 @@ function ErrorView({ error, title, body }: Props & DefaultProps) {
       <View align="center" justify="center">
         <Icon<Icons> type="magnifyingGlassOutline" size="larger" />
       </View>
-      <TextLine text="Hello World" textAlign="center" type="title" />
-      <View margin={["medium", "none"]}>
-        <TextLine text="Hello World" textAlign="center" type="featured" />
-      </View>
+      <TextLine text={title} textAlign="center" type="title" />
+      {body && (
+        <View margin={["medium", "none"]}>
+          <TextLine text={body} textAlign="center" type="featured" />
+        </View>
+      )}
       {process.env.NODE_ENV === "development" && (
         <View>
           <pre
@@ -64,5 +66,7 @@ function ErrorView({ error, title, body }: Props & DefaultProps) {
     </Fragment>
   );
 }
+
+ErrorView.defaultProps = defaultProps;
 
 export { ErrorView };

@@ -13,7 +13,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import {
   GQLGetArtistQuery,
-  GQLGetArtistQueryVariables
+  GQLGetArtistQueryVariables,
+  GQLGetPopularAlbumQuery,
+  GQLGetPopularAlbumQueryVariables
 } from "../../graphql/generated";
 import { RouteComponentProps } from "react-router-dom";
 import { RouteArtistParameters } from "../site-map";
@@ -136,19 +138,7 @@ function Artist(props: Props) {
             justify="space-between"
             align="center"
           >
-            <View>
-              <Picture
-                width={theme.scales.medium}
-                height={theme.scales.medium}
-                alt="Music"
-                source=""
-                aspectRatio="square"
-              />
-            </View>
-            <View flex={1} padding={["small", "medium"]}>
-              <TextLine text={item.name} />
-              <TextLine text="2015 - Album" color="foregroundSecondary" />
-            </View>
+            <PopularSong id={item.album} track={item.name} />
           </View>
         ))}
       </AnimatedMinimize>
@@ -156,9 +146,31 @@ function Artist(props: Props) {
   );
 }
 
-function PopularSong({ id, name }: { id: string; name: string }) {
+function PopularSong({ id, track }: { id: string; track: string }) {
   const theme = useTheme<Theme>();
-  const {} = useQuery(gql);
+  const { data, loading, error } = useQuery<
+    GQLGetPopularAlbumQuery,
+    GQLGetPopularAlbumQueryVariables
+  >(
+    gql`
+      query GetPopularAlbum($id: ID!) {
+        album(id: $id) @client {
+          cover
+          name
+        }
+      }
+    `,
+    {
+      variables: {
+        id
+      }
+    }
+  );
+
+  if (loading || error || !data) {
+    return null;
+  }
+
   return (
     <Fragment>
       <View>
@@ -166,13 +178,13 @@ function PopularSong({ id, name }: { id: string; name: string }) {
           width={theme.scales.medium}
           height={theme.scales.medium}
           alt="Music"
-          source=""
+          source={data.album.cover}
           aspectRatio="square"
         />
       </View>
       <View flex={1} padding={["small", "medium"]}>
-        {/* <TextLine text={item.name} /> */}
-        <TextLine text="2015 - Album" color="foregroundSecondary" />
+        <TextLine text={track} />
+        <TextLine text={data.album.name} color="foregroundSecondary" />
       </View>
     </Fragment>
   );
