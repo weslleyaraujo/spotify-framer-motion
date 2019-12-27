@@ -2,6 +2,8 @@
 import { useLazyQuery } from "@apollo/react-hooks";
 import { jsx } from "@emotion/core";
 import { gql } from "apollo-boost";
+import debounce from "lodash.debounce";
+import { useCallback, useEffect, Fragment } from "react";
 import { Icon } from "../../components/atoms/Icon/Icon";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
@@ -9,25 +11,23 @@ import { View } from "../../components/atoms/View/View";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 import { Grid } from "../../components/utilities/Grid/Grid";
 import { Icons } from "../../foundations/icons";
-import { SearchInput } from "../components/SearchInput/SearchInput";
-import debounce from "lodash.debounce";
 import {
   GQLGetSearchResultsQuery,
   GQLGetSearchResultsQueryVariables,
   GQLSearchResultType
 } from "../../graphql/generated";
+import { SearchInput } from "../components/SearchInput/SearchInput";
 import {
-  useCallback,
-  FormEventHandler,
-  ChangeEvent,
-  Fragment,
-  useEffect
-} from "react";
+  useLazyInteractions,
+  INTERACTIONS
+} from "../../hooks/use-interactions";
+import { Line } from "../components/Line/Line";
 
 interface Props {}
 
 function SearchResults(props: Props) {
-  const [search, { data, loading, error }] = useLazyQuery<
+  const createInteraction = useLazyInteractions();
+  const [search, { data }] = useLazyQuery<
     GQLGetSearchResultsQuery,
     GQLGetSearchResultsQueryVariables
   >(
@@ -60,13 +60,13 @@ function SearchResults(props: Props) {
           switch (item.type) {
             case GQLSearchResultType.Album: {
               return (
-                <View
-                  padding={["small", "medium"]}
-                  justify="space-between"
-                  align="center"
-                  key={item.id}
-                >
-                  <View>
+                <Line
+                  key={`search-result-${item.id}`}
+                  interaction={createInteraction(INTERACTIONS.NAVIGATE_ALBUM, {
+                    id: item.id,
+                    label: `Go to ${item.name}`
+                  })}
+                  head={
                     <Picture
                       width={60}
                       height={60}
@@ -74,26 +74,26 @@ function SearchResults(props: Props) {
                       source={item.cover}
                       aspectRatio="square"
                     />
-                  </View>
-                  <View flex={1} padding={["small", "medium"]}>
-                    <TextLine text="Currents" />
-                    <TextLine text={item.name} color="foregroundSecondary" />
-                  </View>
-                  <View>
-                    <Icon<Icons> type="strokeArrowUp" size="small" />
-                  </View>
-                </View>
+                  }
+                  body={
+                    <Fragment>
+                      <TextLine text="TODO" />
+                      <TextLine text={item.name} color="foregroundSecondary" />
+                    </Fragment>
+                  }
+                  tail={<Icon<Icons> type="strokeArrowUp" size="small" />}
+                />
               );
             }
             case GQLSearchResultType.Artist: {
               return (
-                <View
-                  padding={["small", "medium"]}
-                  justify="space-between"
-                  align="center"
-                  key={item.id}
-                >
-                  <View>
+                <Line
+                  key={`search-result-${item.id}`}
+                  interaction={createInteraction(INTERACTIONS.NAVIGATE_ARTIST, {
+                    id: item.id,
+                    label: `Go to ${item.name}`
+                  })}
+                  head={
                     <div
                       css={{
                         width: 60,
@@ -110,14 +110,10 @@ function SearchResults(props: Props) {
                         aspectRatio="square"
                       />
                     </div>
-                  </View>
-                  <View flex={1} padding={["small", "medium"]}>
-                    <TextLine text={item.name} />
-                  </View>
-                  <View>
-                    <Icon<Icons> type="strokeArrowUp" size="small" />
-                  </View>
-                </View>
+                  }
+                  body={<TextLine text={item.name} />}
+                  tail={<Icon<Icons> type="strokeArrowUp" size="small" />}
+                />
               );
             }
           }

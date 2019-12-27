@@ -3,7 +3,6 @@ import { gql } from "apollo-boost";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../../components/atoms/Icon/Icon";
-import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { View } from "../../components/atoms/View/View";
 import { Section } from "../../components/molecules/Section/Section";
 import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/AnimatedMinimize";
@@ -23,8 +22,8 @@ import {
 } from "../../hooks/use-interactions";
 import { CardCircle } from "../components/CardCircle/CardCircle";
 import { CardCover } from "../components/CardCover/CardCover";
-import { SITEMAP } from "../site-map";
 import { ErrorView } from "../components/ErrorView/ErrorView";
+import { SITEMAP } from "../site-map";
 
 const interactions = {
   [GQLSectionType.Artist]: INTERACTIONS.NAVIGATE_ARTIST,
