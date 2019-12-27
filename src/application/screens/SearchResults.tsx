@@ -10,10 +10,19 @@ import { FadePresence } from "../../components/utilities/FadePresence/FadePresen
 import { Grid } from "../../components/utilities/Grid/Grid";
 import { Icons } from "../../foundations/icons";
 import { SearchInput } from "../components/SearchInput/SearchInput";
+import debounce from "lodash.debounce";
 import {
   GQLGetSearchResultsQuery,
-  GQLGetSearchResultsQueryVariables
+  GQLGetSearchResultsQueryVariables,
+  GQLSearchResultType
 } from "../../graphql/generated";
+import {
+  useCallback,
+  FormEventHandler,
+  ChangeEvent,
+  Fragment,
+  useEffect
+} from "react";
 
 interface Props {}
 
@@ -28,80 +37,91 @@ function SearchResults(props: Props) {
           type
           name
           id
+          cover
         }
       }
-    `,
-    {}
+    `
   );
 
-  console.log(JSON.stringify(data, null, 2));
+  const onChange = useCallback(
+    debounce((term: string) => search({ variables: { term } }), 500),
+    [search]
+  );
+
+  useEffect(() => {
+    search({ variables: { term: "" } });
+  }, [search]);
+
   return (
     <FadePresence>
-      <SearchInput
-        onChange={event => {
-          search({
-            variables: {
-              term: event.target.value
-            }
-          });
-        }}
-      />
+      <SearchInput onChange={onChange} />
       <Grid>
-        <View
-          padding={["small", "medium"]}
-          justify="space-between"
-          align="center"
-        >
-          <View>
-            <div
-              css={{
-                width: 60,
-                height: 60,
-                borderRadius: "4000px",
-                overflow: "hidden"
-              }}
-            >
-              <Picture
-                width={60}
-                height={60}
-                alt="Music"
-                source=""
-                aspectRatio="square"
-              />
-            </div>
-          </View>
-          <View flex={1} padding={["small", "medium"]}>
-            <TextLine text="Tame impala" />
-          </View>
-          <View>
-            <Icon<Icons> type="strokeArrowUp" size="small" />
-          </View>
-        </View>
-        {[...new Array(12)].map((item, key) => (
-          <View
-            key={key}
-            padding={["small", "medium"]}
-            justify="space-between"
-            align="center"
-          >
-            <View>
-              <Picture
-                width={60}
-                height={60}
-                alt="Music"
-                source=""
-                aspectRatio="square"
-              />
-            </View>
-            <View flex={1} padding={["small", "medium"]}>
-              <TextLine text="Currents" />
-              <TextLine text="Tame impala" color="foregroundSecondary" />
-            </View>
-            <View>
-              <Icon<Icons> type="strokeArrowUp" size="small" />
-            </View>
-          </View>
-        ))}
+        {data?.search.map((item, key) => {
+          switch (item.type) {
+            case GQLSearchResultType.Album: {
+              return (
+                <View
+                  padding={["small", "medium"]}
+                  justify="space-between"
+                  align="center"
+                  key={item.id}
+                >
+                  <View>
+                    <Picture
+                      width={60}
+                      height={60}
+                      alt="Music"
+                      source={item.cover}
+                      aspectRatio="square"
+                    />
+                  </View>
+                  <View flex={1} padding={["small", "medium"]}>
+                    <TextLine text="Currents" />
+                    <TextLine text={item.name} color="foregroundSecondary" />
+                  </View>
+                  <View>
+                    <Icon<Icons> type="strokeArrowUp" size="small" />
+                  </View>
+                </View>
+              );
+            }
+            case GQLSearchResultType.Artist: {
+              return (
+                <View
+                  padding={["small", "medium"]}
+                  justify="space-between"
+                  align="center"
+                  key={item.id}
+                >
+                  <View>
+                    <div
+                      css={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: "4000px",
+                        overflow: "hidden"
+                      }}
+                    >
+                      <Picture
+                        width={60}
+                        height={60}
+                        alt="Music"
+                        source={item.cover}
+                        aspectRatio="square"
+                      />
+                    </div>
+                  </View>
+                  <View flex={1} padding={["small", "medium"]}>
+                    <TextLine text={item.name} />
+                  </View>
+                  <View>
+                    <Icon<Icons> type="strokeArrowUp" size="small" />
+                  </View>
+                </View>
+              );
+            }
+          }
+        })}
       </Grid>
     </FadePresence>
   );

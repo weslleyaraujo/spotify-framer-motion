@@ -24,6 +24,7 @@ import {
 import { CardCircle } from "../components/CardCircle/CardCircle";
 import { CardCover } from "../components/CardCover/CardCover";
 import { SITEMAP } from "../site-map";
+import { ErrorView } from "../components/ErrorView/ErrorView";
 
 const interactions = {
   [GQLSectionType.Artist]: INTERACTIONS.NAVIGATE_ARTIST,
@@ -64,7 +65,7 @@ function Home(props: Props) {
   });
 
   if (error) {
-    return <TextLine text="ErrorView TODO" />;
+    return <ErrorView error={error} />;
   }
 
   if (loading) {

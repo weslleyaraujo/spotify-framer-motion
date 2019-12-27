@@ -9,17 +9,20 @@ const data = [
   ...artists.map(item => ({
     id: item.id,
     name: item.name,
-    type: GQLSearchResultType.Artist
+    type: GQLSearchResultType.Artist,
+    cover: item.cover
   })),
   ...tracks.map(item => ({
     id: item.id,
     name: item.name,
-    type: GQLSearchResultType.Track
+    type: GQLSearchResultType.Track,
+    cover: "" // TODO: find cover for the track
   })),
   ...albums.map(item => ({
     id: item.id,
     name: item.name,
-    type: GQLSearchResultType.Album
+    type: GQLSearchResultType.Album,
+    cover: item.cover
   }))
 ];
 

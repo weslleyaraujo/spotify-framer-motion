@@ -19,7 +19,9 @@ import { Theme } from "../../../foundations/Theme";
 import { useClickOutSide } from "../../../hooks/use-click-outside";
 
 interface Props
-  extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus" | "onChange"> {}
+  extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus"> {
+  onChange: (value: string) => void;
+}
 
 interface DefaultProps extends Required<Pick<Props, "placeholder">> {}
 
@@ -41,6 +43,7 @@ function SearchInput({ placeholder, onFocus, onChange }: Props & DefaultProps) {
     justify: "center",
     align: "center"
   });
+
   const { lineHeight, ...font } = theme.fonts.body;
 
   useClickOutSide(ref, () => {
@@ -164,7 +167,7 @@ function SearchInput({ placeholder, onFocus, onChange }: Props & DefaultProps) {
           ref={ref}
           onClick={e => setFocus(true)}
           onBlur={e => setFocus(false)}
-          onChange={onChange}
+          onChange={({ target: { value } }) => onChange(value)}
           type="text"
           css={{
             ...font,
