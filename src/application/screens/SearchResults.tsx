@@ -22,10 +22,12 @@ import {
 } from "../../hooks/use-interactions";
 import { Line } from "../components/Line/Line";
 import { SearchInput } from "../components/SearchInput/SearchInput";
+import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
 
 interface SearchResultsProps {}
 
 function SearchResults(props: SearchResultsProps) {
+  useScrollTopOnce();
   const createInteraction = useLazyInteractions();
   const [search, { data }] = useLazyQuery<
     GQLGetSearchResultsQuery,

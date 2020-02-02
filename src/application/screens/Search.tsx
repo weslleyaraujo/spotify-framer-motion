@@ -10,11 +10,13 @@ import { useBodyBackground } from "../../hooks/use-body-background";
 import { CategoryCard } from "../components/CardCategory/CardCategory";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import { SITEMAP } from "../site-map";
+import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
 
 interface SearchProps {}
 
 function Search(props: SearchProps) {
   const history = useHistory();
+  useScrollTopOnce();
   useBodyBackground({
     color: "white",
     gradientStyle: "topLeft"

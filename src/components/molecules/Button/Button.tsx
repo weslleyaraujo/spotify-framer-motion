@@ -41,8 +41,8 @@ const MAP_TEXT_TYPE: {
   >["type"];
 } = {
   small: "featured",
-  medium: "body",
-  large: "body"
+  medium: "featured",
+  large: "featured"
 };
 
 const PADDING_SIZE_MAP: {

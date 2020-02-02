@@ -8,7 +8,7 @@ const theme: Theme<Icons> = {
   icons,
   colors: {
     foregroundPrimary: "#FFFFFF",
-    foregroundSecondary: "#b3b3b3",
+    foregroundSecondary: "#B3B3B3",
     absoluteLight: "#FFFFFF",
     absoluteDark: "#18262C",
     background: "#121212",
@@ -37,10 +37,10 @@ const theme: Theme<Icons> = {
   },
   fonts: {
     display: {
-      fontSize: 36,
+      fontSize: 42,
       fontWeight: 800,
       fontStyle: "normal",
-      lineHeight: 36,
+      lineHeight: 42,
       fontFamily: "Circular Black"
     },
     body: {
@@ -48,6 +48,13 @@ const theme: Theme<Icons> = {
       fontWeight: "normal",
       lineHeight: 20,
       fontFamily
+    },
+    featured: {
+      fontWeight: 400,
+      fontSize: 14,
+      lineHeight: 20,
+      fontFamily: "Circular Bold",
+      letterSpacing: 2
     },
     caption: {
       fontWeight: 400,
@@ -59,7 +66,7 @@ const theme: Theme<Icons> = {
       fontWeight: 700,
       fontSize: 22,
       lineHeight: 24,
-      fontFamily
+      fontFamily: "Circular Bold"
     },
     subtitle: {
       fontWeight: 500,
@@ -75,12 +82,6 @@ const theme: Theme<Icons> = {
     strong: {
       fontWeight: 700,
       fontSize: 14,
-      lineHeight: 20,
-      fontFamily
-    },
-    featured: {
-      fontWeight: 400,
-      fontSize: 12,
       lineHeight: 20,
       fontFamily
     }

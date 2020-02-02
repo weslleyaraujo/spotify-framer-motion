@@ -21,6 +21,9 @@ import {
 } from "../../graphql/generated";
 import { ErrorView } from "../components/ErrorView/ErrorView";
 import { RouteArtistParameters } from "../site-map";
+import { transparentize } from "polished";
+import { Layers } from "../../foundations/Layers";
+import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
 
 interface ArtistProps extends RouteComponentProps<RouteArtistParameters> {}
 
@@ -37,6 +40,8 @@ function Artist(props: ArtistProps) {
     justify: "center",
     align: "flex-end"
   });
+
+  useScrollTopOnce();
 
   const { data, error, loading } = useQuery<
     GQLGetArtistQuery,
@@ -90,11 +95,23 @@ function Artist(props: ArtistProps) {
               ...headerStyles,
               label: "background",
               paddingBottom: theme.units.larger,
-              height: theme.scales.larger * 2,
+              height: theme.scales.larger * 2.3,
               backgroundImage: `url(${data.artist.cover})`,
               backgroundPosition: "top center",
               backgroundSize: "100vw",
-              backgroundRepeat: "no-repeat"
+              backgroundRepeat: "no-repeat",
+              "&:after": {
+                content: "''",
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                backgroundColor: transparentize(0.7, theme.colors.background),
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: Layers.Root
+              }
             }}
           >
             <View
@@ -103,7 +120,9 @@ function Artist(props: ArtistProps) {
               align="center"
               supportsTruncation
               style={{
-                width: "76vw"
+                width: "76vw",
+                position: "relative",
+                zIndex: Layers.Root + 10
               }}
             >
               <TextLine
@@ -116,7 +135,7 @@ function Artist(props: ArtistProps) {
                 <TextLine
                   text={`${data.artist.listeners} MONTHLY LISTENERS`}
                   type="caption"
-                  color="foregroundSecondary"
+                  color="foregroundPrimary"
                 />
               </View>
             </View>

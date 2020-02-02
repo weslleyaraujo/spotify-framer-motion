@@ -126,12 +126,13 @@ function ScaleOut({
             top: 0,
             left: 0,
             width: "100%",
+            // outline: "1px solid red",
             ...(paintHeight.current && {
-              height: paintHeight.current / 1.9,
-              top: `-${paintHeight.current / 1.9}px`
+              height: paintHeight.current / 1.8,
+              top: `-${paintHeight.current / 1.8}px`
             }),
             ...(!disableBackground && {
-              backgroundImage: `linear-gradient(transparent 0%, ${theme.colors.background} 80%)`
+              backgroundImage: `linear-gradient(transparent 35%, ${theme.colors.background} 80%)`
             })
           }
         }}

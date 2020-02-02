@@ -24,6 +24,7 @@ import { CardCircle } from "../components/CardCircle/CardCircle";
 import { CardCover } from "../components/CardCover/CardCover";
 import { ErrorView } from "../components/ErrorView/ErrorView";
 import { SITEMAP } from "../site-map";
+import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
 
 const interactions = {
   [GQLSectionType.Artist]: INTERACTIONS.NAVIGATE_ARTIST,
@@ -34,6 +35,7 @@ const interactions = {
 interface HomeProps {}
 
 function Home(props: HomeProps) {
+  useScrollTopOnce();
   const { data, loading, error } = useQuery<
     GQLGetFeedQuery,
     GQLGetFeedQueryVariables
