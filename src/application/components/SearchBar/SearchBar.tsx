@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useTheme } from "emotion-theming";
-import { Theme } from "../../../foundations/Theme";
+import { Icon } from "../../../components/atoms/Icon/Icon";
 import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
-import { Layers } from "../../../foundations/Layers";
-import { Icon } from "../../../components/atoms/Icon/Icon";
 import { Icons } from "../../../foundations/icons";
+import { Layers } from "../../../foundations/Layers";
+import { Theme } from "../../../foundations/Theme";
 
 interface SearchBarProps
   extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus"> {}

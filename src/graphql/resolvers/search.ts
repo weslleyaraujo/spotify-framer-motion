@@ -65,6 +65,12 @@ const fuzzy = new Fuse(data, {
 });
 
 const search: GQLQueryResolvers["search"] = (parent, { term }, context) => {
+  if (!term) {
+    return data.map(item => ({
+      __typename: "SearchResult",
+      ...item
+    }));
+  }
   return fuzzy.search(term.toLocaleLowerCase().trim()).map(item => ({
     __typename: "SearchResult",
     ...item

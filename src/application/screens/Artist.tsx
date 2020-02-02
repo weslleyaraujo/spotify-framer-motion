@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { jsx } from "@emotion/core";
 import { gql } from "apollo-boost";
 import { useTheme } from "emotion-theming";
-import { Fragment } from "react";
+import { transparentize } from "polished";
 import { RouteComponentProps } from "react-router-dom";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
@@ -12,6 +12,7 @@ import { Button } from "../../components/molecules/Button/Button";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 import { ScaleOut } from "../../components/utilities/ScaleOut/ScaleOut";
+import { Layers } from "../../foundations/Layers";
 import { Theme } from "../../foundations/Theme";
 import {
   GQLGetArtistQuery,
@@ -19,11 +20,10 @@ import {
   GQLGetPopularAlbumQuery,
   GQLGetPopularAlbumQueryVariables
 } from "../../graphql/generated";
-import { ErrorView } from "../components/ErrorView/ErrorView";
-import { RouteArtistParameters } from "../site-map";
-import { transparentize } from "polished";
-import { Layers } from "../../foundations/Layers";
 import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
+import { ErrorView } from "../components/ErrorView/ErrorView";
+import { Line } from "../components/Line/Line";
+import { RouteArtistParameters } from "../site-map";
 
 interface ArtistProps extends RouteComponentProps<RouteArtistParameters> {}
 
@@ -161,14 +161,7 @@ function Artist(props: ArtistProps) {
           </View>
         </View>
         {data.artist.popular.map((item, key) => (
-          <View
-            key={key}
-            padding={["small", "medium"]}
-            justify="space-between"
-            align="center"
-          >
-            <PopularSong id={item.album} track={item.name} />
-          </View>
+          <PopularSong id={item.album} track={item.name} key={key} />
         ))}
         <div
           style={{
@@ -206,8 +199,14 @@ function PopularSong({ id, track }: { id: string; track: string }) {
   }
 
   return (
-    <Fragment>
-      <View>
+    <Line
+      interaction={{
+        label: "Go to TODO",
+        action: {
+          as: "div"
+        }
+      }}
+      head={
         <Picture
           width={theme.scales.medium}
           height={theme.scales.medium}
@@ -215,12 +214,11 @@ function PopularSong({ id, track }: { id: string; track: string }) {
           source={data.album.cover}
           aspectRatio="square"
         />
-      </View>
-      <View flex={1} padding={["small", "medium"]}>
-        <TextLine text={track} />
-        <TextLine text={data.album.name} color="foregroundSecondary" />
-      </View>
-    </Fragment>
+      }
+    >
+      <TextLine text={track} />
+      <TextLine text={data.album.name} color="foregroundSecondary" />
+    </Line>
   );
 }
 

@@ -5,6 +5,7 @@ import { Picture } from "../../../components/atoms/Picture/Picture";
 import { jsx } from "@emotion/core";
 import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
+import { Ring } from "../Ring/Ring";
 
 interface CardCircleProps<P extends Object>
   extends CardProps<{
@@ -18,14 +19,9 @@ interface CardCircleProps<P extends Object>
 function CardCircle<P>(props: CardCircleProps<P>) {
   return (
     <Action {...props.interactions.primary.action}>
-      <div
-        css={{
-          borderRadius: 4000,
-          overflow: "hidden"
-        }}
-      >
+      <Ring>
         <Picture {...props.media} alt={props.title} aspectRatio="square" />
-      </div>
+      </Ring>
       <View margin={["small", "none"]}>
         <TextLine
           numberOfLines={1}

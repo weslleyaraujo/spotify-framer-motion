@@ -7,14 +7,14 @@ import { Interaction } from "../../../interfaces/Card";
 interface LineProps<T extends Object> {
   interaction: Interaction<T>;
   head?: React.ReactNode;
-  body?: React.ReactNode;
+  children?: React.ReactNode;
   tail?: React.ReactNode;
 }
 
 function Line<P extends Object>({
   interaction,
   head,
-  body,
+  children,
   tail
 }: LineProps<P>) {
   return (
@@ -27,7 +27,7 @@ function Line<P extends Object>({
       >
         <View supportsTruncation>{head || null}</View>
         <View flex={1} padding={["small", "medium"]} supportsTruncation>
-          {body || null}
+          {children || null}
         </View>
         <View supportsTruncation>{tail || null}</View>
       </View>

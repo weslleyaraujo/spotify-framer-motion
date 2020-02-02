@@ -38,7 +38,7 @@ function SearchInput({
   const ref = useRef<HTMLInputElement>(null);
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
-  const [focus, setFocus] = useState();
+  const [focus, setFocus] = useState(true);
   const scrollMotion = useMotionValue(1);
   const [contentRef, { height }] = useDimensions({
     liveMeasure: false
@@ -52,6 +52,10 @@ function SearchInput({
   const { lineHeight, ...font } = theme.fonts.body;
 
   useClickOutSide(ref, () => {
+    if (!ref.current.value) {
+      return;
+    }
+
     setFocus(false);
     if (ref.current && focus) {
       ref.current.blur();
@@ -80,6 +84,13 @@ function SearchInput({
       lighten(0.06, theme.colors.backgroundAccent)
     ]
   );
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.focus();
+      setFocus(true);
+    }
+  }, []);
 
   return (
     <motion.div
@@ -170,8 +181,15 @@ function SearchInput({
         </motion.div>
         <input
           ref={ref}
-          onClick={e => setFocus(true)}
-          onBlur={e => setFocus(false)}
+          onClick={e => {
+            setFocus(true);
+            ref.current && ref.current.focus();
+          }}
+          onBlur={e => {
+            if (!e.target.value) {
+              setFocus(false);
+            }
+          }}
           onChange={({ target: { value } }) => onChange(value)}
           type="text"
           css={{
@@ -187,6 +205,7 @@ function SearchInput({
             paddingTop: theme.units.medium,
             paddingBottom: theme.units.medium,
             position: "relative",
+            fontSize: 16,
             zIndex: Layers.Stacks + 200,
             "&:focus": {
               outline: "transparent"
