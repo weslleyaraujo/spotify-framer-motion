@@ -23,12 +23,13 @@ function Line<P extends Object>({
         padding={["small", "medium"]}
         justify="space-between"
         align="center"
+        supportsTruncation
       >
-        <View>{head || null}</View>
-        <View flex={1} padding={["small", "medium"]}>
+        <View supportsTruncation>{head || null}</View>
+        <View flex={1} padding={["small", "medium"]} supportsTruncation>
           {body || null}
         </View>
-        <View>{tail || null}</View>
+        <View supportsTruncation>{tail || null}</View>
       </View>
     </Action>
   );

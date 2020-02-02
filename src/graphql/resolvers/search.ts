@@ -6,11 +6,12 @@ import flatten from "lodash.flatten";
 
 import { GQLQueryResolvers, GQLSearchResultType } from "../generated";
 
-// LOL
+/**  Here's a super LOL search. Love it */
 const data = [
   ...artists.map(item => ({
     id: item.id,
     name: item.name,
+    body: "Artist",
     type: GQLSearchResultType.Artist,
     terms: flatten([
       item.name,
@@ -23,6 +24,9 @@ const data = [
   ...tracks.map(item => ({
     id: item.id,
     name: item.name,
+    body: `Song · ${
+      artists.find(artist => item.artist.includes(artist.id))?.name
+    }`,
     type: GQLSearchResultType.Track,
     terms: flatten([
       item.name,
@@ -36,6 +40,9 @@ const data = [
   ...albums.map(item => ({
     id: item.id,
     name: item.name,
+    body: `Album · ${
+      artists.find(artist => item.artists.includes(artist.id))?.name
+    }`,
     type: GQLSearchResultType.Album,
     cover: item.cover,
     terms: flatten([

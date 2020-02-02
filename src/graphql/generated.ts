@@ -71,6 +71,7 @@ export interface GQLQueryAlbumArgs {
 export interface GQLSearchResult {
    __typename: 'SearchResult',
   name: Scalars['String'],
+  body: Maybe<Scalars['String']>,
   type: GQLSearchResultType,
   cover: Scalars['String'],
   id: Scalars['ID'],
@@ -143,7 +144,7 @@ export type GQLGetSearchResultsQueryVariables = {
 };
 
 
-export type GQLGetSearchResultsQuery = { __typename: 'Query', search: Array<{ __typename: 'SearchResult', type: GQLSearchResultType, name: string, id: string, cover: string }> };
+export type GQLGetSearchResultsQuery = { __typename: 'Query', search: Array<{ __typename: 'SearchResult', type: GQLSearchResultType, name: string, body: Maybe<string>, id: string, cover: string }> };
 
 
 
@@ -288,6 +289,7 @@ export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolvers
 
 export type GQLSearchResultResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['SearchResult'] = GQLResolversParentTypes['SearchResult']> = {
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  body: Resolver<Maybe<GQLResolversTypes['String']>, ParentType, ContextType>,
   type: Resolver<GQLResolversTypes['SearchResultType'], ParentType, ContextType>,
   cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,

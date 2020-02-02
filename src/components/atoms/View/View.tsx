@@ -104,7 +104,10 @@ function useViewStyles(
     padding,
     debugTrace,
     flex
-  } = props;
+  } = {
+    ...defaultProps,
+    ...props
+  };
   const theme = useTheme<Theme>();
   const display = [
     justifyContent,

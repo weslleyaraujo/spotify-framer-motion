@@ -21,6 +21,7 @@ import {
 } from "../../hooks/use-interactions";
 import { Line } from "../components/Line/Line";
 import { SearchInput } from "../components/SearchInput/SearchInput";
+import { View } from "../../components/atoms/View/View";
 
 interface SearchResultsProps {}
 
@@ -35,6 +36,7 @@ function SearchResults(props: SearchResultsProps) {
         search(term: $term) @client {
           type
           name
+          body
           id
           cover
         }
@@ -61,7 +63,12 @@ function SearchResults(props: SearchResultsProps) {
               return (
                 <Line
                   key={`search-result-${item.id}`}
-                  body={<TextLine>{item.name}</TextLine>}
+                  body={
+                    <View supportsTruncation>
+                      <TextLine numberOfLines={1}>{item.name}</TextLine>
+                      <TextLine text={item.body} color="foregroundSecondary" />
+                    </View>
+                  }
                   head={
                     <Picture
                       width={60}
@@ -96,10 +103,10 @@ function SearchResults(props: SearchResultsProps) {
                     />
                   }
                   body={
-                    <Fragment>
-                      <TextLine text={item.name} />
-                      <TextLine text={item.name} color="foregroundSecondary" />
-                    </Fragment>
+                    <View supportsTruncation>
+                      <TextLine numberOfLines={1}>{item.name}</TextLine>
+                      <TextLine text={item.body} color="foregroundSecondary" />
+                    </View>
                   }
                   tail={<Icon<Icons> type="strokeArrowUp" size="small" />}
                 />
@@ -131,7 +138,12 @@ function SearchResults(props: SearchResultsProps) {
                       />
                     </div>
                   }
-                  body={<TextLine text={item.name} />}
+                  body={
+                    <View supportsTruncation>
+                      <TextLine numberOfLines={1}>{item.name}</TextLine>
+                      <TextLine text={item.body} color="foregroundSecondary" />
+                    </View>
+                  }
                   tail={<Icon<Icons> type="strokeArrowUp" size="small" />}
                 />
               );

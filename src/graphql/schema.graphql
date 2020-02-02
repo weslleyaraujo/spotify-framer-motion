@@ -71,6 +71,7 @@ enum SearchResultType {
 
 type SearchResult {
   name: String!
+  body: String
   type: SearchResultType!
   cover: String!
   id: ID!
