@@ -11,9 +11,9 @@ import { CategoryCard } from "../components/CardCategory/CardCategory";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import { SITEMAP } from "../site-map";
 
-interface Props {}
+interface SearchProps {}
 
-function Search(props: Props) {
+function Search(props: SearchProps) {
   const history = useHistory();
   useBodyBackground({
     color: "white",

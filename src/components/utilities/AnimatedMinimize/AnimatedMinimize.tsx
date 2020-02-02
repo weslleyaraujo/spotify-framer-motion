@@ -12,17 +12,19 @@ import useDimensions from "react-use-dimensions";
 import { Layers } from "../../../foundations/Layers";
 import { Theme } from "../../../foundations/Theme";
 
-interface Props {
+interface AnimatedMinimizeProps {
   content: React.ReactNode;
   children: React.ReactNode;
   disableScaling?: boolean;
   disableBackground?: boolean;
 }
 
-interface DefaultProps
-  extends Required<Pick<Props, "disableBackground" | "disableScaling">> {}
+interface AnimatedMinimizeDefaultProps
+  extends Required<
+    Pick<AnimatedMinimizeProps, "disableBackground" | "disableScaling">
+  > {}
 
-const defaultProps: DefaultProps = {
+const defaultProps: AnimatedMinimizeDefaultProps = {
   disableBackground: false,
   disableScaling: false
 };
@@ -32,7 +34,7 @@ function AnimatedMinimize({
   content,
   disableBackground,
   disableScaling
-}: Props & DefaultProps) {
+}: AnimatedMinimizeProps & AnimatedMinimizeDefaultProps) {
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
   const [contentRef, { height }] = useDimensions({

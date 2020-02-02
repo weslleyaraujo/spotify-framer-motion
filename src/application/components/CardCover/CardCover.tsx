@@ -6,7 +6,7 @@ import { jsx } from "@emotion/core";
 import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
 
-interface Props<P extends Object>
+interface CardCoverProps<P extends Object>
   extends CardProps<{
     required: "interactions" | "media" | "title";
     actions: {
@@ -15,7 +15,7 @@ interface Props<P extends Object>
     interactions: "primary";
   }> {}
 
-function CardCover<P>(props: Props<P>) {
+function CardCover<P>(props: CardCoverProps<P>) {
   return (
     <Action {...props.interactions.primary.action}>
       <Picture {...props.media} alt={props.title} aspectRatio="square" />

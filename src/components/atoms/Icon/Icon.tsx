@@ -8,19 +8,20 @@ import { Theme } from "../../../foundations/Theme";
 import { jsx } from "@emotion/core";
 import { useTheme } from "emotion-theming";
 
-interface Props<T> {
+interface IconProps<T> {
   color: keyof Colors;
   size: keyof Scales;
   type: T;
 }
 
-interface DefaultProps<T> extends Required<Pick<Props<T>, "color" | "size">> {}
+interface IconDefaultProps<T>
+  extends Required<Pick<IconProps<T>, "color" | "size">> {}
 
 function Icon<T extends keyof any>({
   color,
   size,
   type
-}: Props<T> & DefaultProps<T>): React.ReactElement {
+}: IconProps<T> & IconDefaultProps<T>): React.ReactElement {
   const theme = useTheme<Theme<T>>();
   const dimensions = theme.scales[size];
   const el = useMemo(() => {
@@ -49,7 +50,7 @@ function Icon<T extends keyof any>({
   );
 }
 
-const defaultProps: DefaultProps<""> = {
+const defaultProps: IconDefaultProps<""> = {
   color: "foregroundPrimary",
   size: "medium"
 };

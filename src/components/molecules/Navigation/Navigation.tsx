@@ -74,11 +74,11 @@ const defaultItemsProps: ItemDefaultProps<{}> = {
 
 Item.defaultProps = defaultItemsProps;
 
-interface Props<T> {
+interface NavigationProps<T> {
   items: Assign<ItemProps<T>, ItemDefaultProps<T>>[];
 }
 
-function Navigation<T>({ items }: Props<T>) {
+function Navigation<T>({ items }: NavigationProps<T>) {
   const theme = useTheme<Theme>();
   return (
     <div

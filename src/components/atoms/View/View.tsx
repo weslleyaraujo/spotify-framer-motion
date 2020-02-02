@@ -55,7 +55,7 @@ type ViewStyles = Subtract<
   { [P in ClashingCSSProperties]?: CSSObject[P] }
 >;
 
-export interface Props {
+export interface ViewProps {
   children: React.ReactNode;
   margin?: Spacing;
   padding?: Spacing;
@@ -71,11 +71,12 @@ export interface Props {
   flex?: FlexProperty<number>;
 }
 
-interface DefaultProps extends Required<Pick<Props, "margin" | "padding">> {}
+interface ViewDefaultProps
+  extends Required<Pick<ViewProps, "margin" | "padding">> {}
 
 function useViewStyles(
   props: Pick<
-    Props,
+    ViewProps,
     | "margin"
     | "padding"
     | "radius"
@@ -124,7 +125,7 @@ function useViewStyles(
   );
 
   const mapSpacing = useCallback(
-    function mapSpacing(value: Props["margin"] | Props["padding"]) {
+    function mapSpacing(value: ViewProps["margin"] | ViewProps["padding"]) {
       if (!value) {
         return 0;
       }
@@ -137,7 +138,7 @@ function useViewStyles(
   );
 
   const mapRadius = useCallback(
-    function mapRadius(radius: Props["radius"]) {
+    function mapRadius(radius: ViewProps["radius"]) {
       switch (radius) {
         case "small":
           return theme.constants.borderRadiusSmall;
@@ -173,7 +174,7 @@ function useViewStyles(
 }
 
 const View = forwardRef(function View(
-  props: Props,
+  props: ViewProps,
   ref?: React.Ref<HTMLDivElement>
 ) {
   const { children, style } = props;
@@ -191,7 +192,7 @@ const View = forwardRef(function View(
   );
 });
 
-const defaultProps: DefaultProps = {
+const defaultProps: ViewDefaultProps = {
   margin: "none",
   padding: "none"
 };

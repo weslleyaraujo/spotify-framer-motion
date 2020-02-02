@@ -4,9 +4,9 @@ import { View } from "../../components/atoms/View/View";
 import { useBodyBackground } from "../../hooks/use-body-background";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 
-interface Props {}
+interface LibraryProps {}
 
-function Library(props: Props) {
+function Library(props: LibraryProps) {
   useBodyBackground({
     color: "red",
     gradientStyle: "topLeft"

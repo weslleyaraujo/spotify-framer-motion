@@ -4,7 +4,7 @@ import { View, useViewStyles } from "../../atoms/View/View";
 import { TextLine } from "../../atoms/TextLine/TextLine";
 import { Fragment } from "react";
 
-interface Props
+interface SectionProps
   extends Pick<
     React.ComponentProps<typeof View>,
     "padding" | "justify" | "align"
@@ -19,9 +19,9 @@ interface Props
   children: React.ReactNode;
 }
 
-interface DefaultProps
+interface SectionDefaultProps
   extends Required<
-    Pick<Props, "head" | "padding" | "justify" | "align" | "titleType">
+    Pick<SectionProps, "head" | "padding" | "justify" | "align" | "titleType">
   > {}
 
 function Section({
@@ -32,7 +32,7 @@ function Section({
   justify,
   head,
   titleType
-}: Props & DefaultProps) {
+}: SectionProps & SectionDefaultProps) {
   const view = useViewStyles({
     padding,
     justify,
@@ -60,7 +60,7 @@ function Section({
   );
 }
 
-const defaultProps: DefaultProps = {
+const defaultProps: SectionDefaultProps = {
   justify: "center",
   align: "center",
   padding: "large",

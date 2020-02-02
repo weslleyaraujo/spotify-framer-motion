@@ -6,7 +6,7 @@ import { jsx } from "@emotion/core";
 import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
 
-interface Props<P extends Object>
+interface CardCircleProps<P extends Object>
   extends CardProps<{
     required: "interactions" | "media" | "title";
     actions: {
@@ -15,7 +15,7 @@ interface Props<P extends Object>
     interactions: "primary";
   }> {}
 
-function CardCircle<P>(props: Props<P>) {
+function CardCircle<P>(props: CardCircleProps<P>) {
   return (
     <Action {...props.interactions.primary.action}>
       <div

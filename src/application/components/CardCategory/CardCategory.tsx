@@ -9,7 +9,7 @@ import { Picture } from "../../../components/atoms/Picture/Picture";
 import { View } from "../../../components/atoms/View/View";
 import { useBoxShadow } from "../../../hooks/use-box-shadow";
 
-interface Props<P extends Object>
+interface CategoryCardProps<P extends Object>
   extends CardProps<{
     required: "interactions" | "media" | "title";
     actions: {
@@ -23,7 +23,12 @@ interface Props<P extends Object>
   };
 }
 
-function CategoryCard<P>({ interactions, media, title, background }: Props<P>) {
+function CategoryCard<P>({
+  interactions,
+  media,
+  title,
+  background
+}: CategoryCardProps<P>) {
   const theme = useTheme<Theme>();
   const boxShadow = useBoxShadow({
     color: theme.colors.absoluteDark

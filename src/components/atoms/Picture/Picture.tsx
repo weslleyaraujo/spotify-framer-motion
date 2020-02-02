@@ -13,7 +13,7 @@ import { jsx } from "@emotion/core";
 import { useInView } from "react-intersection-observer";
 import { useTheme } from "emotion-theming";
 
-interface Props {
+interface PictureProps {
   /** Image Url */
   source: string;
 
@@ -45,7 +45,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-interface DefaultProps
+interface PictureDefaultProps
   extends Required<
     Pick<
       Props,
@@ -53,7 +53,7 @@ interface DefaultProps
     >
   > {}
 
-const defaultProps: DefaultProps = {
+const defaultProps: PictureDefaultProps = {
   resizeMode: "cover",
   aspectRatio: "standard",
   orientation: "landscape",
@@ -61,7 +61,7 @@ const defaultProps: DefaultProps = {
   onLoad: () => {}
 };
 
-function Picture(props: Props & DefaultProps) {
+function Picture(props: PictureProps & PictureDefaultProps) {
   const {
     children,
     aspectRatio,

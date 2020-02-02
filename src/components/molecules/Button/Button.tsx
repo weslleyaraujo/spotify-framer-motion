@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import { Props as ViewProps, useViewStyles } from "../../atoms/View/View";
+import { ViewProps, useViewStyles } from "../../atoms/View/View";
 
 import { Action } from "../../atoms/Action/Action";
 import { ActionProps } from "../../../interfaces/Card";
@@ -10,7 +10,7 @@ import { Theme } from "../../../foundations/Theme";
 import { jsx } from "@emotion/core";
 import { useTheme } from "emotion-theming";
 
-interface Props<T> {
+interface ButtonProps<T> {
   action: ActionProps<T>;
   type?: "normal" | "primary" | "secondary" | "third";
   size?: SetIntersection<ViewProps["padding"], "medium" | "large" | "small">;
@@ -19,13 +19,13 @@ interface Props<T> {
   display?: "block" | "inline";
 }
 
-interface DefaultProps<T>
+interface ButtonDefaultProps<T>
   extends Required<
-    Pick<Props<T>, "action" | "size" | "rounded" | "display" | "type">
+    Pick<ButtonProps<T>, "action" | "size" | "rounded" | "display" | "type">
   > {}
 
 const MAP_TEXT_COLOR: {
-  [key in DefaultProps<{}>["type"]]: React.ComponentProps<
+  [key in ButtonDefaultProps<{}>["type"]]: React.ComponentProps<
     typeof TextLine
   >["color"];
 } = {
@@ -35,7 +35,7 @@ const MAP_TEXT_COLOR: {
 };
 
 const MAP_TEXT_TYPE: {
-  [key in DefaultProps<{}>["size"]]: React.ComponentProps<
+  [key in ButtonDefaultProps<{}>["size"]]: React.ComponentProps<
     typeof TextLine
   >["type"];
 } = {
@@ -45,7 +45,7 @@ const MAP_TEXT_TYPE: {
 };
 
 const PADDING_SIZE_MAP: {
-  [key in DefaultProps<{}>["size"]]: Parameters<
+  [key in ButtonDefaultProps<{}>["size"]]: Parameters<
     typeof useViewStyles
   >[0]["padding"];
 } = {
@@ -55,7 +55,10 @@ const PADDING_SIZE_MAP: {
 };
 
 function useButtonStyles(
-  props: Pick<Props<{}> & DefaultProps<{}>, "rounded" | "display" | "type">
+  props: Pick<
+    ButtonProps<{}> & ButtonDefaultProps<{}>,
+    "rounded" | "display" | "type"
+  >
 ) {
   const { rounded, display, type } = props;
   const theme = useTheme<Theme>();
@@ -140,7 +143,7 @@ function useButtonStyles(
 }
 
 function Button<T = React.HTMLProps<HTMLButtonElement>>(
-  props: Props<T> & DefaultProps<T>
+  props: ButtonProps<T> & ButtonDefaultProps<T>
 ) {
   const view = useViewStyles({
     padding: PADDING_SIZE_MAP[props.size],
@@ -163,7 +166,7 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>(
   );
 }
 
-const defaultProps: DefaultProps<React.HTMLProps<HTMLButtonElement>> = {
+const defaultProps: ButtonDefaultProps<React.HTMLProps<HTMLButtonElement>> = {
   size: "medium",
   display: "block",
   type: "normal",

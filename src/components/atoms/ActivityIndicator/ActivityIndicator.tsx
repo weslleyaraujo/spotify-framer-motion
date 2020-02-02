@@ -6,7 +6,7 @@ import { jsx } from "@emotion/core";
 import { keyframes } from "@emotion/core";
 import { useTheme } from "emotion-theming";
 
-interface Props {
+interface ActivityIndicatorProps {
   /** Size of the spinner. Default: "medium" */
   size?: keyof Scales;
 
@@ -14,9 +14,10 @@ interface Props {
   color?: ForegroundColors;
 }
 
-interface DefaultProps extends Required<Pick<Props, "size" | "color">> {}
+interface ActivityInidicatorDefaultProps
+  extends Required<Pick<ActivityIndicatorProps, "size" | "color">> {}
 
-const defaultProps: DefaultProps = {
+const defaultProps: ActivityIndicatorDefaultProps = {
   size: "medium",
   color: "foregroundPrimary"
 };
@@ -27,7 +28,10 @@ const spin = keyframes({
   }
 });
 
-function ActivityIndicator({ color, size }: Props & DefaultProps) {
+function ActivityIndicator({
+  color,
+  size
+}: ActivityIndicatorProps & ActivityIndicatorDefaultProps) {
   const theme = useTheme<Theme>();
   return (
     <svg

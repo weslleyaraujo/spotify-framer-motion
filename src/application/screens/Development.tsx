@@ -7,9 +7,9 @@ import { View } from "../../components/atoms/View/View";
 import { useBodyBackground } from "../../hooks/use-body-background";
 import { useTheme } from "emotion-theming";
 
-interface Props {}
+interface DevelopmentProps {}
 
-function Development(props: Props) {
+function Development(props: DevelopmentProps) {
   useBodyBackground();
   const theme = useTheme<Theme>();
   return (

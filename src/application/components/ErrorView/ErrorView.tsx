@@ -7,19 +7,24 @@ import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
 import { Icons } from "../../../foundations/icons";
 
-interface Props {
+interface ErrorViewProps {
   title?: string;
   body?: string;
   error?: string | Error;
 }
 
-interface DefaultProps extends Required<Pick<Props, "title">> {}
+interface ErrorViewDefaultProps
+  extends Required<Pick<ErrorViewProps, "title">> {}
 
-const defaultProps: DefaultProps = {
+const defaultProps: ErrorViewDefaultProps = {
   title: "Something went wrong"
 };
 
-function ErrorView({ error, title, body }: Props & DefaultProps) {
+function ErrorView({
+  error,
+  title,
+  body
+}: ErrorViewProps & ErrorViewDefaultProps) {
   const message = useMemo(() => {
     if (!error) {
       return "";

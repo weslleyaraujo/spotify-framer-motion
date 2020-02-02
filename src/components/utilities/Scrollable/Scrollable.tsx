@@ -11,7 +11,7 @@ import { useTheme } from "emotion-theming";
 type InlineItems = boolean;
 type MaxVisibleItems = number;
 
-type Props = {
+type ScrollableProps = {
   children: React.ReactNode;
   padding: React.ComponentProps<typeof View>["padding"];
   horizontalPadding: keyof Units;
@@ -23,11 +23,12 @@ type Props = {
   | {
       inlineItems: InlineItems;
       maxVisibleItems?: never;
-    });
+    }
+);
 
-type DefaultProps = Required<
+type ScrollableDefaultProps = Required<
   Pick<
-    Props,
+    ScrollableProps,
     "inlineItems" | "padding" | "horizontalPadding" | "maxVisibleItems"
   >
 >;
@@ -38,7 +39,7 @@ function Scrollable({
   horizontalPadding,
   maxVisibleItems,
   inlineItems
-}: Props & DefaultProps) {
+}: ScrollableProps & ScrollableDefaultProps) {
   const count = Children.count(children);
   const theme = useTheme<Theme>();
   const view = useViewStyles({
@@ -86,7 +87,7 @@ function Scrollable({
   );
 }
 
-const defaultProps: DefaultProps = {
+const defaultProps: ScrollableDefaultProps = {
   inlineItems: false,
   padding: "large",
   horizontalPadding: "large",

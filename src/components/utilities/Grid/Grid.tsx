@@ -5,22 +5,23 @@ import { theme } from "../../../application/application-theme";
 
 type Gap = keyof Units | "none";
 
-interface Props {
+interface GridProps {
   children: React.ReactNode;
   gap?: Gap | [Gap, Gap];
   itemsPerRow?: number;
 }
 
-interface DefaultProps extends Required<Pick<Props, "gap" | "itemsPerRow">> {}
+interface GridDefaultProps
+  extends Required<Pick<GridProps, "gap" | "itemsPerRow">> {}
 
-const defaultProps: DefaultProps = {
+const defaultProps: GridDefaultProps = {
   gap: "small",
   itemsPerRow: 1
 };
 
 function useGapMap({
   gap
-}: Pick<Props, "gap">): {
+}: Pick<GridProps, "gap">): {
   horizontal: number;
   vertical: number;
 } {
@@ -52,7 +53,7 @@ function useGapMap({
   };
 }
 
-function Grid({ gap, itemsPerRow, children }: Props) {
+function Grid({ gap, itemsPerRow, children }: GridProps) {
   const { vertical, horizontal } = useGapMap({
     gap
   });

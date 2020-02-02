@@ -15,7 +15,7 @@ export type ForegroundColors = PickEnum<
   "absoluteDark" | "absoluteLight" | "foregroundPrimary" | "foregroundSecondary"
 >;
 
-export type Props = {
+export type TextLineProps = {
   /* Typography type to be used based on runtime theme. */
   type?: keyof Fonts;
 
@@ -38,13 +38,16 @@ export type Props = {
       children: React.ReactNode;
       text?: never;
     }
-  | { children?: never; text: string });
+  | { children?: never; text: string }
+);
 
-interface DefaultProps
-  extends Required<Pick<Props, "numberOfLines" | "type" | "as" | "color">> {}
+interface TextLineDefaultProps
+  extends Required<
+    Pick<TextLineProps, "numberOfLines" | "type" | "as" | "color">
+  > {}
 
 const TextLine = forwardRef(function TextLine(
-  props: Props,
+  props: TextLineProps,
   ref?: React.Ref<any>
 ) {
   const {
@@ -56,7 +59,7 @@ const TextLine = forwardRef(function TextLine(
     display,
     children,
     textAlign
-  } = props as Props & DefaultProps;
+  } = props as TextLineProps & TextLineDefaultProps;
   const Element = as;
   const isTruncated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
@@ -118,7 +121,7 @@ const TextLine = forwardRef(function TextLine(
   );
 });
 
-const defaultProps: DefaultProps = {
+const defaultProps: TextLineDefaultProps = {
   as: "p",
   type: "body",
   numberOfLines: 0,

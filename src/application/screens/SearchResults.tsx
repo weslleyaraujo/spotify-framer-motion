@@ -23,9 +23,9 @@ import {
 } from "../../hooks/use-interactions";
 import { Line } from "../components/Line/Line";
 
-interface Props {}
+interface SearchResultsProps {}
 
-function SearchResults(props: Props) {
+function SearchResults(props: SearchResultsProps) {
   const createInteraction = useLazyInteractions();
   const [search, { data }] = useLazyQuery<
     GQLGetSearchResultsQuery,

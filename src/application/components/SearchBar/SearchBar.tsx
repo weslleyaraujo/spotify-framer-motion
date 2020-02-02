@@ -8,16 +8,20 @@ import { Layers } from "../../../foundations/Layers";
 import { Icon } from "../../../components/atoms/Icon/Icon";
 import { Icons } from "../../../foundations/icons";
 
-interface Props
+interface SearchBarProps
   extends Pick<React.HTMLProps<HTMLInputElement>, "placeholder" | "onFocus"> {}
 
-interface DefaultProps extends Required<Pick<Props, "placeholder">> {}
+interface SearchBarDefaultProps
+  extends Required<Pick<SearchBarProps, "placeholder">> {}
 
-const defaultProps: DefaultProps = {
+const defaultProps: SearchBarDefaultProps = {
   placeholder: "Artists, songs, or podcasts"
 };
 
-function SearchBar({ placeholder, onFocus }: Props & DefaultProps) {
+function SearchBar({
+  placeholder,
+  onFocus
+}: SearchBarProps & SearchBarDefaultProps) {
   const theme = useTheme<Theme>();
   return (
     <View

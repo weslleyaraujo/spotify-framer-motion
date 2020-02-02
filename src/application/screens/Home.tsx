@@ -31,9 +31,9 @@ const interactions = {
   [GQLSectionType.Playlist]: INTERACTIONS.NAVIGATE_PLAYLIST
 };
 
-interface Props {}
+interface HomeProps {}
 
-function Home(props: Props) {
+function Home(props: HomeProps) {
   const { data, loading, error } = useQuery<
     GQLGetFeedQuery,
     GQLGetFeedQueryVariables

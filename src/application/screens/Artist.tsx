@@ -23,9 +23,9 @@ import { LoadingView } from "../../components/utilities/LoadingView/LoadingView"
 import { ErrorView } from "../components/ErrorView/ErrorView";
 import { Fragment } from "react";
 
-interface Props extends RouteComponentProps<RouteArtistParameters> {}
+interface ArtistProps extends RouteComponentProps<RouteArtistParameters> {}
 
-function Artist(props: Props) {
+function Artist(props: ArtistProps) {
   const {
     match: {
       params: { id }

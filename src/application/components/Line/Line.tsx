@@ -4,14 +4,19 @@ import { CardProps, Interaction } from "../../../interfaces/Card";
 import { View } from "../../../components/atoms/View/View";
 import { Action } from "../../../components/atoms/Action/Action";
 
-interface Props<T extends Object> {
+interface LineProps<T extends Object> {
   interaction: Interaction<T>;
   head?: React.ReactNode;
   body?: React.ReactNode;
   tail?: React.ReactNode;
 }
 
-function Line<P extends Object>({ interaction, head, body, tail }: Props<P>) {
+function Line<P extends Object>({
+  interaction,
+  head,
+  body,
+  tail
+}: LineProps<P>) {
   return (
     <Action {...interaction.action}>
       <View
