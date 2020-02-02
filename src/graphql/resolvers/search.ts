@@ -31,7 +31,7 @@ const data = [
         .filter(Boolean)
         .map(item => item.name)
     ]),
-    cover: albums.find(album => item.album.includes(item.id))?.cover || ""
+    cover: albums.find(album => item.album.includes(album.id))?.cover || ""
   })),
   ...albums.map(item => ({
     id: item.id,

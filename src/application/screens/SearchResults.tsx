@@ -97,7 +97,7 @@ function SearchResults(props: SearchResultsProps) {
                   }
                   body={
                     <Fragment>
-                      <TextLine text={item.type} />
+                      <TextLine text={item.name} />
                       <TextLine text={item.name} color="foregroundSecondary" />
                     </Fragment>
                   }
