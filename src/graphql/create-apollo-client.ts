@@ -1,4 +1,5 @@
 import ApolloClient from "apollo-boost";
+import { Resolvers } from "apollo-client";
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher
@@ -18,7 +19,7 @@ const cache = new InMemoryCache({
 function createApolloClient() {
   return new ApolloClient({
     clientState: {
-      resolvers
+      resolvers: resolvers as Resolvers
     },
     cache
   });

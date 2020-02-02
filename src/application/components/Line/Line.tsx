@@ -1,8 +1,8 @@
 /**  @jsx jsx */
 import { jsx } from "@emotion/core";
-import { CardProps, Interaction } from "../../../interfaces/Card";
-import { View } from "../../../components/atoms/View/View";
 import { Action } from "../../../components/atoms/Action/Action";
+import { View } from "../../../components/atoms/View/View";
+import { Interaction } from "../../../interfaces/Card";
 
 interface LineProps<T extends Object> {
   interaction: Interaction<T>;

@@ -48,10 +48,10 @@ interface TextLineDefaultProps
 
 const TextLine = forwardRef(function TextLine(
   props: TextLineProps,
-  ref?: React.Ref<any>
+  ref?: React.Ref<TextLineProps>
 ) {
   const {
-    as,
+    as: Element,
     type,
     text,
     numberOfLines,
@@ -60,7 +60,6 @@ const TextLine = forwardRef(function TextLine(
     children,
     textAlign
   } = props as TextLineProps & TextLineDefaultProps;
-  const Element = as;
   const isTruncated = Boolean(numberOfLines);
   const isSingleLine = numberOfLines === 1;
   const isMultiline = isTruncated && numberOfLines > 1;
@@ -89,6 +88,7 @@ const TextLine = forwardRef(function TextLine(
   });
 
   return (
+    // @ts-ignore
     <Element css={styles} ref={ref}>
       {text ||
         Children.map(

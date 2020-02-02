@@ -17,7 +17,7 @@ interface ActivityIndicatorProps {
 interface ActivityInidicatorDefaultProps
   extends Required<Pick<ActivityIndicatorProps, "size" | "color">> {}
 
-const defaultProps: ActivityIndicatorDefaultProps = {
+const defaultProps: ActivityInidicatorDefaultProps = {
   size: "medium",
   color: "foregroundPrimary"
 };
@@ -31,7 +31,7 @@ const spin = keyframes({
 function ActivityIndicator({
   color,
   size
-}: ActivityIndicatorProps & ActivityIndicatorDefaultProps) {
+}: ActivityIndicatorProps & ActivityInidicatorDefaultProps) {
   const theme = useTheme<Theme>();
   return (
     <svg

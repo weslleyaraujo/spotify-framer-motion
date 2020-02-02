@@ -31,7 +31,8 @@ const MAP_TEXT_COLOR: {
 } = {
   normal: "absoluteLight",
   primary: "absoluteLight",
-  secondary: "absoluteDark"
+  secondary: "absoluteDark",
+  third: "absoluteDark"
 };
 
 const MAP_TEXT_TYPE: {

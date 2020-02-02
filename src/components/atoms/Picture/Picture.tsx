@@ -48,7 +48,7 @@ interface PictureProps {
 interface PictureDefaultProps
   extends Required<
     Pick<
-      Props,
+      PictureProps,
       "resizeMode" | "aspectRatio" | "orientation" | "onError" | "onLoad"
     >
   > {}
