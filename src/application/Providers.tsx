@@ -3,11 +3,11 @@ import React from "react";
 import { Router } from "react-router-dom";
 import { ThemeProvider } from "emotion-theming";
 import { createApolloClient } from "../graphql/create-apollo-client";
-import { createBrowserHistory } from "history";
+import { createHashHistory } from "history";
 import { theme } from "./application-theme";
 
 const client = createApolloClient();
-const history = createBrowserHistory();
+const history = createHashHistory();
 
 const Providers: React.FunctionComponent = function Providers({ children }) {
   return (

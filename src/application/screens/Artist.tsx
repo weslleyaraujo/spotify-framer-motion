@@ -88,10 +88,11 @@ function Artist(props: ArtistProps) {
           <div
             css={{
               ...headerStyles,
+              label: "background",
               paddingBottom: theme.units.larger,
-              height: theme.scales.larger * 1.8,
+              height: theme.scales.larger * 2,
               backgroundImage: `url(${data.artist.cover})`,
-              backgroundPosition: "center",
+              backgroundPosition: "top center",
               backgroundSize: "100vw",
               backgroundRepeat: "no-repeat"
             }}
@@ -111,7 +112,7 @@ function Artist(props: ArtistProps) {
                 type="display"
                 numberOfLines={2}
               />
-              <View margin={["medium", "none"]}>
+              <View margin={["large", "none"]}>
                 <TextLine
                   text={`${data.artist.listeners} MONTHLY LISTENERS`}
                   type="caption"

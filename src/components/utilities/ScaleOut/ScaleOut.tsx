@@ -127,8 +127,8 @@ function ScaleOut({
             left: 0,
             width: "100%",
             ...(paintHeight.current && {
-              height: paintHeight.current / 1.5,
-              top: `-${paintHeight.current / 1.5}px`
+              height: paintHeight.current / 1.9,
+              top: `-${paintHeight.current / 1.9}px`
             }),
             ...(!disableBackground && {
               backgroundImage: `linear-gradient(transparent 0%, ${theme.colors.background} 80%)`

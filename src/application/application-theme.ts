@@ -40,8 +40,8 @@ const theme: Theme<Icons> = {
       fontSize: 36,
       fontWeight: 800,
       fontStyle: "normal",
-      lineHeight: 32,
-      fontFamily
+      lineHeight: 36,
+      fontFamily: "Circular Black"
     },
     body: {
       fontSize: 14,

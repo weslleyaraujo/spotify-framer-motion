@@ -1,6 +1,7 @@
 import { css, InterpolationWithTheme } from "@emotion/core";
 
 import circular from "../assets/fonts/circular-book.woff2";
+import circularBlack from "../assets/fonts/circular-black.woff2";
 import { Theme } from "../foundations/Theme";
 
 const globalStyles: InterpolationWithTheme<Theme> = theme => css`
@@ -111,6 +112,11 @@ const globalStyles: InterpolationWithTheme<Theme> = theme => css`
   @font-face {
     font-family: "Circular";
     src: local("Circular"), url(${circular}) format("truetype");
+  }
+
+  @font-face {
+    font-family: "Circular Black";
+    src: local("Circular Black"), url(${circularBlack}) format("truetype");
   }
 `;
 
