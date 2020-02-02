@@ -1,8 +1,7 @@
 import { Link, LinkProps } from "react-router-dom";
-import { Interaction } from "../interfaces/Card";
 import { SITEMAP } from "../application/site-map";
+import { Interaction } from "../interfaces/Card";
 import { createUrl } from "../utils/create-url";
-import { useViewStyles } from "../components/atoms/View/View";
 
 interface Identifier {
   id: string;

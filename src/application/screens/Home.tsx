@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "../../components/atoms/Icon/Icon";
 import { View } from "../../components/atoms/View/View";
 import { Section } from "../../components/molecules/Section/Section";
-import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/AnimatedMinimize";
+import { ScaleOut } from "../../components/utilities/ScaleOut/ScaleOut";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 import { Scrollable } from "../../components/utilities/Scrollable/Scrollable";
@@ -73,7 +73,7 @@ function Home(props: HomeProps) {
 
   return (
     <FadePresence>
-      <AnimatedMinimize
+      <ScaleOut
         disableBackground
         disableScaling
         content={
@@ -143,7 +143,7 @@ function Home(props: HomeProps) {
             </Scrollable>
           </Section>
         ))}
-      </AnimatedMinimize>
+      </ScaleOut>
     </FadePresence>
   );
 }

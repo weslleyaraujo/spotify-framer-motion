@@ -12,29 +12,38 @@ import useDimensions from "react-use-dimensions";
 import { Layers } from "../../../foundations/Layers";
 import { Theme } from "../../../foundations/Theme";
 
-interface AnimatedMinimizeProps {
+interface ScaleOutProps {
   content: React.ReactNode;
   children: React.ReactNode;
   disableScaling?: boolean;
   disableBackground?: boolean;
+  scale?: {
+    from: Parameters<typeof useTransform>[1];
+    to: Parameters<typeof useTransform>[1];
+  };
 }
 
-interface AnimatedMinimizeDefaultProps
+interface ScaleOutDefaultProps
   extends Required<
-    Pick<AnimatedMinimizeProps, "disableBackground" | "disableScaling">
+    Pick<ScaleOutProps, "disableBackground" | "disableScaling" | "scale">
   > {}
 
-const defaultProps: AnimatedMinimizeDefaultProps = {
+const defaultProps: ScaleOutDefaultProps = {
   disableBackground: false,
-  disableScaling: false
+  disableScaling: false,
+  scale: {
+    from: [1, 0.9, 0.88, 0.84, 0.82, 0.8],
+    to: [1, 0.98, 0.96, 0.94, 0.92, 0.9]
+  }
 };
 
-function AnimatedMinimize({
+function ScaleOut({
   children,
   content,
   disableBackground,
-  disableScaling
-}: AnimatedMinimizeProps & AnimatedMinimizeDefaultProps) {
+  disableScaling,
+  scale: scaleTransform
+}: ScaleOutProps & ScaleOutDefaultProps) {
   const theme = useTheme<Theme>();
   const { scrollY } = useViewportScroll();
   const [contentRef, { height }] = useDimensions({
@@ -50,11 +59,8 @@ function AnimatedMinimize({
     [1, 0.8, 0.75, 0.65, 0.5],
     [1, 0.75, 0.65, 0.5, 0]
   );
-  const scale = useTransform(
-    value,
-    [1, 0.9, 0.88, 0.84, 0.82, 0.8],
-    [1, 0.98, 0.96, 0.94, 0.92, 0.9]
-  );
+
+  const scale = useTransform(value, scaleTransform.from, scaleTransform.to);
 
   if (height && !paintHeight.current) {
     paintHeight.current = height;
@@ -121,8 +127,8 @@ function AnimatedMinimize({
             left: 0,
             width: "100%",
             ...(paintHeight.current && {
-              height: paintHeight.current / 2.5,
-              top: `-${paintHeight.current / 2.5}px`
+              height: paintHeight.current / 1.5,
+              top: `-${paintHeight.current / 1.5}px`
             }),
             ...(!disableBackground && {
               backgroundImage: `linear-gradient(to top, ${theme.colors.background} 0px, transparent 100%)`
@@ -136,6 +142,6 @@ function AnimatedMinimize({
   );
 }
 
-AnimatedMinimize.defaultProps = defaultProps;
+ScaleOut.defaultProps = defaultProps;
 
-export { AnimatedMinimize };
+export { ScaleOut };

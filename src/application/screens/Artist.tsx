@@ -1,27 +1,26 @@
 /** @jsx jsx */
+import { useQuery } from "@apollo/react-hooks";
 import { jsx } from "@emotion/core";
+import { gql } from "apollo-boost";
 import { useTheme } from "emotion-theming";
+import { Fragment } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
-import { View } from "../../components/atoms/View/View";
+import { useViewStyles, View } from "../../components/atoms/View/View";
 import { Button } from "../../components/molecules/Button/Button";
-import { AnimatedMinimize } from "../../components/utilities/AnimatedMinimize/AnimatedMinimize";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
+import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
+import { ScaleOut } from "../../components/utilities/ScaleOut/ScaleOut";
 import { Theme } from "../../foundations/Theme";
-import { useBodyBackground } from "../../hooks/use-body-background";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import {
   GQLGetArtistQuery,
   GQLGetArtistQueryVariables,
   GQLGetPopularAlbumQuery,
   GQLGetPopularAlbumQueryVariables
 } from "../../graphql/generated";
-import { RouteComponentProps } from "react-router-dom";
-import { RouteArtistParameters } from "../site-map";
-import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 import { ErrorView } from "../components/ErrorView/ErrorView";
-import { Fragment } from "react";
+import { RouteArtistParameters } from "../site-map";
 
 interface ArtistProps extends RouteComponentProps<RouteArtistParameters> {}
 
@@ -31,9 +30,12 @@ function Artist(props: ArtistProps) {
       params: { id }
     }
   } = props;
-  useBodyBackground({
-    color: "green",
-    gradientStyle: "topBottom"
+
+  const headerStyles = useViewStyles({
+    padding: "none",
+    margin: "none",
+    justify: "center",
+    align: "flex-end"
   });
 
   const { data, error, loading } = useQuery<
@@ -77,31 +79,38 @@ function Artist(props: ArtistProps) {
 
   return (
     <FadePresence>
-      <AnimatedMinimize
+      <ScaleOut
+        scale={{
+          from: [1, 0.8],
+          to: [1.06, 1.01]
+        }}
         content={
-          <View padding={["none", "none", "largest", "none"]}>
+          <div
+            css={{
+              ...headerStyles,
+              paddingBottom: theme.units.larger,
+              height: theme.scales.larger * 1.8,
+              backgroundImage: `url(${data.artist.cover})`,
+              backgroundPosition: "center",
+              backgroundSize: "100vw",
+              backgroundRepeat: "no-repeat"
+            }}
+          >
             <View
-              padding={["larger", "large", "medium"]}
               justify="center"
+              direction="column"
               align="center"
+              supportsTruncation
+              style={{
+                width: "76vw"
+              }}
             >
-              <div
-                style={{
-                  overflow: "hidden",
-                  borderRadius: "4000px"
-                }}
-              >
-                <Picture
-                  alt={data.artist.name}
-                  source={data.artist.cover}
-                  aspectRatio="square"
-                  width={theme.scales.larger}
-                  height={theme.scales.larger}
-                />
-              </div>
-            </View>
-            <View justify="center" direction="column" align="center">
-              <TextLine text={data.artist.name} type="heading" />
+              <TextLine
+                textAlign="center"
+                text={data.artist.name}
+                type="display"
+                numberOfLines={2}
+              />
               <View margin={["medium", "none"]}>
                 <TextLine
                   text={`${data.artist.listeners} MONTHLY LISTENERS`}
@@ -110,7 +119,7 @@ function Artist(props: ArtistProps) {
                 />
               </View>
             </View>
-          </View>
+          </div>
         }
       >
         <View justify="center" direction="column" align="center">
@@ -141,7 +150,12 @@ function Artist(props: ArtistProps) {
             <PopularSong id={item.album} track={item.name} />
           </View>
         ))}
-      </AnimatedMinimize>
+        <div
+          style={{
+            height: "90vh"
+          }}
+        />
+      </ScaleOut>
     </FadePresence>
   );
 }

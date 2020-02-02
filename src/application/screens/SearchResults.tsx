@@ -3,10 +3,11 @@ import { useLazyQuery } from "@apollo/react-hooks";
 import { jsx } from "@emotion/core";
 import { gql } from "apollo-boost";
 import debounce from "lodash.debounce";
-import { Fragment, useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Icon } from "../../components/atoms/Icon/Icon";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
+import { View } from "../../components/atoms/View/View";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 import { Grid } from "../../components/utilities/Grid/Grid";
 import { Icons } from "../../foundations/icons";
@@ -21,7 +22,6 @@ import {
 } from "../../hooks/use-interactions";
 import { Line } from "../components/Line/Line";
 import { SearchInput } from "../components/SearchInput/SearchInput";
-import { View } from "../../components/atoms/View/View";
 
 interface SearchResultsProps {}
 
