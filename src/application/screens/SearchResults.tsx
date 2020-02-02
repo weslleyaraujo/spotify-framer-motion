@@ -57,6 +57,27 @@ function SearchResults(props: SearchResultsProps) {
       <Grid>
         {data?.search.map((item, key) => {
           switch (item.type) {
+            case GQLSearchResultType.Track: {
+              return (
+                <Line
+                  key={`search-result-${item.id}`}
+                  body={<TextLine>{item.name}</TextLine>}
+                  head={
+                    <Picture
+                      width={60}
+                      height={60}
+                      alt="Music"
+                      source={item.cover}
+                      aspectRatio="square"
+                    />
+                  }
+                  interaction={createInteraction(INTERACTIONS.NAVIGATE_ALBUM, {
+                    id: item.id,
+                    label: `Go to ${item.name}`
+                  })}
+                />
+              );
+            }
             case GQLSearchResultType.Album: {
               return (
                 <Line
@@ -76,7 +97,7 @@ function SearchResults(props: SearchResultsProps) {
                   }
                   body={
                     <Fragment>
-                      <TextLine text="TODO" />
+                      <TextLine text={item.type} />
                       <TextLine text={item.name} color="foregroundSecondary" />
                     </Fragment>
                   }
