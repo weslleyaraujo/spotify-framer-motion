@@ -1,0 +1,187 @@
+[
+  {
+    "id": "recMneYSn0f20Wdul",
+    "name": "Hip hop",
+    "artists": [
+      "rec69lHAqpbSjsqce"
+    ],
+    "colorstart": "#FFA69E",
+    "colorend": "#861657"
+  },
+  {
+    "id": "recm9S2hFLKnOzn25",
+    "name": "Psychedelic Rock",
+    "artists": [
+      "recXxeujNuaRhIrWa",
+      "recrPh8LOmhkPwk7A"
+    ],
+    "colorstart": "#D7816A",
+    "colorend": "#BD4F6C"
+  },
+  {
+    "id": "recMtDOfkoTM9FXP4",
+    "name": "Neo-psychedelia",
+    "artists": [
+      "recXxeujNuaRhIrWa"
+    ],
+    "colorstart": "#5F0A87",
+    "colorend": "#A4508B"
+  },
+  {
+    "id": "recT8ik5HC2JEpXvn",
+    "name": "Psychedelic pop",
+    "artists": [
+      "recXxeujNuaRhIrWa"
+    ],
+    "colorstart": "#20BF55",
+    "colorend": "#01BAEF"
+  },
+  {
+    "id": "recPGpeUx7xbxGm1n",
+    "name": "Indie Rock",
+    "artists": [
+      "recrPh8LOmhkPwk7A",
+      "recSdYMfCazlYbeBL"
+    ],
+    "colorstart": "#74F2CE",
+    "colorend": "#7CFFCB"
+  },
+  {
+    "id": "reciUVpLRDthEWil0",
+    "name": "Jangle",
+    "artists": [
+      "recrPh8LOmhkPwk7A"
+    ],
+    "colorstart": "#A40606",
+    "colorend": "#D98324"
+  },
+  {
+    "id": "recfsRpx1I7jSvsZS",
+    "name": "Lo-fi music",
+    "artists": [
+      "recrPh8LOmhkPwk7A"
+    ],
+    "colorstart": "#380036",
+    "colorend": "#0CBABA"
+  },
+  {
+    "id": "recuk8Z39plZGa9kC",
+    "name": "Nu jazz",
+    "artists": [
+      "rec0NAqdvcgsigP6o"
+    ],
+    "colorstart": "#E58C8A",
+    "colorend": "#EEC0C6"
+  },
+  {
+    "id": "reckoXEBQoWilr95q",
+    "name": "French house",
+    "artists": [
+      "rec0NAqdvcgsigP6o"
+    ],
+    "colorstart": "#80FF72",
+    "colorend": "#7EE8FA"
+  },
+  {
+    "id": "recit4LtVgT7xu8JB",
+    "name": "Rhythm And Blues",
+    "artists": [
+      "rec0NAqdvcgsigP6o"
+    ],
+    "colorstart": "#7EE8FA",
+    "colorend": "#EEC0C6"
+  },
+  {
+    "id": "recmvcGvL8jsG4RTA",
+    "name": "Electropop",
+    "artists": [
+      "recQUO0Zsc0kD3QLx"
+    ],
+    "colorstart": "#EC9F05",
+    "colorend": "#FF4E00"
+  },
+  {
+    "id": "rec1plbIyVHkN70Lj",
+    "name": "Funk",
+    "artists": [
+      "recQUO0Zsc0kD3QLx"
+    ],
+    "colorstart": "#9FA4C4",
+    "colorend": "#B3CDD1"
+  },
+  {
+    "id": "recmFkKjRAXs52IjZ",
+    "name": "Chillwave",
+    "artists": [
+      "recQUO0Zsc0kD3QLx"
+    ],
+    "colorstart": "#9E768F",
+    "colorend": "#9FA4C4"
+  },
+  {
+    "id": "recjHp0k4Qyy64Tvr",
+    "name": "Disco",
+    "artists": [
+      "recQUO0Zsc0kD3QLx"
+    ],
+    "colorstart": "#8693AB",
+    "colorend": "#BDD4E7"
+  },
+  {
+    "id": "recit9SbGpTTScTOa",
+    "name": "Soul music",
+    "artists": [
+      "recQUO0Zsc0kD3QLx",
+      "recQPTSPWWma4AGDD",
+      "recRaw1xzNQAqNZbL"
+    ],
+    "colorstart": "#B279A7",
+    "colorend": "#D387AB"
+  },
+  {
+    "id": "reciqYNDNVYxK5gj7",
+    "name": "Alternative R&B",
+    "artists": [
+      "recQPTSPWWma4AGDD",
+      "recRaw1xzNQAqNZbL"
+    ],
+    "colorstart": "#D387AB",
+    "colorend": "#E899DC"
+  },
+  {
+    "id": "recj8r3tNvpRNbg7X",
+    "name": "Downtempo",
+    "artists": [
+      "recQPTSPWWma4AGDD"
+    ],
+    "colorstart": "#0D324D",
+    "colorend": "#7F5A83"
+  },
+  {
+    "id": "recSpIXzeoUdi5yHh",
+    "name": "Folk rock",
+    "artists": [
+      "recSdYMfCazlYbeBL"
+    ],
+    "colorstart": "#B91372",
+    "colorend": "#6B0F1A"
+  },
+  {
+    "id": "recDIQImYRqop9PS7",
+    "name": "Jazz",
+    "artists": [
+      "recRaw1xzNQAqNZbL"
+    ],
+    "colorstart": "#F2A65A",
+    "colorend": "#772F1A"
+  },
+  {
+    "id": "recBJUbHEH4Qx1p1I",
+    "name": "Trip hop",
+    "artists": [
+      "recRaw1xzNQAqNZbL"
+    ],
+    "colorstart": "#A7ACD9",
+    "colorend": "#9E8FB2"
+  }
+]

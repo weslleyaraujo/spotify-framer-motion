@@ -77,10 +77,22 @@ type SearchResult {
   id: ID!
 }
 
+type GradientColor {
+  start: String!
+  end: String!
+}
+
+type Genre {
+  id: ID!
+  name: String!
+  color: GradientColor!
+}
+
 type Query {
   # user: User!
   feed: Feed!
   artist(id: ID!): Artist!
   search(term: String!): [SearchResult!]!
   album(id: ID!): Album!
+  genres: [Genre!]!
 }

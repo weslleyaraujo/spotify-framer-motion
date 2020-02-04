@@ -1,8 +1,8 @@
 require("dotenv").config();
 
+const Airtable = require("airtable");
 const path = require("path");
 const fs = require("fs");
-const Airtable = require("airtable");
 const base = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY
 }).base(process.env.AIRTABLE_BASE);
@@ -68,6 +68,7 @@ async function run() {
   await fetchBase("Tracks", "Grid view", "tracks");
   await fetchBase("Feed", "Grid view", "feed");
   await fetchBase("Playlists", "Grid view", "playlists");
+  await fetchBase("Genres", "Grid view", "genres");
 }
 
 run();

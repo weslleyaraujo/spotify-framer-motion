@@ -34,6 +34,19 @@ export interface GQLFeed {
   sections: Array<GQLSection>,
 }
 
+export interface GQLGenre {
+   __typename: 'Genre',
+  id: Scalars['ID'],
+  name: Scalars['String'],
+  color: GQLGradientColor,
+}
+
+export interface GQLGradientColor {
+   __typename: 'GradientColor',
+  start: Scalars['String'],
+  end: Scalars['String'],
+}
+
 /** 
  * ==
  * Application interfaces
@@ -51,6 +64,7 @@ export interface GQLQuery {
   artist: GQLArtist,
   search: Array<GQLSearchResult>,
   album: GQLAlbum,
+  genres: Array<GQLGenre>,
 }
 
 
@@ -230,6 +244,8 @@ export type GQLResolversTypes = {
   SearchResult: ResolverTypeWrapper<GQLSearchResult>,
   SearchResultType: GQLSearchResultType,
   Album: ResolverTypeWrapper<GQLAlbum>,
+  Genre: ResolverTypeWrapper<GQLGenre>,
+  GradientColor: ResolverTypeWrapper<GQLGradientColor>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Node: ResolverTypeWrapper<GQLNode>,
   User: ResolverTypeWrapper<GQLUser>,
@@ -250,6 +266,8 @@ export type GQLResolversParentTypes = {
   SearchResult: GQLSearchResult,
   SearchResultType: GQLSearchResultType,
   Album: GQLAlbum,
+  Genre: GQLGenre,
+  GradientColor: GQLGradientColor,
   Boolean: Scalars['Boolean'],
   Node: GQLNode,
   User: GQLUser,
@@ -276,6 +294,17 @@ export type GQLFeedResolvers<ContextType = any, ParentType extends GQLResolversP
   sections: Resolver<Array<GQLResolversTypes['Section']>, ParentType, ContextType>,
 };
 
+export type GQLGenreResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Genre'] = GQLResolversParentTypes['Genre']> = {
+  id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  color: Resolver<GQLResolversTypes['GradientColor'], ParentType, ContextType>,
+};
+
+export type GQLGradientColorResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['GradientColor'] = GQLResolversParentTypes['GradientColor']> = {
+  start: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  end: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+};
+
 export type GQLNodeResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Node'] = GQLResolversParentTypes['Node']> = {
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
 };
@@ -285,6 +314,7 @@ export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolvers
   artist: Resolver<GQLResolversTypes['Artist'], ParentType, ContextType, RequireFields<GQLQueryArtistArgs, 'id'>>,
   search: Resolver<Array<GQLResolversTypes['SearchResult']>, ParentType, ContextType, RequireFields<GQLQuerySearchArgs, 'term'>>,
   album: Resolver<GQLResolversTypes['Album'], ParentType, ContextType, RequireFields<GQLQueryAlbumArgs, 'id'>>,
+  genres: Resolver<Array<GQLResolversTypes['Genre']>, ParentType, ContextType>,
 };
 
 export type GQLSearchResultResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['SearchResult'] = GQLResolversParentTypes['SearchResult']> = {
@@ -325,6 +355,8 @@ export type GQLResolvers<ContextType = any> = {
   Album: GQLAlbumResolvers<ContextType>,
   Artist: GQLArtistResolvers<ContextType>,
   Feed: GQLFeedResolvers<ContextType>,
+  Genre: GQLGenreResolvers<ContextType>,
+  GradientColor: GQLGradientColorResolvers<ContextType>,
   Node: GQLNodeResolvers<ContextType>,
   Query: GQLQueryResolvers<ContextType>,
   SearchResult: GQLSearchResultResolvers<ContextType>,
