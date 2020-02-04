@@ -11,6 +11,14 @@ import { CategoryCard } from "../components/CardCategory/CardCategory";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import { SITEMAP } from "../site-map";
 import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import {
+  GQLGetGenresQueryVariables,
+  GQLGetGenresQuery
+} from "../../graphql/generated";
+import { ErrorView } from "../components/ErrorView/ErrorView";
+import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
 
 interface SearchProps {}
 
@@ -22,6 +30,31 @@ function Search(props: SearchProps) {
     gradientStyle: "topLeft"
   });
 
+  const { loading, error, data } = useQuery<
+    GQLGetGenresQuery,
+    GQLGetGenresQueryVariables
+  >(gql`
+    query GetGenres {
+      genres @client {
+        id
+        name
+        cover
+        color {
+          start
+          end
+        }
+      }
+    }
+  `);
+
+  if (error) {
+    return <ErrorView error={error} />;
+  }
+
+  if (loading) {
+    return <LoadingView />;
+  }
+
   return (
     <FadePresence>
       <View justify="center" padding={["larger", "large", "none", "large"]}>
@@ -32,27 +65,27 @@ function Search(props: SearchProps) {
       </View>
       <Section
         titleType="title"
-        title="Your top genres"
+        title="Genres"
         padding="medium"
         head={{
           padding: ["medium", "medium", "none", "medium"],
           justify: "flex-start"
         }}
       >
-        <Grid itemsPerRow={2} gap="medium">
-          {[...new Array(6)].map((item, key) => (
+        <Grid itemsPerRow={2} gap="small">
+          {data.genres.map(({ name, id, color, cover }, key) => (
             <CategoryCard
-              key={key}
+              key={`category-genre-card-${id}-${key}`}
               background={{
-                from: "orange",
-                to: "pink"
+                from: color.start,
+                to: color.end
               }}
               media={{
-                source: "",
+                source: cover,
                 type: "image",
                 credits: "Spotify"
               }}
-              title="Indie"
+              title={name}
               interactions={{
                 primary: {
                   label: "Visit page",

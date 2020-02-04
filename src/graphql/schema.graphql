@@ -86,6 +86,7 @@ type Genre {
   id: ID!
   name: String!
   color: GradientColor!
+  cover: String!
 }
 
 type Query {

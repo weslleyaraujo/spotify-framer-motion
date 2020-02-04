@@ -18,10 +18,10 @@ const cache = new InMemoryCache({
 
 function createApolloClient() {
   return new ApolloClient({
+    cache,
     clientState: {
       resolvers: resolvers as Resolvers
-    },
-    cache
+    }
   });
 }
 

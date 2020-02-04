@@ -39,6 +39,7 @@ export interface GQLGenre {
   id: Scalars['ID'],
   name: Scalars['String'],
   color: GQLGradientColor,
+  cover: Scalars['String'],
 }
 
 export interface GQLGradientColor {
@@ -152,6 +153,11 @@ export type GQLGetFeedQueryVariables = {};
 
 
 export type GQLGetFeedQuery = { __typename: 'Query', feed: { __typename: 'Feed', id: string, sections: Array<{ __typename: 'Section', id: string, title: string, items: Array<{ __typename: 'SectionItem', id: string, contentId: string, name: string, cover: string, type: GQLSectionType }> }> } };
+
+export type GQLGetGenresQueryVariables = {};
+
+
+export type GQLGetGenresQuery = { __typename: 'Query', genres: Array<{ __typename: 'Genre', id: string, name: string, cover: string, color: { __typename: 'GradientColor', start: string, end: string } }> };
 
 export type GQLGetSearchResultsQueryVariables = {
   term: Scalars['String']
@@ -298,6 +304,7 @@ export type GQLGenreResolvers<ContextType = any, ParentType extends GQLResolvers
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   color: Resolver<GQLResolversTypes['GradientColor'], ParentType, ContextType>,
+  cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
 };
 
 export type GQLGradientColorResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['GradientColor'] = GQLResolversParentTypes['GradientColor']> = {
