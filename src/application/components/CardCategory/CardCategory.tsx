@@ -1,13 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useTheme } from "emotion-theming";
-import { Theme } from "../../../foundations/Theme";
-import { TextLine } from "../../../components/atoms/TextLine/TextLine";
-import { CardProps } from "../../../interfaces/Card";
 import { Action } from "../../../components/atoms/Action/Action";
 import { Picture } from "../../../components/atoms/Picture/Picture";
+import { TextLine } from "../../../components/atoms/TextLine/TextLine";
 import { View } from "../../../components/atoms/View/View";
+import { Theme } from "../../../foundations/Theme";
 import { useBoxShadow } from "../../../hooks/use-box-shadow";
+import { CardProps } from "../../../interfaces/Card";
 
 interface CategoryCardProps<P extends Object>
   extends CardProps<{
@@ -46,23 +46,26 @@ function CategoryCard<P>({
           backgroundImage: `linear-gradient(to bottom, ${background.from} 0px, ${background.to} 100%)`
         }}
       >
-        <View
+        <div
           css={{
-            width: "50%"
+            position: "absolute",
+            left: theme.units.medium,
+            top: theme.units.medium,
+            width: "50%",
+            minWidth: 0
           }}
         >
-          <TextLine text={title} type="strong" />
-        </View>
-        <View
+          <TextLine text={title} type="strong" numberOfLines={2} />
+        </div>
+        <div
           css={{
-            width: "50%",
             position: "relative"
           }}
         >
           <div
             css={{
               position: "relative",
-              right: `-${dimensions / 2.5}px`,
+              right: `-${dimensions}px`,
               top: theme.units.small,
               transform: "rotate(30deg)",
               boxShadow
@@ -75,7 +78,7 @@ function CategoryCard<P>({
               height={dimensions}
             />
           </div>
-        </View>
+        </div>
       </View>
     </Action>
   );

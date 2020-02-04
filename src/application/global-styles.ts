@@ -97,7 +97,7 @@ const globalStyles: InterpolationWithTheme<Theme> = theme => css`
   html,
   body,
   #root {
-    -webkit-font-smoothing: smoothing;
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   body {

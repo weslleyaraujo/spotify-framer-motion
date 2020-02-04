@@ -37,10 +37,10 @@ const theme: Theme<Icons> = {
   },
   fonts: {
     display: {
-      fontSize: 42,
+      fontSize: 46,
       fontWeight: 800,
       fontStyle: "normal",
-      lineHeight: 42,
+      lineHeight: 46,
       fontFamily: "Circular Black"
     },
     body: {
