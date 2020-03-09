@@ -54,6 +54,11 @@ function Artist(props: ArtistProps) {
           name
           cover
           listeners
+          albums {
+            id
+            name
+            cover
+          }
           popular {
             name
             album
@@ -157,24 +162,60 @@ function Artist(props: ArtistProps) {
             />
           </div>
           <View align="center">
-            <TextLine text="Popular" />
+            <TextLine text="Popular" type="heading" />
           </View>
         </View>
-        {data.artist.popular.map((item, key) => (
-          <PopularSong id={item.album} track={item.name} key={key} />
+        {data.artist.popular.map((item, index) => (
+          <PopularSong
+            id={item.album}
+            track={item.name}
+            index={index + 1}
+            key={`${item.name}-${index}`}
+          />
         ))}
-        <div
-          style={{
-            height: "90vh"
-          }}
-        />
+
+        <View>
+          <View justify="center" margin={["none", "large", "none"]}>
+            <TextLine text="Albums" type="heading" textAlign="center" />
+          </View>
+          {data.artist.albums.map((item, index) => (
+            <Line
+              key={`${item.id}-${index}`}
+              interaction={{
+                label: "Go to TODO",
+                action: {
+                  as: "div"
+                }
+              }}
+              head={
+                <Picture
+                  width={theme.scales.large}
+                  height={theme.scales.large}
+                  alt="Music"
+                  source={item.cover}
+                  aspectRatio="square"
+                />
+              }
+            >
+              <TextLine text={item.name} type="title" />
+              <TextLine text="Album" color="foregroundSecondary" />
+            </Line>
+          ))}
+        </View>
       </ScaleOut>
     </FadePresence>
   );
 }
 
-function PopularSong({ id, track }: { id: string; track: string }) {
-  const theme = useTheme<Theme>();
+function PopularSong({
+  id,
+  index,
+  track
+}: {
+  id: string;
+  track: string;
+  index: number;
+}) {
   const { data, loading, error } = useQuery<
     GQLGetPopularAlbumQuery,
     GQLGetPopularAlbumQueryVariables
@@ -206,15 +247,7 @@ function PopularSong({ id, track }: { id: string; track: string }) {
           as: "div"
         }
       }}
-      head={
-        <Picture
-          width={theme.scales.medium}
-          height={theme.scales.medium}
-          alt="Music"
-          source={data.album.cover}
-          aspectRatio="square"
-        />
-      }
+      head={<TextLine text={String(index)} />}
     >
       <TextLine text={track} />
       <TextLine text={data.album.name} color="foregroundSecondary" />

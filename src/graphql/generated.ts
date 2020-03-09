@@ -26,6 +26,7 @@ export interface GQLArtist {
   listeners: Scalars['Int'],
   cover: Scalars['String'],
   popular: Array<GQLSong>,
+  albums: Array<GQLAlbum>,
 }
 
 export interface GQLFeed {
@@ -140,7 +141,7 @@ export type GQLGetArtistQueryVariables = {
 };
 
 
-export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, popular: Array<{ __typename: 'Song', name: string, album: string }> } };
+export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, albums: Array<{ __typename: 'Album', id: string, name: string, cover: string }>, popular: Array<{ __typename: 'Song', name: string, album: string }> } };
 
 export type GQLGetPopularAlbumQueryVariables = {
   id: Scalars['ID']
@@ -247,9 +248,9 @@ export type GQLResolversTypes = {
   Artist: ResolverTypeWrapper<GQLArtist>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
   Song: ResolverTypeWrapper<GQLSong>,
+  Album: ResolverTypeWrapper<GQLAlbum>,
   SearchResult: ResolverTypeWrapper<GQLSearchResult>,
   SearchResultType: GQLSearchResultType,
-  Album: ResolverTypeWrapper<GQLAlbum>,
   Genre: ResolverTypeWrapper<GQLGenre>,
   GradientColor: ResolverTypeWrapper<GQLGradientColor>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
@@ -269,9 +270,9 @@ export type GQLResolversParentTypes = {
   Artist: GQLArtist,
   Int: Scalars['Int'],
   Song: GQLSong,
+  Album: GQLAlbum,
   SearchResult: GQLSearchResult,
   SearchResultType: GQLSearchResultType,
-  Album: GQLAlbum,
   Genre: GQLGenre,
   GradientColor: GQLGradientColor,
   Boolean: Scalars['Boolean'],
@@ -293,6 +294,7 @@ export type GQLArtistResolvers<ContextType = any, ParentType extends GQLResolver
   listeners: Resolver<GQLResolversTypes['Int'], ParentType, ContextType>,
   cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   popular: Resolver<Array<GQLResolversTypes['Song']>, ParentType, ContextType>,
+  albums: Resolver<Array<GQLResolversTypes['Album']>, ParentType, ContextType>,
 };
 
 export type GQLFeedResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Feed'] = GQLResolversParentTypes['Feed']> = {

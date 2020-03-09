@@ -65,7 +65,7 @@ function CategoryCard<P>({
           <div
             css={{
               position: "relative",
-              right: `-${dimensions}px`,
+              right: `-${dimensions + 25}px`,
               top: theme.units.small,
               transform: "rotate(30deg)",
               boxShadow

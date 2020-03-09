@@ -1,9 +1,8 @@
-import data from "../../data/artists.json";
-import tracks from "../../data/tracks.json";
 import albums from "../../data/albums.json";
-import artists from "../../data/artists.json";
-
+import { default as data } from "../../data/artists.json";
+import tracks from "../../data/tracks.json";
 import { GQLQueryResolvers, GQLSong } from "../generated";
+import { album as albumResolver } from "./album";
 
 const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
   const item = data.find(item => item.id === id);
@@ -18,6 +17,16 @@ const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
     cover,
     id,
     listeners,
+    albums: albums
+      .filter(item => item.artists.includes(id))
+      .map(item =>
+        (albumResolver as Function)(
+          {},
+          {
+            id: item.id
+          }
+        )
+      ),
     popular: tracks
       .filter(item => popular.includes(item.id))
       .map(
@@ -29,7 +38,7 @@ const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
 
           const { id, name } = item;
           const album = albums.find(({ id }) => id === item.album[0]);
-          const artist = artists.find(({ id }) => id === item.artist[0]);
+          const artist = data.find(({ id }) => id === item.artist[0]);
 
           if (!album) {
             throw new Error(`Could not find album with id ${item.album[0]}`);

@@ -1,12 +1,12 @@
 [
   {
     "id": "recMneYSn0f20Wdul",
-    "name": "Hip hop",
+    "name": "Hip Hop",
     "artists": [
       "rec69lHAqpbSjsqce"
     ],
-    "colorstart": "#FFA69E",
-    "colorend": "#861657",
+    "colorstart": "orange",
+    "colorend": "green",
     "cover": "https://dl.airtable.com/.attachments/9a73f12584cf98e287b9016a272a3cd3/1442ffb5/22ce771ba27db4613205c062b7152f4605becee7.jpg"
   },
   {
