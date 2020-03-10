@@ -127,7 +127,7 @@ export interface GQLSong {
   id: Scalars['ID'],
   name: Scalars['String'],
   artist: Scalars['ID'],
-  album: Scalars['ID'],
+  album: GQLAlbum,
 }
 
 export interface GQLUser {
@@ -141,7 +141,7 @@ export type GQLGetArtistQueryVariables = {
 };
 
 
-export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, albums: Array<{ __typename: 'Album', id: string, name: string, cover: string }>, popular: Array<{ __typename: 'Song', name: string, album: string }> } };
+export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, albums: Array<{ __typename: 'Album', id: string, name: string, cover: string }>, popular: Array<{ __typename: 'Song', name: string, album: { __typename: 'Album', name: string } }> } };
 
 export type GQLGetPopularAlbumQueryVariables = {
   id: Scalars['ID']
@@ -352,7 +352,7 @@ export type GQLSongResolvers<ContextType = any, ParentType extends GQLResolversP
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  album: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
+  album: Resolver<GQLResolversTypes['Album'], ParentType, ContextType>,
 };
 
 export type GQLUserResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['User'] = GQLResolversParentTypes['User']> = {

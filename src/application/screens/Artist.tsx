@@ -61,7 +61,9 @@ function Artist(props: ArtistProps) {
           }
           popular {
             name
-            album
+            album {
+              name
+            }
           }
         }
       }
@@ -166,12 +168,19 @@ function Artist(props: ArtistProps) {
           </View>
         </View>
         {data.artist.popular.map((item, index) => (
-          <PopularSong
-            id={item.album}
-            track={item.name}
-            index={index + 1}
-            key={`${item.name}-${index}`}
-          />
+          <Line
+            key={`popular-song-${item.name}-${index}`}
+            interaction={{
+              label: "Go to TODO",
+              action: {
+                as: "div"
+              }
+            }}
+            head={<TextLine text={String(index + 1)} />}
+          >
+            <TextLine text={item.name} />
+            <TextLine text={item.album.name} color="foregroundSecondary" />
+          </Line>
         ))}
 
         <View>
@@ -204,54 +213,6 @@ function Artist(props: ArtistProps) {
         </View>
       </ScaleOut>
     </FadePresence>
-  );
-}
-
-function PopularSong({
-  id,
-  index,
-  track
-}: {
-  id: string;
-  track: string;
-  index: number;
-}) {
-  const { data, loading, error } = useQuery<
-    GQLGetPopularAlbumQuery,
-    GQLGetPopularAlbumQueryVariables
-  >(
-    gql`
-      query GetPopularAlbum($id: ID!) {
-        album(id: $id) @client {
-          cover
-          name
-        }
-      }
-    `,
-    {
-      variables: {
-        id
-      }
-    }
-  );
-
-  if (loading || error || !data) {
-    return null;
-  }
-
-  return (
-    <Line
-      interaction={{
-        label: "Go to TODO",
-        action: {
-          as: "div"
-        }
-      }}
-      head={<TextLine text={String(index)} />}
-    >
-      <TextLine text={track} />
-      <TextLine text={data.album.name} color="foregroundSecondary" />
-    </Line>
   );
 }
 

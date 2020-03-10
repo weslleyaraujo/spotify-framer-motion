@@ -23,7 +23,7 @@ type Song {
   id: ID!
   name: String!
   artist: ID!
-  album: ID!
+  album: Album!
 }
 
 # ==

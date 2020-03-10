@@ -52,8 +52,13 @@ const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
             __typename: "Song",
             name,
             id,
-            album: album.id,
-            artist: artist.id
+            artist: artist.id,
+            album: (albumResolver as Function)(
+              {},
+              {
+                id: album.id
+              }
+            )
           };
         }
       )
