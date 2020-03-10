@@ -4,6 +4,8 @@ import tracks from "../../data/tracks.json";
 import { GQLQueryResolvers, GQLSong } from "../generated";
 import { album as albumResolver } from "./album";
 
+const album = albumResolver as Function;
+
 const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
   const item = data.find(item => item.id === id);
   if (!item) {
@@ -20,7 +22,7 @@ const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
     albums: albums
       .filter(item => item.artists.includes(id))
       .map(item =>
-        (albumResolver as Function)(
+        album(
           {},
           {
             id: item.id
@@ -37,7 +39,7 @@ const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
           }
 
           const { id, name } = item;
-          const album = albums.find(({ id }) => id === item.album[0]);
+          const { id: albumID } = albums.find(({ id }) => id === item.album[0]);
           const artist = data.find(({ id }) => id === item.artist[0]);
 
           if (!album) {
@@ -53,10 +55,10 @@ const artist: GQLQueryResolvers["artist"] = (parent, { id }, context) => {
             name,
             id,
             artist: artist.id,
-            album: (albumResolver as Function)(
+            album: album(
               {},
               {
-                id: album.id
+                id: albumID
               }
             )
           };

@@ -16,9 +16,7 @@ import { Layers } from "../../foundations/Layers";
 import { Theme } from "../../foundations/Theme";
 import {
   GQLGetArtistQuery,
-  GQLGetArtistQueryVariables,
-  GQLGetPopularAlbumQuery,
-  GQLGetPopularAlbumQueryVariables
+  GQLGetArtistQueryVariables
 } from "../../graphql/generated";
 import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
 import { ErrorView } from "../components/ErrorView/ErrorView";
