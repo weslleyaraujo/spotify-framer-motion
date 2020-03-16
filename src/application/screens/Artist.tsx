@@ -3,16 +3,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { jsx } from "@emotion/core";
 import { gql } from "apollo-boost";
 import { useTheme } from "emotion-theming";
-import { transparentize } from "polished";
+import { Fragment } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Picture } from "../../components/atoms/Picture/Picture";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
-import { useViewStyles, View } from "../../components/atoms/View/View";
+import { View } from "../../components/atoms/View/View";
 import { Button } from "../../components/molecules/Button/Button";
-import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
+import { Section } from "../../components/molecules/Section/Section";
 import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
-import { ScaleOut } from "../../components/utilities/ScaleOut/ScaleOut";
-import { Layers } from "../../foundations/Layers";
 import { Theme } from "../../foundations/Theme";
 import {
   GQLGetArtistQuery,
@@ -21,6 +19,7 @@ import {
 import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
 import { ErrorView } from "../components/ErrorView/ErrorView";
 import { Line } from "../components/Line/Line";
+import { ObjectDetails } from "../components/ObjectDetails/ObjectDetails";
 import { RouteArtistParameters } from "../site-map";
 
 interface ArtistProps extends RouteComponentProps<RouteArtistParameters> {}
@@ -31,13 +30,6 @@ function Artist(props: ArtistProps) {
       params: { id }
     }
   } = props;
-
-  const headerStyles = useViewStyles({
-    padding: "none",
-    margin: "none",
-    justify: "center",
-    align: "flex-end"
-  });
 
   useScrollTopOnce();
 
@@ -88,83 +80,35 @@ function Artist(props: ArtistProps) {
   }
 
   return (
-    <FadePresence>
-      <ScaleOut
-        scale={{
-          from: [1, 0.8],
-          to: [1.06, 1.01]
-        }}
-        content={
-          <div
-            css={{
-              ...headerStyles,
-              label: "background",
-              paddingBottom: theme.units.larger,
-              height: theme.scales.larger * 2.3,
-              backgroundImage: `url(${data.artist.cover})`,
-              backgroundPosition: "top center",
-              backgroundSize: "100vw",
-              backgroundRepeat: "no-repeat",
-              "&:after": {
-                content: "''",
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                backgroundColor: transparentize(0.7, theme.colors.background),
-                left: 0,
-                top: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: Layers.Root
-              }
-            }}
-          >
-            <View
-              justify="center"
-              direction="column"
-              align="center"
-              supportsTruncation
-              style={{
-                width: "76vw",
-                position: "relative",
-                zIndex: Layers.Root + 10
-              }}
-            >
-              <TextLine
-                textAlign="center"
-                text={data.artist.name}
-                type="display"
-                numberOfLines={2}
-              />
-              <View margin={["large", "none"]}>
-                <TextLine
-                  text={`${data.artist.listeners} MONTHLY LISTENERS`}
-                  type="caption"
-                  color="foregroundPrimary"
-                />
-              </View>
-            </View>
-          </div>
-        }
-      >
-        <View justify="center" direction="column" align="center">
-          <div
-            css={{
-              position: "relative",
-              top: `-${theme.units.larger}px`
-            }}
-          >
-            <Button
-              type="primary"
-              label="Shuffle Play"
-              display="inline"
-              size="large"
+    <ObjectDetails
+      backgroundImage={data.artist.cover}
+      overlap={
+        <Button
+          type="primary"
+          label="Shuffle Play"
+          display="inline"
+          size="large"
+        />
+      }
+      head={
+        <Fragment>
+          <TextLine
+            textAlign="center"
+            text={data.artist.name}
+            type="display"
+            numberOfLines={2}
+          />
+          <View margin={["large", "none"]}>
+            <TextLine
+              text={`${data.artist.listeners} MONTHLY LISTENERS`}
+              type="caption"
+              color="foregroundPrimary"
             />
-          </div>
-          <View align="center">
-            <TextLine text="Popular" type="heading" />
           </View>
-        </View>
+        </Fragment>
+      }
+    >
+      <Section title="Popular" padding="none">
         {data.artist.popular.map((item, index) => (
           <Line
             key={`popular-song-${item.name}-${index}`}
@@ -180,37 +124,33 @@ function Artist(props: ArtistProps) {
             <TextLine text={item.album.name} color="foregroundSecondary" />
           </Line>
         ))}
-
-        <View>
-          <View justify="center" margin={["none", "large", "none"]}>
-            <TextLine text="Albums" type="heading" textAlign="center" />
-          </View>
-          {data.artist.albums.map((item, index) => (
-            <Line
-              key={`${item.id}-${index}`}
-              interaction={{
-                label: "Go to TODO",
-                action: {
-                  as: "div"
-                }
-              }}
-              head={
-                <Picture
-                  width={theme.scales.large}
-                  height={theme.scales.large}
-                  alt="Music"
-                  source={item.cover}
-                  aspectRatio="square"
-                />
+      </Section>
+      <Section title="Albums" padding="none">
+        {data.artist.albums.map((item, index) => (
+          <Line
+            key={`${item.id}-${index}`}
+            interaction={{
+              label: "Go to TODO",
+              action: {
+                as: "div"
               }
-            >
-              <TextLine text={item.name} type="title" />
-              <TextLine text="Album" color="foregroundSecondary" />
-            </Line>
-          ))}
-        </View>
-      </ScaleOut>
-    </FadePresence>
+            }}
+            head={
+              <Picture
+                width={theme.scales.large}
+                height={theme.scales.large}
+                alt="Music"
+                source={item.cover}
+                aspectRatio="square"
+              />
+            }
+          >
+            <TextLine text={item.name} type="title" />
+            <TextLine text="Album" color="foregroundSecondary" />
+          </Line>
+        ))}
+      </Section>
+    </ObjectDetails>
   );
 }
 
