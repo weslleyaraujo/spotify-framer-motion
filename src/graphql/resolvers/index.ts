@@ -4,6 +4,7 @@ import { search } from "./search";
 import { album } from "./album";
 import { GQLResolvers } from "../generated";
 import { genres } from "./genres";
+import { song } from "./song";
 
 const resolvers: Pick<GQLResolvers, "Query"> = {
   Query: {
@@ -11,7 +12,8 @@ const resolvers: Pick<GQLResolvers, "Query"> = {
     artist,
     search,
     album,
-    genres
+    genres,
+    song
   }
 };
 

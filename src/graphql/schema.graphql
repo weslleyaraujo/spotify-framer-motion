@@ -14,15 +14,14 @@ type Artist {
 type Album {
   id: ID!
   name: String!
-  artist: ID!
-  songs: [ID!]!
   cover: String!
+  songs: [Song!]!
+  artist: ID!
 }
 
 type Song {
   id: ID!
   name: String!
-  artist: ID!
   album: Album!
 }
 
@@ -97,4 +96,5 @@ type Query {
   search(term: String!): [SearchResult!]!
   album(id: ID!): Album!
   genres: [Genre!]!
+  song(id: ID!): Song!
 }

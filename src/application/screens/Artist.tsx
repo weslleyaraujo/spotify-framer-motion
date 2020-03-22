@@ -21,6 +21,10 @@ import { ErrorView } from "../components/ErrorView/ErrorView";
 import { Line } from "../components/Line/Line";
 import { ObjectDetails } from "../components/ObjectDetails/ObjectDetails";
 import { RouteArtistParameters } from "../site-map";
+import {
+  useLazyInteractions,
+  INTERACTIONS
+} from "../../hooks/use-interactions";
 
 interface ArtistProps extends RouteComponentProps<RouteArtistParameters> {}
 
@@ -32,6 +36,8 @@ function Artist(props: ArtistProps) {
   } = props;
 
   useScrollTopOnce();
+
+  const createInteraction = useLazyInteractions();
 
   const { data, error, loading } = useQuery<
     GQLGetArtistQuery,
@@ -129,12 +135,10 @@ function Artist(props: ArtistProps) {
         {data.artist.albums.map((item, index) => (
           <Line
             key={`${item.id}-${index}`}
-            interaction={{
-              label: "Go to TODO",
-              action: {
-                as: "div"
-              }
-            }}
+            interaction={createInteraction(INTERACTIONS.NAVIGATE_ALBUM, {
+              id: item.id,
+              label: `Go to ${item.name}`
+            })}
             head={
               <Picture
                 width={theme.scales.large}

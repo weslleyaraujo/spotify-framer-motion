@@ -12,7 +12,7 @@ interface Props {
   head?: React.ReactNode;
   overlap?: React.ReactNode;
   children: React.ReactNode;
-  backgroundImage: string;
+  backgroundImage?: string;
 }
 
 function ObjectDetails({ backgroundImage, head, children, overlap }: Props) {
@@ -37,10 +37,12 @@ function ObjectDetails({ backgroundImage, head, children, overlap }: Props) {
               label: "background",
               paddingBottom: theme.units.larger,
               height: theme.scales.larger * 2.3,
-              backgroundImage: `url(${backgroundImage})`,
               backgroundPosition: "top center",
               backgroundSize: "100vw",
               backgroundRepeat: "no-repeat",
+              ...(backgroundImage && {
+                backgroundImage: `url(${backgroundImage})`
+              }),
               "&:after": {
                 content: "''",
                 position: "absolute",

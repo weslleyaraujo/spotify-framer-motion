@@ -14,9 +14,9 @@ export interface GQLAlbum {
    __typename: 'Album',
   id: Scalars['ID'],
   name: Scalars['String'],
-  artist: Scalars['ID'],
-  songs: Array<Scalars['ID']>,
   cover: Scalars['String'],
+  songs: Array<GQLSong>,
+  artist: Scalars['ID'],
 }
 
 export interface GQLArtist {
@@ -67,6 +67,7 @@ export interface GQLQuery {
   search: Array<GQLSearchResult>,
   album: GQLAlbum,
   genres: Array<GQLGenre>,
+  song: GQLSong,
 }
 
 
@@ -81,6 +82,11 @@ export interface GQLQuerySearchArgs {
 
 
 export interface GQLQueryAlbumArgs {
+  id: Scalars['ID']
+}
+
+
+export interface GQLQuerySongArgs {
   id: Scalars['ID']
 }
 
@@ -126,7 +132,6 @@ export interface GQLSong {
    __typename: 'Song',
   id: Scalars['ID'],
   name: Scalars['String'],
-  artist: Scalars['ID'],
   album: GQLAlbum,
 }
 
@@ -136,19 +141,26 @@ export interface GQLUser {
   name: Scalars['String'],
 }
 
+export type GQLGetLazyArtistQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type GQLGetLazyArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string } };
+
+export type GQLGetAlbumQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type GQLGetAlbumQuery = { __typename: 'Query', album: { __typename: 'Album', id: string, name: string, cover: string, artist: string, songs: Array<{ __typename: 'Song', id: string, name: string }> } };
+
 export type GQLGetArtistQueryVariables = {
   id: Scalars['ID']
 };
 
 
 export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, albums: Array<{ __typename: 'Album', id: string, name: string, cover: string }>, popular: Array<{ __typename: 'Song', name: string, album: { __typename: 'Album', name: string } }> } };
-
-export type GQLGetPopularAlbumQueryVariables = {
-  id: Scalars['ID']
-};
-
-
-export type GQLGetPopularAlbumQuery = { __typename: 'Query', album: { __typename: 'Album', cover: string, name: string } };
 
 export type GQLGetFeedQueryVariables = {};
 
@@ -283,9 +295,9 @@ export type GQLResolversParentTypes = {
 export type GQLAlbumResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Album'] = GQLResolversParentTypes['Album']> = {
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
-  songs: Resolver<Array<GQLResolversTypes['ID']>, ParentType, ContextType>,
   cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  songs: Resolver<Array<GQLResolversTypes['Song']>, ParentType, ContextType>,
+  artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
 };
 
 export type GQLArtistResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Artist'] = GQLResolversParentTypes['Artist']> = {
@@ -324,6 +336,7 @@ export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolvers
   search: Resolver<Array<GQLResolversTypes['SearchResult']>, ParentType, ContextType, RequireFields<GQLQuerySearchArgs, 'term'>>,
   album: Resolver<GQLResolversTypes['Album'], ParentType, ContextType, RequireFields<GQLQueryAlbumArgs, 'id'>>,
   genres: Resolver<Array<GQLResolversTypes['Genre']>, ParentType, ContextType>,
+  song: Resolver<GQLResolversTypes['Song'], ParentType, ContextType, RequireFields<GQLQuerySongArgs, 'id'>>,
 };
 
 export type GQLSearchResultResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['SearchResult'] = GQLResolversParentTypes['SearchResult']> = {
@@ -351,7 +364,6 @@ export type GQLSectionItemResolvers<ContextType = any, ParentType extends GQLRes
 export type GQLSongResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['Song'] = GQLResolversParentTypes['Song']> = {
   id: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
-  artist: Resolver<GQLResolversTypes['ID'], ParentType, ContextType>,
   album: Resolver<GQLResolversTypes['Album'], ParentType, ContextType>,
 };
 

@@ -8,6 +8,7 @@ import { Providers } from "./Providers";
 import { SITEMAP } from "./site-map";
 import { Shell } from "./components/Shell/Shell";
 import { globalStyles } from "./global-styles";
+import Album from "./screens/Album";
 
 const Development = React.lazy(() =>
   import(/* webpackChunkName: 'Development' */ "./screens/Development")
@@ -59,6 +60,7 @@ function App() {
               <SearchResults />
             </Route>
             <Route path={SITEMAP.ARTIST} component={Artist} />
+            <Route path={SITEMAP.ALBUM} component={Album} />
             {process.env.NODE_ENV === "development" && (
               <Route path={SITEMAP.DEVELOPMENT} exact fallback={fallback}>
                 <Development />
