@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import { jsx, Global } from "@emotion/core";
 import { useTheme } from "emotion-theming";
 import { createContext, useContext, useMemo } from "react";
 import useDimensions from "react-use-dimensions";
@@ -61,6 +61,13 @@ function MiniPlayer() {
         label: "Parcels"
       }}
     >
+      <Global
+        styles={{
+          body: {
+            paddingBottom: theme.units.largest * 4.3
+          }
+        }}
+      />
       <View
         padding="medium"
         justify="space-between"

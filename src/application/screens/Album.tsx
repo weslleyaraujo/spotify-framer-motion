@@ -102,14 +102,12 @@ function Album(props: AlbumProps) {
   return (
     <ObjectDetails
       overlap={
-        <Fragment>
-          <Button
-            type="primary"
-            label="Shuffle Play"
-            display="inline"
-            size="large"
-          />
-        </Fragment>
+        <Button
+          type="primary"
+          label="Shuffle Play"
+          display="inline"
+          size="large"
+        />
       }
       head={
         <Fragment>
@@ -135,6 +133,7 @@ function Album(props: AlbumProps) {
               numberOfLines={1}
             />
             <TextLine
+              textAlign="center"
               text={`Album by ${artistData?.artist.name}`}
               color="foregroundSecondary"
             />

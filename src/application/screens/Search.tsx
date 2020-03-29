@@ -19,11 +19,15 @@ import {
 } from "../../graphql/generated";
 import { ErrorView } from "../components/ErrorView/ErrorView";
 import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
+import { Global } from "@emotion/core";
+import { useTheme } from "emotion-theming";
+import { Theme } from "../../foundations/Theme";
 
 interface SearchProps {}
 
 function Search(props: SearchProps) {
   const history = useHistory();
+  const theme = useTheme<Theme>();
   useScrollTopOnce();
   useBodyBackground({
     color: "white",
@@ -57,6 +61,13 @@ function Search(props: SearchProps) {
 
   return (
     <FadePresence>
+      <Global
+        styles={{
+          body: {
+            paddingBottom: theme.units.largest * 5
+          }
+        }}
+      />
       <View justify="center" padding={["larger", "large", "none", "large"]}>
         <TextLine text="Search" type="display" color="foregroundPrimary" />
       </View>
