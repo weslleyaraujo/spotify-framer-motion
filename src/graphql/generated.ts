@@ -41,6 +41,7 @@ export interface GQLGenre {
   name: Scalars['String'],
   color: GQLGradientColor,
   cover: Scalars['String'],
+  songs: Array<GQLSong>,
 }
 
 export interface GQLGradientColor {
@@ -67,6 +68,7 @@ export interface GQLQuery {
   search: Array<GQLSearchResult>,
   album: GQLAlbum,
   genres: Array<GQLGenre>,
+  genre: GQLGenre,
   song: GQLSong,
 }
 
@@ -82,6 +84,11 @@ export interface GQLQuerySearchArgs {
 
 
 export interface GQLQueryAlbumArgs {
+  id: Scalars['ID']
+}
+
+
+export interface GQLQueryGenreArgs {
   id: Scalars['ID']
 }
 
@@ -161,6 +168,13 @@ export type GQLGetArtistQueryVariables = {
 
 
 export type GQLGetArtistQuery = { __typename: 'Query', artist: { __typename: 'Artist', id: string, name: string, cover: string, listeners: number, albums: Array<{ __typename: 'Album', id: string, name: string, cover: string }>, popular: Array<{ __typename: 'Song', name: string, album: { __typename: 'Album', name: string } }> } };
+
+export type GQLGetGenreQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type GQLGetGenreQuery = { __typename: 'Query', genre: { __typename: 'Genre', id: string, name: string, cover: string, color: { __typename: 'GradientColor', start: string }, songs: Array<{ __typename: 'Song', id: string, name: string }> } };
 
 export type GQLGetFeedQueryVariables = {};
 
@@ -319,6 +333,7 @@ export type GQLGenreResolvers<ContextType = any, ParentType extends GQLResolvers
   name: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
   color: Resolver<GQLResolversTypes['GradientColor'], ParentType, ContextType>,
   cover: Resolver<GQLResolversTypes['String'], ParentType, ContextType>,
+  songs: Resolver<Array<GQLResolversTypes['Song']>, ParentType, ContextType>,
 };
 
 export type GQLGradientColorResolvers<ContextType = any, ParentType extends GQLResolversParentTypes['GradientColor'] = GQLResolversParentTypes['GradientColor']> = {
@@ -336,6 +351,7 @@ export type GQLQueryResolvers<ContextType = any, ParentType extends GQLResolvers
   search: Resolver<Array<GQLResolversTypes['SearchResult']>, ParentType, ContextType, RequireFields<GQLQuerySearchArgs, 'term'>>,
   album: Resolver<GQLResolversTypes['Album'], ParentType, ContextType, RequireFields<GQLQueryAlbumArgs, 'id'>>,
   genres: Resolver<Array<GQLResolversTypes['Genre']>, ParentType, ContextType>,
+  genre: Resolver<GQLResolversTypes['Genre'], ParentType, ContextType, RequireFields<GQLQueryGenreArgs, 'id'>>,
   song: Resolver<GQLResolversTypes['Song'], ParentType, ContextType, RequireFields<GQLQuerySongArgs, 'id'>>,
 };
 

@@ -8,7 +8,6 @@ import { Providers } from "./Providers";
 import { SITEMAP } from "./site-map";
 import { Shell } from "./components/Shell/Shell";
 import { globalStyles } from "./global-styles";
-import Album from "./screens/Album";
 
 const Development = React.lazy(() =>
   import(/* webpackChunkName: 'Development' */ "./screens/Development")
@@ -28,6 +27,14 @@ const Settings = React.lazy(() =>
 
 const Artist = React.lazy(() =>
   import(/* webpackChunkName: 'Artist' */ "./screens/Artist")
+);
+
+const Album = React.lazy(() =>
+  import(/* webpackChunkName: 'Album' */ "./screens/Album")
+);
+
+const Genre = React.lazy(() =>
+  import(/* webpackChunkName: 'Artist' */ "./screens/Genre")
 );
 
 const fallback = <LoadingView />;
@@ -61,6 +68,7 @@ function App() {
             </Route>
             <Route path={SITEMAP.ARTIST} component={Artist} />
             <Route path={SITEMAP.ALBUM} component={Album} />
+            <Route path={SITEMAP.GENRE} component={Genre} />
             {process.env.NODE_ENV === "development" && (
               <Route path={SITEMAP.DEVELOPMENT} exact fallback={fallback}>
                 <Development />

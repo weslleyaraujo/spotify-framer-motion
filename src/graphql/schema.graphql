@@ -87,6 +87,7 @@ type Genre {
   name: String!
   color: GradientColor!
   cover: String!
+  songs: [Song!]!
 }
 
 type Query {
@@ -96,5 +97,6 @@ type Query {
   search(term: String!): [SearchResult!]!
   album(id: ID!): Album!
   genres: [Genre!]!
+  genre(id: ID!): Genre!
   song(id: ID!): Song!
 }

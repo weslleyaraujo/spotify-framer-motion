@@ -92,11 +92,12 @@ function SearchResults(props: SearchResultsProps) {
                 <Line
                   {...defaultProps}
                   key={`search-result-${item.id}`}
-                  // TODO: Navigate track or play it?
-                  interaction={createInteraction(INTERACTIONS.NAVIGATE_ALBUM, {
-                    id: item.id,
-                    label: `Go to ${item.name}`
-                  })}
+                  interaction={{
+                    label: "Nothing",
+                    action: {
+                      as: "div"
+                    }
+                  }}
                 />
               );
             }

@@ -28,6 +28,13 @@ export interface RouteAlbumParameters {
   id: string;
 }
 
+/* Genre */
+const GENRE = "/genre/:id";
+
+export interface RouteGenreParameters {
+  id: string;
+}
+
 /* Playlist */
 const PLAYLIST = "/playlist/:id";
 
@@ -45,6 +52,7 @@ const SITEMAP = {
   SEARCH_RESULTS,
   ARTIST,
   ALBUM,
+  GENRE,
   PLAYLIST,
   HOME,
   LIBRARY,

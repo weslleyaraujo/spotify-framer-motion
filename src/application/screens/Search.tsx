@@ -1,33 +1,37 @@
+import { useQuery } from "@apollo/react-hooks";
+import { Global } from "@emotion/core";
+import { gql } from "apollo-boost";
+import { useTheme } from "emotion-theming";
 import React from "react";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 import { TextLine } from "../../components/atoms/TextLine/TextLine";
 import { View } from "../../components/atoms/View/View";
 import { Section } from "../../components/molecules/Section/Section";
 import { FadePresence } from "../../components/utilities/FadePresence/FadePresence";
 import { Grid } from "../../components/utilities/Grid/Grid";
+import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
+import { Theme } from "../../foundations/Theme";
+import {
+  GQLGetGenresQuery,
+  GQLGetGenresQueryVariables
+} from "../../graphql/generated";
 import { useBodyBackground } from "../../hooks/use-body-background";
+import {
+  INTERACTIONS,
+  useLazyInteractions
+} from "../../hooks/use-interactions";
+import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
 import { CategoryCard } from "../components/CardCategory/CardCategory";
+import { ErrorView } from "../components/ErrorView/ErrorView";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import { SITEMAP } from "../site-map";
-import { useScrollTopOnce } from "../../hooks/use-scroll-top-once";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import {
-  GQLGetGenresQueryVariables,
-  GQLGetGenresQuery
-} from "../../graphql/generated";
-import { ErrorView } from "../components/ErrorView/ErrorView";
-import { LoadingView } from "../../components/utilities/LoadingView/LoadingView";
-import { Global } from "@emotion/core";
-import { useTheme } from "emotion-theming";
-import { Theme } from "../../foundations/Theme";
 
 interface SearchProps {}
 
 function Search(props: SearchProps) {
   const history = useHistory();
   const theme = useTheme<Theme>();
+  const createInteraction = useLazyInteractions();
   useScrollTopOnce();
   useBodyBackground({
     color: "white",
@@ -98,13 +102,10 @@ function Search(props: SearchProps) {
               }}
               title={name}
               interactions={{
-                primary: {
-                  label: "Visit page",
-                  action: {
-                    as: Link,
-                    to: "/artist/tame-impala"
-                  }
-                }
+                primary: createInteraction(INTERACTIONS.NAVIGATE_GENRE, {
+                  id,
+                  label: `Go to ${name}`
+                })
               }}
             />
           ))}

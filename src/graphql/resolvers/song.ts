@@ -13,7 +13,6 @@ const song: GQLQueryResolvers["song"] = (parent, { id }, context) => {
     __typename: "Song",
     id: item.id,
     name: item.name,
-    // artist: item.artist,
     album: (albums
       .filter(item => item.artists.includes(id))
       .map(item =>

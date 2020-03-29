@@ -10,13 +10,15 @@ interface Identifier {
 export enum INTERACTIONS {
   NAVIGATE_ARTIST,
   NAVIGATE_ALBUM,
-  NAVIGATE_PLAYLIST
+  NAVIGATE_PLAYLIST,
+  NAVIGATE_GENRE
 }
 
 interface Payload {
   [INTERACTIONS.NAVIGATE_ARTIST]: Identifier;
   [INTERACTIONS.NAVIGATE_ALBUM]: Identifier;
   [INTERACTIONS.NAVIGATE_PLAYLIST]: Identifier;
+  [INTERACTIONS.NAVIGATE_GENRE]: Identifier;
 }
 
 function useInteractions<T extends INTERACTIONS>(
@@ -25,13 +27,15 @@ function useInteractions<T extends INTERACTIONS>(
 ) {
   const { icon, iconColor, label, ...data } = payload;
   switch (type) {
+    case INTERACTIONS.NAVIGATE_GENRE:
     case INTERACTIONS.NAVIGATE_PLAYLIST:
     case INTERACTIONS.NAVIGATE_ALBUM:
     case INTERACTIONS.NAVIGATE_ARTIST: {
       const paths = {
         [INTERACTIONS.NAVIGATE_ARTIST]: SITEMAP.ARTIST,
         [INTERACTIONS.NAVIGATE_ALBUM]: SITEMAP.ALBUM,
-        [INTERACTIONS.NAVIGATE_PLAYLIST]: SITEMAP.PLAYLIST
+        [INTERACTIONS.NAVIGATE_PLAYLIST]: SITEMAP.PLAYLIST,
+        [INTERACTIONS.NAVIGATE_GENRE]: SITEMAP.GENRE
       };
       const { id } = data;
       const interaction: Interaction<LinkProps> = {
