@@ -1,5 +1,5 @@
 import { ValuesType } from "utility-types";
-import uuid from "uuid/v1";
+import { v1 as uuid } from "uuid";
 import albums from "../../data/albums.json";
 import artists from "../../data/artists.json";
 import playlists from "../../data/playlists.json";
@@ -8,7 +8,7 @@ import {
   GQLQueryResolvers,
   GQLSection,
   GQLSectionItem,
-  GQLSectionType
+  GQLSectionType,
 } from "../generated";
 import shuffle from "lodash.shuffle";
 
@@ -17,12 +17,12 @@ const resources: {
 } = {
   [GQLSectionType.Album]: albums,
   [GQLSectionType.Artist]: artists,
-  [GQLSectionType.Playlist]: playlists
+  [GQLSectionType.Playlist]: playlists,
 };
 
 function parseJSON({
   type,
-  items
+  items,
 }: {
   items?: string[];
   type: GQLSectionType;
@@ -31,7 +31,7 @@ function parseJSON({
   return [...(items ? items : [])]
     .map((id): GQLSectionItem | undefined => {
       const item: ValuesType<typeof data> | undefined = data.find(
-        i => i.id === id
+        (i) => i.id === id
       );
 
       if (item) {
@@ -41,7 +41,7 @@ function parseJSON({
           cover: item.cover,
           id: uuid(),
           name: item.name,
-          type
+          type,
         };
       }
 
@@ -58,17 +58,17 @@ const sections = data.map(
     items: shuffle([
       ...parseJSON({
         items: item.albums,
-        type: GQLSectionType.Album
+        type: GQLSectionType.Album,
       }),
       ...parseJSON({
         items: item.artists,
-        type: GQLSectionType.Artist
+        type: GQLSectionType.Artist,
       }),
       ...parseJSON({
         items: item.playlists,
-        type: GQLSectionType.Playlist
-      })
-    ])
+        type: GQLSectionType.Playlist,
+      }),
+    ]),
   })
 );
 
@@ -76,7 +76,7 @@ const feed: GQLQueryResolvers["feed"] = () => {
   return {
     __typename: "Feed",
     id: uuid(),
-    sections
+    sections,
   };
 };
 

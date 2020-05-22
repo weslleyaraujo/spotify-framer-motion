@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, Fragment } from "react";
 import { Route, Switch } from "react-router";
 
 import { Global } from "@emotion/core";
@@ -41,7 +41,7 @@ const fallback = <LoadingView />;
 
 function App() {
   return (
-    <>
+    <Fragment>
       <Providers>
         <Global styles={globalStyles} />
         <Suspense fallback={fallback}>
@@ -80,7 +80,7 @@ function App() {
           </Switch>
         </Suspense>
       </Providers>
-    </>
+    </Fragment>
   );
 }
 

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React, { useMemo } from "react";
+import React, { useMemo, Fragment } from "react";
 
 import { Colors } from "../../../foundations/Colors";
 import { Scales } from "../../../foundations/Spacing";
@@ -20,7 +20,7 @@ interface IconDefaultProps<T>
 function Icon<T extends keyof any>({
   color,
   size,
-  type
+  type,
 }: IconProps<T> & IconDefaultProps<T>): React.ReactElement {
   const theme = useTheme<Theme<T>>();
   const dimensions = theme.scales[size];
@@ -29,12 +29,12 @@ function Icon<T extends keyof any>({
     return factory({
       width: dimensions,
       height: dimensions,
-      color: theme.colors[color]
+      color: theme.colors[color],
     });
   }, [dimensions, theme, color, type]);
 
   return (
-    <>
+    <Fragment>
       {React.Children.map(el, (root: React.ReactElement<any>) =>
         React.cloneElement(root, {
           width: dimensions,
@@ -43,16 +43,16 @@ function Icon<T extends keyof any>({
           children: React.Children.map(
             root.props.children,
             (child: React.ReactElement<any>) => React.cloneElement(child)
-          )
+          ),
         })
       )}
-    </>
+    </Fragment>
   );
 }
 
 const defaultProps: IconDefaultProps<""> = {
   color: "foregroundPrimary",
-  size: "medium"
+  size: "medium",
 };
 
 Icon.defaultProps = defaultProps;

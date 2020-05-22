@@ -7,7 +7,7 @@ import { ActionProps } from "../../../interfaces/Card";
 import { SetIntersection } from "utility-types";
 import { TextLine } from "../../atoms/TextLine/TextLine";
 import { Theme } from "../../../foundations/Theme";
-import { jsx } from "@emotion/core";
+import { jsx, InterpolationWithTheme } from "@emotion/core";
 import { useTheme } from "emotion-theming";
 
 interface ButtonProps<T> {
@@ -32,7 +32,7 @@ const MAP_TEXT_COLOR: {
   normal: "absoluteLight",
   primary: "absoluteLight",
   secondary: "absoluteDark",
-  third: "absoluteDark"
+  third: "absoluteDark",
 };
 
 const MAP_TEXT_TYPE: {
@@ -42,7 +42,7 @@ const MAP_TEXT_TYPE: {
 } = {
   small: "featured",
   medium: "featured",
-  large: "featured"
+  large: "featured",
 };
 
 const PADDING_SIZE_MAP: {
@@ -52,7 +52,7 @@ const PADDING_SIZE_MAP: {
 } = {
   small: ["smallest", "medium"],
   medium: ["small", "large"],
-  large: ["medium", "larger"]
+  large: ["medium", "larger"],
 };
 
 function useButtonStyles(
@@ -82,64 +82,64 @@ function useButtonStyles(
     position: "relative",
     fontWeight: 400,
     ...(rounded && {
-      borderRadius: theme.constants.borderRadiusSmall
+      borderRadius: theme.constants.borderRadiusSmall,
     }),
 
     /** Button type */
     ...(type === "normal" && {
-      backgroundColor: theme.colors.complement
+      backgroundColor: theme.colors.complement,
     }),
 
     ...(type === "primary" && {
       backgroundColor: theme.colors.primary,
-      textTransform: "uppercase"
+      textTransform: "uppercase",
     }),
 
     ...(type === "secondary" && {
-      backgroundColor: theme.colors.absoluteLight
+      backgroundColor: theme.colors.absoluteLight,
     }),
 
     ...(type === "third" && {
       backgroundColor: "transparent",
       border: `1px solid ${theme.colors.absoluteLight}`,
-      textTransform: "uppercase"
+      textTransform: "uppercase",
     }),
 
     /** Display */
     ...(display === "block" && {
       width: "100%",
-      display: "flex"
+      display: "flex",
     }),
     ...(display === "inline" && {
-      display: "inline-flex"
+      display: "inline-flex",
     }),
 
     "&:disabled": {
-      cursor: "not-allowed"
+      cursor: "not-allowed",
     },
     "&:active, &:focus": {
-      outline: 0
+      outline: 0,
     },
     "&:not([disabled]):hover": {
-      textDecoration: "none"
+      textDecoration: "none",
     },
     "&:not([disabled]):active": {
       outline: "0",
-      transition: "none"
+      transition: "none",
     },
     "&[disabled] > *": {
-      pointerEvents: "none"
+      pointerEvents: "none",
     },
     // TODO: disabled styles
     "&[disabled], &[disabled]:hover, &[disabled]:active": {
       cursor: "not-allowed",
       textDecoration: "none",
       outline: 0,
-      transition: "none"
+      transition: "none",
     },
     ...(rounded && {
-      borderRadius: 40000
-    })
+      borderRadius: 40000,
+    }),
   };
 }
 
@@ -148,15 +148,15 @@ function Button<T = React.HTMLProps<HTMLButtonElement>>(
 ) {
   const view = useViewStyles({
     padding: PADDING_SIZE_MAP[props.size],
-    margin: "none"
+    margin: "none",
   });
   const button = useButtonStyles(props);
   const styles = {
     ...view,
-    ...button
+    ...button,
   };
   return (
-    <Action {...props.action} css={styles}>
+    <Action {...props.action} css={styles as InterpolationWithTheme<any>}>
       <TextLine
         type={MAP_TEXT_TYPE[props.size]}
         text={props.label}
@@ -173,8 +173,8 @@ const defaultProps: ButtonDefaultProps<React.HTMLProps<HTMLButtonElement>> = {
   type: "normal",
   rounded: true,
   action: {
-    as: "button"
-  }
+    as: "button",
+  },
 };
 
 Button.defaultProps = defaultProps;
